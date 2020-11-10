@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A0A0A"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/button2"
+        tools:layout_editor_absoluteX="129dp"
+        tools:layout_editor_absoluteY="635dp"
+        android:layout_width="153dp"
+        android:layout_height="43dp"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="-77dp"
+        android:background="#00020000"
+        android:text="Voltar"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textStyle="bold" />
+
+    <Space
+        android:id="@+id/space1"
+        android:layout_width="45dp"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="302dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="402dp"
+        app:srcCompat="@drawable/sinal_proibido" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="349dp"
+        android:layout_height="180dp"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="-207dp"
+        android:layout_toEndOf="@+id/space1"
+        android:text="Estimado Utilizador,                                                   Relembramos que só terá acesso à aplicação se tiver a inscrição feita no Ginásio e depois ser-lhe-à atribuído os dados de login."
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="-43dp"
+        android:text="Poderá nos visitar em:"
+        android:textColor="#FCFAFA"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_marginStart="-1dp"
+        android:layout_marginBottom="-48dp"
+        android:text="www.gym.com"
+        android:textColor="#0003F5"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+</RelativeLayout>

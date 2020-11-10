@@ -23,7 +23,7 @@
         android:layout_width="153dp"
         android:layout_height="43dp"
         android:background="#00020000"
-        android:text="Começar"
+        android:text="@string/comecarbutton"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textStyle="bold"
