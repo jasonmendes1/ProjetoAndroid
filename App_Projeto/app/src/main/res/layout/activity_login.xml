@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="">
+    android:background="@drawable/wallpaper_3">
 
     <Space
         android:id="@+id/space1"
@@ -13,7 +13,7 @@
         android:layout_height="match_parent" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/editTextPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -25,10 +25,10 @@
         android:text="Introduza a Password" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/editTextEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editText3"
+        android:layout_above="@+id/editTextPassword"
         android:layout_marginStart="78dp"
         android:layout_marginBottom="19dp"
         android:layout_toEndOf="@+id/space1"
@@ -40,7 +40,7 @@
         android:id="@+id/textView8"
         android:layout_width="207dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editText3"
+        android:layout_alignBottom="@+id/editTextPassword"
         android:layout_marginStart="81dp"
         android:layout_marginBottom="-77dp"
         android:layout_toEndOf="@+id/space1"
@@ -52,17 +52,18 @@
         android:id="@+id/textView9"
         android:layout_width="207dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editText3"
+        android:layout_alignBottom="@+id/editTextPassword"
         android:layout_marginStart="137dp"
         android:layout_marginBottom="-77dp"
         android:layout_toEndOf="@+id/space1"
+        android:onClick="onClickAqui"
         android:text="Aqui"
         android:textColor="#0A009B"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnLogin"
         android:layout_width="153dp"
         android:layout_height="43dp"
         android:layout_alignBottom="@+id/textView8"
@@ -70,10 +71,11 @@
         android:layout_marginBottom="-107dp"
         android:layout_toEndOf="@+id/space1"
         android:background="#00020000"
-        android:text="@string/comecarbutton"
+        android:text="@string/login"
         android:textColor="#070000"
         android:textColorHint="#FFFFFF"
         android:textStyle="bold"
+        android:onClick="onClickLogin"
         tools:layout_editor_absoluteX="129dp"
         tools:layout_editor_absoluteY="635dp" />
 

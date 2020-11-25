@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#0A0A0A"
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/button2"
-        tools:layout_editor_absoluteX="129dp"
-        tools:layout_editor_absoluteY="635dp"
+        android:id="@+id/btnVoltar"
         android:layout_width="153dp"
         android:layout_height="43dp"
         android:layout_alignStart="@+id/textView2"
@@ -17,10 +16,13 @@
         android:layout_marginStart="80dp"
         android:layout_marginBottom="-77dp"
         android:background="#00020000"
+        android:onClick="onClickVoltar"
         android:text="Voltar"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="129dp"
+        tools:layout_editor_absoluteY="635dp" />
 
     <Space
         android:id="@+id/space1"

@@ -11,22 +11,28 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="172dp"
         android:layout_marginBottom="540dp"
         android:text="Gym"
         android:textColor="#FFFFFF"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        tools:layout_editor_absoluteX="175dp" />
+        app:layout_constraintBottom_toTopOf="@+id/btnComecar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.573" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnComecar"
         android:layout_width="153dp"
         android:layout_height="43dp"
+        android:layout_marginBottom="32dp"
         android:background="#00020000"
+        android:onClick="onClick"
         android:text="@string/comecarbutton"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="129dp"
-        tools:layout_editor_absoluteY="635dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

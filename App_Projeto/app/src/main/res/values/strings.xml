@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">App_Projeto</string>
     <string name="comecarbutton">Começar</string>
+    <string name="login">Login</string>
+    <string name="email_errado">Email Errado</string>
+    <string name="password_errada">Password Errada</string>
 </resources>
