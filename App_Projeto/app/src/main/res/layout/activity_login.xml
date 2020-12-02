@@ -22,7 +22,7 @@
         android:layout_toEndOf="@+id/space1"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Introduza a Password" />
+        android:text="@string/introduza_a_password" />
 
     <EditText
         android:id="@+id/editTextEmail"
@@ -34,7 +34,7 @@
         android:layout_toEndOf="@+id/space1"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Introduza o Email" />
+        android:text="@string/introduza_o_email" />
 
     <TextView
         android:id="@+id/textView8"
@@ -57,7 +57,7 @@
         android:layout_marginBottom="-77dp"
         android:layout_toEndOf="@+id/space1"
         android:onClick="onClickAqui"
-        android:text="Aqui"
+        android:text="@string/aqui"
         android:textColor="#0A009B"
         android:textSize="18sp"
         android:textStyle="bold" />

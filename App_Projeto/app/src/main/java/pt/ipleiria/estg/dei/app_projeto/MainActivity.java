@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         buttonComecar = findViewById(R.id.btnComecar);
     }
 
-    public void onClick(View view) {
+    public void onClickComecar(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }

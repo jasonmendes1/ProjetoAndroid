@@ -1,7 +1,16 @@
 <resources>
-    <string name="app_name">App_Projeto</string>
+    <string name="app_name">Fitness League</string>
     <string name="comecarbutton">Começar</string>
     <string name="login">Login</string>
     <string name="email_errado">Email Errado</string>
     <string name="password_errada">Password Errada</string>
+    <string name="aqui">Aqui</string>
+    <string name="introduza_o_email">Introduza o Email</string>
+    <string name="introduza_a_password">Introduza a Password</string>
+    <string name="perfil">Perfil</string>
+    <string name="planos_de_treino">Planos de Treino</string>
+    <string name="planos_de_nutri_o">Planos de Nutrição</string>
+    <string name="hor_rios">Horários</string>
+    <string name="info_gym">Info Gym</string>
+    <string name="logout">Logout</string>
 </resources>

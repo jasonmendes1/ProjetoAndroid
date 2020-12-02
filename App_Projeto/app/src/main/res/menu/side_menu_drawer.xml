@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="nav_perfil"
+            android:title="@string/perfil"
+            android:icon="@drawable/ic_menu_perfil"
+            android:fontFamily="@font/bold"
+            android:textColor="@color/red"
+            android:textSize="20sp"/>
+        <item
+            android:id="nav_planos_treino"
+            android:title="@string/planos_de_treino"
+            android:icon="@drawable/ic_menu_perfil"
+            android:fontFamily="@font/bold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"/>
+        <item
+            android:id="nav_planos_nutricao"
+            android:title="@string/planos_de_nutri_o"
+            android:icon="@drawable/ic_menu_perfil"
+            android:fontFamily="@font/bold"
+            android:textColor="@color/gray"
+            android:textSize="20sp"/>
+        <item
+            android:id="nav_horarios"
+            android:title="@string/hor_rios"
+            android:icon="@drawable/ic_menu_perfil"
+            android:fontFamily="@font/bold"
+            android:textColor="@color/gray"
+            android:textSize="20sp"/>
+        <item
+            android:id="nav_info_gym"
+            android:title="@string/info_gym"
+            android:icon="@drawable/ic_menu_perfil"
+            android:fontFamily="@font/bold"
+            android:textColor="@color/gray"
+            android:textSize="20sp"/>
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="nav_logout"
+                android:fontFamily="@font/bold"
+                android:icon="@drawable/ic_menu_logout"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+                android:title="@string/logout"></item>
+        </menu>
+    </item>
+</menu>
