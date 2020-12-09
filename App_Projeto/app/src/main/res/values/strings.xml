@@ -13,4 +13,11 @@
     <string name="hor_rios">Horários</string>
     <string name="info_gym">Info Gym</string>
     <string name="logout">Logout</string>
+    <string name="horarios">Horários</string>
+    <string name="minhas_bandas">Minhas Bandas</string>
+    <string name="planos_nutricao">Planos de Nutrição</string>
+    <string name="voltar">Voltar</string>
+    <string name="estimado_utilizador">Estimado Utilizador, Relembramos que só terá acesso à aplicação se tiver a inscrição feita no Ginásio e depois ser-lhe-à atribuído os dados de login.</string>
+    <string name="visitar_em">Poderá nos visitar em:</string>
+    <string name="website">www.gym.com</string>
 </resources>
