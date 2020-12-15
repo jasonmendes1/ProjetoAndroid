@@ -11,10 +11,13 @@
     <style name="ThemeOverlay.AppCompat.navTheme">
         <!-- Color of text and icon when SELECTED -->
         <item name="colorPrimary">@color/white</item>
-
         <!-- Background color when SELECTED -->
         <item name="colorControlHighlight">@color/gray</item>
+    </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 
 </resources>
