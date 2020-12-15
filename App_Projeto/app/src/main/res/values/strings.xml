@@ -20,4 +20,10 @@
     <string name="estimado_utilizador">Estimado Utilizador, Relembramos que só terá acesso à aplicação se tiver a inscrição feita no Ginásio e depois ser-lhe-à atribuído os dados de login.</string>
     <string name="visitar_em">Poderá nos visitar em:</string>
     <string name="website">www.gym.com</string>
+    <string name="nvAbrir">Abrir</string>
+    <string name="nvFechar">Fechar</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="confirmar_logout">Quer mesmo fazer logout?</string>
 </resources>
