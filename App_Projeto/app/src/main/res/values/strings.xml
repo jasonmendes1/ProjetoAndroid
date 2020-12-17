@@ -26,4 +26,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="confirmar_logout">Quer mesmo fazer logout?</string>
+    <string name="sexo">Sexo:</string>
+    <string name="blank">XXXXX</string>
 </resources>
