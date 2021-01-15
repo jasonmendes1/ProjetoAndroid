@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivityPlanosTreino"></activity>
+        <activity android:name=".MainActivityPlanosTreino" />
         <activity android:name=".vistas.CalcularIMC" />
         <activity
             android:name=".vistas.MenuMainActivity"
