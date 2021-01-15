@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivityPlanosTreino">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="160dp"
+        android:layout_height="138dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="137dp"
+        app:srcCompat="@drawable/avatar_example" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView3"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="126dp"
+        android:layout_marginBottom="-57dp"
+        android:fontFamily="@font/bold"
+        android:text="Planos de Treino"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView6"
+        android:layout_marginBottom="-165dp"
+        app:srcCompat="@drawable/linhahorizontal" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="73dp"
+        android:layout_alignBottom="@+id/imageView4"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="274dp"
+        android:layout_marginBottom="-80dp"
+        android:text="Segunda-Feira" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="132dp"
+        android:layout_height="82dp"
+        android:layout_alignBottom="@+id/button5"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="268dp"
+        android:layout_marginBottom="-152dp"
+        android:text="Quinta-Feira" />
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="127dp"
+        android:layout_height="83dp"
+        android:layout_alignBottom="@+id/button5"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="134dp"
+        android:layout_marginBottom="-153dp"
+        android:text="Sexta-Feira" />
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="121dp"
+        android:layout_height="85dp"
+        android:layout_alignBottom="@+id/button5"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="-152dp"
+        android:text="Sábado" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="132dp"
+        android:layout_height="73dp"
+        android:layout_alignBottom="@+id/imageView4"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="134dp"
+        android:layout_marginBottom="-79dp"
+        android:text="Terça-Feira" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="133dp"
+        android:layout_height="73dp"
+        android:layout_alignBottom="@+id/imageView4"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="-79dp"
+        android:text="Quarta-Feira" />
+
+</RelativeLayout>
