@@ -1,8 +1,10 @@
-package pt.ipleiria.estg.dei.app_projeto;
+package pt.ipleiria.estg.dei.app_projeto.vistas;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import pt.ipleiria.estg.dei.app_projeto.R;
 
 public class MainActivityPlanosTreino extends AppCompatActivity {
 
