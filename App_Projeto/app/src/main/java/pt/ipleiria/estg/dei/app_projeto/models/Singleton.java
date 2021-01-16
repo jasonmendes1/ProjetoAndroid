@@ -32,6 +32,7 @@ public class Singleton extends Application {
     public List<PlanosNutricao> planosnutricaoAPI;
 
     private LoginListener loginListener;
+    private int IDUser = 4;
     // Resto dos Listeners
 
     private static final String ALGORITHM = "AES";
@@ -152,5 +153,13 @@ public class Singleton extends Application {
             }
         });
         volleyQueue.add(req);
+    }
+
+    public int getIdUser(){
+        return IDUser;
+    }
+
+    public void setIdUser(int idUser){
+        this.IDUser = IDUser;
     }
 }
