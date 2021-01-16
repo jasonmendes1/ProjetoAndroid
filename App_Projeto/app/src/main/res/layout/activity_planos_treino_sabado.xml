@@ -24,10 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView10"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="147dp"
-        android:layout_marginBottom="-24dp"
+        android:layout_marginEnd="169dp"
+        android:layout_marginBottom="-27dp"
         android:fontFamily="@font/bold"
-        android:text="Segunda-Feira"
+        android:text="Sábado"
         android:textSize="18sp" />
 
     <ImageView
