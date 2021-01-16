@@ -48,7 +48,7 @@ public class Singleton extends Application {
 
     private static RequestQueue volleyQueue = null;
     private String tokenAPI = "";
-    private String urlAPI = "http://" + SharedPreferencesConfig.read(SharedPreferencesConfig.IP, null) + "/projetoWeb/api";
+    private String urlAPI = "http://" + SharedPreferencesConfig.read(SharedPreferencesConfig.IP, null) + "/projetoWeb/api/web/v1";
     private String ipURL;
 
     private FitnessLeagueBDHelper fitnessLeagueBDHelper = null;
@@ -82,7 +82,7 @@ public class Singleton extends Application {
 
     public void setIp(String ip) {
         SharedPreferencesConfig.write(SharedPreferencesConfig.IP, ip);
-        urlAPI = "http://" + SharedPreferencesConfig.read(SharedPreferencesConfig.IP, null) + "/projetoweb/api";
+        urlAPI = "http://" + SharedPreferencesConfig.read(SharedPreferencesConfig.IP, null) + "/projetoWeb/api/web/v1";
     }
 
     public String getIp() {
@@ -119,6 +119,16 @@ public class Singleton extends Application {
     }
     public ArrayList<TipoSubscricao> getTipoSubscricaos() {
         return tipoSubscricaos;
+    }
+
+
+    public Cliente getCliente(int id){
+        for (Cliente c: clientes){
+          if(c.getIDCliente() == id){
+                return c;
+          }
+    }
+    return null;
     }
 
     public String getEncrypted(String plainText) {
@@ -163,8 +173,6 @@ public class Singleton extends Application {
         });
         volleyQueue.add(req);
     }
-
-
 
     public int getIdUser(){
         return IDUser;
