@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -58,7 +59,7 @@ public class PerfilFragment extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
                         System.out.println("-->RESPOSTA ");
-                        try{
+                        try {
                             JSONObject cliente = response.getJSONObject(0);
                             String ClienteNome = cliente.getString("ClienteNome");
                             String ClienteSexo = cliente.getString("ClienteSexo");
@@ -69,14 +70,28 @@ public class PerfilFragment extends Fragment {
                             String SubscricaoDataExpirar = cliente.getString("SubscricaoDataExpirar");
 
                             tvNome.setText(ClienteNome);
+                            tvSexo2.setText(ClienteSexo);
+                            tvDataNasc2.setText(ClienteDataNasc);
+                            tvTelefone2.setText(ClienteTelefone);
+                            tvNif2.setText(ClienteNif);
+                            tvDataInicio.setText(SubscricaoDataInicio);
+                            tvDataExpirar.setText(SubscricaoDataExpirar);
+
+                            System.out.println("--> tvNome: " + tvNome.getText());
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        mQueue.add(request);
 
-
-    public void onClickEditarPerfil(View view) {
+        public void onClickEditarPerfil(View view) {
         Intent intent = new Intent(this, EditarPerfilFragment.class);
         startActivity(intent);
     }
