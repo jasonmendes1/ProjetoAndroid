@@ -21,6 +21,7 @@ public class Singleton extends Application {
     private ArrayList<Cliente> clientes;
     private ArrayList<Desconto> descontos;
     private ArrayList<Ementa> ementa;
+    private ArrayList<Exercicio> exercicios;
     private ArrayList<Funcionario> funcionario;
     private ArrayList<ListaPlanos> listaPlanos;
     private ArrayList<PlanosNutricao> planosNutricaos;
@@ -61,6 +62,7 @@ public class Singleton extends Application {
         clientes = new ArrayList<>();
         descontos = new ArrayList<>();
         ementa = new ArrayList<>();
+        exercicios = new ArrayList<>();
         funcionario = new ArrayList<>();
         listaPlanos = new ArrayList<>();
         planosNutricaos = new ArrayList<>();

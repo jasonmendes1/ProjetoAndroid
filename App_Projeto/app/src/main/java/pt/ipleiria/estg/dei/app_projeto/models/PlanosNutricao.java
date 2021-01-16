@@ -2,9 +2,9 @@ package pt.ipleiria.estg.dei.app_projeto.models;
 
 public class PlanosNutricao {
     private int IDPlanoNutricao;
-    private String segunda, terca, quarta, quinta, sexta, sabado;
+    private String segunda, terca, quarta, quinta, sexta, sabado, semana;
 
-    public PlanosNutricao (int IDPlanoNutricao, String segunda, String terca, String quarta, String quinta, String sexta, String sabado){
+    public PlanosNutricao (int IDPlanoNutricao, String segunda, String terca, String quarta, String quinta, String sexta, String sabado, String semana){
         this.IDPlanoNutricao = IDPlanoNutricao;
         this.segunda = segunda;
         this.terca = terca;
@@ -12,6 +12,7 @@ public class PlanosNutricao {
         this.quinta = quinta;
         this.sexta = sexta;
         this.sabado = sabado;
+        this.semana = semana;
     }
 
     public int getIDPlanoNutricao() {
@@ -68,5 +69,13 @@ public class PlanosNutricao {
 
     public void setSabado(String sabado) {
         this.sabado = sabado;
+    }
+
+    public String getSemana() {
+        return semana;
+    }
+
+    public void setSemana(String semana) {
+        this.semana = semana;
     }
 }
