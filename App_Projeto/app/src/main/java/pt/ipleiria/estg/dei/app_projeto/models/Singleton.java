@@ -4,6 +4,13 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Base64;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 
 import java.security.Key;
@@ -76,7 +83,6 @@ public class Singleton extends Application {
     public void setIp(String ip) {
         SharedPreferencesConfig.write(SharedPreferencesConfig.IP, ip);
         urlAPI = "http://" + SharedPreferencesConfig.read(SharedPreferencesConfig.IP, null) + "/projetoweb/api";
-        //UrlAPI = "http://192.168.1.7/MusicaeWeb/backend/web/v1";
     }
 
     public String getIp() {
@@ -139,9 +145,10 @@ public class Singleton extends Application {
         this.loginListener = loginListener;
     }
 
+
     public void verificaLoginAPI_POST(final String username, final String password){
-        System.out.println("--> url:" + UrlAPI + "/user/verificaLogin?username="+ username +"&password_hash="+ password);
-        JsonArrayRequest req = new JsonArrayRequest(Request.Method.POST, UrlAPI + "/user/verificaLogin?username="+ username +"&password_hash="+ password, null, new Response.Listener<JSONArray>() {
+        System.out.println("--> url:" + urlAPI + "/user/verificaLogin?username="+ username +"&password_hash="+ password);
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.POST, urlAPI + "/user/verificaLogin?username="+ username +"&password_hash="+ password, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 if(loginListener!=null){
@@ -156,6 +163,8 @@ public class Singleton extends Application {
         });
         volleyQueue.add(req);
     }
+
+
 
     public int getIdUser(){
         return IDUser;

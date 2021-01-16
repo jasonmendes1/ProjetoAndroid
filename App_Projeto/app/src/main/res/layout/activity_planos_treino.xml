@@ -27,6 +27,7 @@
         android:textSize="24sp" />
 
     <ListView
+        android:id="@+id/lvPlanosTreino"
         android:layout_width="match_parent"
         android:layout_height="491dp"
         android:layout_alignBottom="@+id/imageView4"
