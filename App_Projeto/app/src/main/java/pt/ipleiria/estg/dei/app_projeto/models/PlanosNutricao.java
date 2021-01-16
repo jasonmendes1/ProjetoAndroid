@@ -1,10 +1,10 @@
 package pt.ipleiria.estg.dei.app_projeto.models;
 
 public class PlanosNutricao {
-    private int IDPlanoNutricao;
-    private String segunda, terca, quarta, quinta, sexta, sabado, semana;
+    private int IDPlanoNutricao, segunda, terca, quarta, quinta, sexta, sabado;
+    private String semana;
 
-    public PlanosNutricao (int IDPlanoNutricao, String segunda, String terca, String quarta, String quinta, String sexta, String sabado, String semana){
+    public PlanosNutricao (int IDPlanoNutricao, int segunda, int terca, int quarta, int quinta, int sexta, int sabado, String semana){
         this.IDPlanoNutricao = IDPlanoNutricao;
         this.segunda = segunda;
         this.terca = terca;
@@ -23,51 +23,51 @@ public class PlanosNutricao {
         this.IDPlanoNutricao = IDPlanoNutricao;
     }
 
-    public String getSegunda() {
+    public int getSegunda() {
         return segunda;
     }
 
-    public void setSegunda(String segunda) {
+    public void setSegunda(int segunda) {
         this.segunda = segunda;
     }
 
-    public String getTerca() {
+    public int getTerca() {
         return terca;
     }
 
-    public void setTerca(String terca) {
+    public void setTerca(int terca) {
         this.terca = terca;
     }
 
-    public String getQuarta() {
+    public int getQuarta() {
         return quarta;
     }
 
-    public void setQuarta(String quarta) {
+    public void setQuarta(int quarta) {
         this.quarta = quarta;
     }
 
-    public String getQuinta() {
+    public int getQuinta() {
         return quinta;
     }
 
-    public void setQuinta(String quinta) {
+    public void setQuinta(int quinta) {
         this.quinta = quinta;
     }
 
-    public String getSexta() {
+    public int getSexta() {
         return sexta;
     }
 
-    public void setSexta(String sexta) {
+    public void setSexta(int sexta) {
         this.sexta = sexta;
     }
 
-    public String getSabado() {
+    public int getSabado() {
         return sabado;
     }
 
-    public void setSabado(String sabado) {
+    public void setSabado(int sabado) {
         this.sabado = sabado;
     }
 

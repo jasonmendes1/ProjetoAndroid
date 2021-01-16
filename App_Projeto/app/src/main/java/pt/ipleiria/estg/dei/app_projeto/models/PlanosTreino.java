@@ -1,26 +1,48 @@
 package pt.ipleiria.estg.dei.app_projeto.models;
 
-public class PlanosTreino {
-    private int dia_treino, semana;
+import java.util.Date;
 
-    public PlanosTreino (int dia_treino, int semana){
+public class PlanosTreino {
+    private int IDPlanoTreino, IDPT;
+    private Integer dia_treino;
+    private String semana;
+
+    public PlanosTreino (int IDPlanoTreino,int IDPT ,  int dia_treino, String semana){
+        this.IDPlanoTreino = IDPlanoTreino;
+        this.IDPT = IDPT;
         this.dia_treino = dia_treino;
         this.semana = semana;
     }
 
-    public int getDia_treino() {
+    public int getIDPT() {
+        return IDPT;
+    }
+
+    public void setIDPT(int IDPT) {
+        this.IDPT = IDPT;
+    }
+
+    public int getIDPlanoTreino() {
+        return IDPlanoTreino;
+    }
+
+    public void setIDPlanoTreino(int IDPlanoTreino) {
+        this.IDPlanoTreino = IDPlanoTreino;
+    }
+
+    public Integer getDia_treino() {
         return dia_treino;
     }
 
-    public void setDia_treino(int dia_treino) {
+    public void setDia_treino(Integer dia_treino) {
         this.dia_treino = dia_treino;
     }
 
-    public int getSemana() {
+    public String getSemana() {
         return semana;
     }
 
-    public void setSemana(int semana) {
+    public void setSemana(String semana) {
         this.semana = semana;
     }
 }

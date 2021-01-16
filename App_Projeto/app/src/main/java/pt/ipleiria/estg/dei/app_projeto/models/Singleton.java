@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.app_projeto.models;
 import android.app.Application;
 import android.content.Context;
 import android.util.Base64;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,6 +22,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 import pt.ipleiria.estg.dei.app_projeto.listeners.LoginListener;
+import utils.PlanosTreinoJSONParser;
 
 public class Singleton extends Application {
 
@@ -181,4 +183,50 @@ public class Singleton extends Application {
     public void setIdUser(int idUser){
         this.User_id = User_id;
     }
-}
+
+    public void adicionarPlanosTreinoBD(ArrayList<PlanosTreino> planostreinos){
+        fitnessLeagueBDHelper.removeAllPlanosTreinoBD();
+        for(PlanosTreino planosTreino : planostreinos){
+            fitnessLeagueBDHelper.adicionarPlanoTreino(planosTreino);
+        }
+    }
+
+    public void adicionarPlanosNutricaoBD(ArrayList<PlanosNutricao> planosnutri){
+        fitnessLeagueBDHelper.removeAllPlanosNutricaoBD();
+        for(PlanosNutricao planosNutricao : planosnutri){
+            fitnessLeagueBDHelper.adicionarPlanoNutricao(planosNutricao);
+        }
+    }
+
+    public void getAllExerFromPlanosTreino(final Context context, boolean isConnected, ArrayList<PlanosTreino> planosTreinos){
+        if(!isConnected){
+            planosTreinos = fitnessLeagueBDHelper.getAllPlanosTreino();
+            if()
+        }else{
+
+        }
+    }
+
+
+    public void planostreinoAPI(final Context context, final boolean isConnected) {
+        if(!isConnected){
+
+        }else{
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, urlAPI, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    planosTreinos = PlanosTreinoJSONParser.parserJsonPlanosTreino(response, context);
+                    adicionarPlanosTreinoBD(planosTreinos);
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, "Error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            );
+            volleyQueue.add(request);
+        }
+    }

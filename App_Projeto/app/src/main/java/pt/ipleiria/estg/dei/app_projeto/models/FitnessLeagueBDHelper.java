@@ -1,8 +1,12 @@
 package pt.ipleiria.estg.dei.app_projeto.models;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
 
 public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
 
@@ -10,6 +14,8 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "gym";
     private static final String TABLE_CLIENTE = "cliente";
     private static final String TABLE_FUNCIONARIO = "funcionario";
+    private static final String TABLE_PLANOTREINO = "planostreino";
+    private static final String TABLE_PLANONUTRICAO = "planosnutricao";
 
     private static final String CLIENTE_ID = "IDCliente";
     private static final String CLIENTE_PRIMEIRONOME = "primeiroNome";
@@ -28,6 +34,20 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
     private static final String FUNCIONARIO_AVATAR = "avatar";
     private static final String FUNCIONARIO_TELEMOVEL = "num_tele";
     private static final String FUNCIONARIO_NIF = "nif";
+
+    private static final String IDPLANOTREINO = "IDPlanoTreino";
+    private static final String IDPT = "id_PT";
+    private static final String DIATREINO = "dia_treino";
+    private static final String SEMANAPT = "semana";
+
+    private static final String IDPLANONUTRICAO = "IDPlanoNutricao";
+    private static final String SEGUNDA = "Segunda";
+    private static final String TERCA = "Terca";
+    private static final String QUARTA = "Quarta";
+    private static final String QUINTA = "Quinta";
+    private static final String SEXTA = "Sexta";
+    private static final String SABADO = "Sabado";
+    private static final String SEMANAPN = "Semana";
 
 
     private final SQLiteDatabase database;
@@ -61,10 +81,100 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
                 FUNCIONARIO_TELEMOVEL + " TEXT NOT NULL, " +
                 FUNCIONARIO_NIF + " TEXT NOT NULL);";
         db.execSQL(TBL_CREATE_FUNCIONARIO);
+
+
+        String TBL_CREATE_PLANOTREINO = "CREATE TABLE " + TABLE_PLANOTREINO + "(" +
+                IDPLANOTREINO + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                IDPT + " INTEGER NOT NULL, " +
+                DIATREINO + " DATE NOT NULL, " +
+                SEMANAPT + " TEXT NOT NULL);";
+        db.execSQL(TBL_CREATE_PLANOTREINO);
+
+        String TBL_CREATE_PLANONUTRICAO = "CREATE TABLE " + TABLE_PLANONUTRICAO + "(" +
+                IDPLANONUTRICAO + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                SEGUNDA + " INTEGER NOT NULL, " +
+                TERCA + " INTEGER NOT NULL, " +
+                QUARTA + " INTEGER NOT NULL, " +
+                QUINTA + " INTEGER NOT NULL, " +
+                SEXTA + " INTEGER NOT NULL, " +
+                SABADO + " INTEGER NOT NULL, " +
+                SEMANAPN + " TEXT NOT NULL);";
+        db.execSQL(TBL_CREATE_PLANONUTRICAO);
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+    public boolean removeAllPlanosTreinoBD(){
+        return database.delete(TABLE_PLANOTREINO,null,null) > 0;
+    }
+
+    public PlanosTreino adicionarPlanoTreino(PlanosTreino planosTreino){
+        ContentValues values = new ContentValues();
+        values.put(IDPLANOTREINO, planosTreino.getIDPlanoTreino());
+        values.put(IDPT, planosTreino.getIDPT());
+        values.put(DIATREINO, planosTreino.getDia_treino());
+        values.put(SEMANAPT, planosTreino.getSemana());
+
+        long id = this.database.insert(TABLE_PLANOTREINO,null,values);
+        if(id > -1){
+            planosTreino.setIDPlanoTreino((int) id);
+            return planosTreino;
+        }
+        return null;
+    }
+
+    public ArrayList<PlanosTreino> getAllPlanosTreino(){
+        ArrayList<PlanosTreino> planosTreinos = new ArrayList<PlanosTreino>();
+        Cursor cursor = this.database.query(TABLE_PLANOTREINO, new String[]{IDPLANOTREINO,IDPT,DIATREINO,SEMANAPT},null,null,null,null,null);
+        if(cursor.moveToFirst()){
+            do{
+                PlanosTreino auxplanotreino = new PlanosTreino(cursor.getInt(0),cursor.getInt(0),cursor.getInt(0),cursor.getString(0));
+                auxplanotreino.setIDPlanoTreino(cursor.getInt(0));
+                planosTreinos.add(auxplanotreino);
+            }while(cursor.moveToNext());
+        }
+        return planosTreinos;
+    }
+
+    public boolean removeAllPlanosNutricaoBD(){
+        return database.delete(TABLE_PLANONUTRICAO,null,null) > 0;
+    }
+
+    public PlanosNutricao adicionarPlanoNutricao(PlanosNutricao planosNutricao){
+        ContentValues values = new ContentValues();
+        values.put(IDPLANONUTRICAO, planosNutricao.getIDPlanoNutricao());
+        values.put(SEGUNDA, planosNutricao.getSegunda());
+        values.put(TERCA, planosNutricao.getTerca());
+        values.put(QUARTA, planosNutricao.getQuarta());
+        values.put(QUINTA, planosNutricao.getQuinta());
+        values.put(SEXTA, planosNutricao.getSexta());
+        values.put(SABADO, planosNutricao.getSabado());
+        values.put(SEMANAPN, planosNutricao.getSemana());
+
+        long id = this.database.insert(TABLE_PLANONUTRICAO,null,values);
+        if(id > -1){
+            planosNutricao.setIDPlanoNutricao((int) id);
+            return planosNutricao;
+        }
+        return null;
+    }
+
+    public ArrayList<PlanosNutricao> getAllPlanosNutricao(){
+        ArrayList<PlanosNutricao> planosNutricaos = new ArrayList<PlanosNutricao>();
+        Cursor cursor = this.database.query(TABLE_PLANONUTRICAO, new String[]{IDPLANONUTRICAO, SEGUNDA, TERCA,QUARTA,QUINTA,SEXTA,SABADO,SEMANAPN}, null, null, null,null, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                PlanosNutricao auxplanonutri = new PlanosNutricao(cursor.getInt(0),cursor.getInt(0),cursor.getInt(0),cursor.getInt(0),cursor.getInt(0),cursor.getInt(0),cursor.getInt(0),cursor.getString(0));
+                auxplanonutri.setIDPlanoNutricao(cursor.getInt(0));
+                planosNutricaos.add(auxplanonutri);
+            }while (cursor.moveToNext());
+        }
+        return planosNutricaos;
+    }
+
 }
