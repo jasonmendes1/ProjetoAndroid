@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".vistas.PlanosTreinoSegunda"></activity>
-        <activity android:name=".vistas.MainActivityPlanosTreino" />
+        <activity android:name=".vistas.PlanosTreinoActivity" />
         <activity android:name=".vistas.CalcularIMC" />
         <activity
             android:name=".vistas.MenuMainActivity"

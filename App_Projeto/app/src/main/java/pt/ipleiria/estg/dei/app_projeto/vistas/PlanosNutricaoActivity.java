@@ -6,11 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import pt.ipleiria.estg.dei.app_projeto.R;
 
-public class MainActivityPlanosTreino extends AppCompatActivity {
+public class PlanosNutricaoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_planos_treino);
+        setContentView(R.layout.activity_planos_nutricao);
     }
 }
