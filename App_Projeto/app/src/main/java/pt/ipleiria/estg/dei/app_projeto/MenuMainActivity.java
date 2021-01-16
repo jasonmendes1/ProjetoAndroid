@@ -1,15 +1,4 @@
-package pt.ipleiria.estg.dei.app_projeto.vistas;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+package pt.ipleiria.estg.dei.app_projeto;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,9 +9,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.google.android.material.navigation.NavigationView;
 
-import pt.ipleiria.estg.dei.app_projeto.R;
+import pt.ipleiria.estg.dei.app_projeto.vistas.LoginActivity;
+import pt.ipleiria.estg.dei.app_projeto.vistas.PerfilFragment;
 
 public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 

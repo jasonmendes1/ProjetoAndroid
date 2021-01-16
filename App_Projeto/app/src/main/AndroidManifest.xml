@@ -14,7 +14,7 @@
         <activity android:name=".vistas.PlanosTreinoActivity" />
         <activity android:name=".vistas.CalcularIMC" />
         <activity
-            android:name=".vistas.MenuMainActivity"
+            android:name=".MenuMainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

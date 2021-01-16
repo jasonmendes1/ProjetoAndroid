@@ -1,13 +1,14 @@
 package pt.ipleiria.estg.dei.app_projeto.vistas;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuAdapter;
 
 import pt.ipleiria.estg.dei.app_projeto.R;
 
@@ -17,6 +18,10 @@ public class LoginActivity extends AppCompatActivity {
     public static final String EMAIl = "EMAIL";
     private EditText etEmail, etPassword;
     private String email;
+    private String textIP;
+    private TextView textViewIP;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +31,15 @@ public class LoginActivity extends AppCompatActivity {
 
         etEmail = findViewById(R.id.editTextEmail);
         etPassword = findViewById(R.id.editTextPassword);
+        textViewIP = findViewById(R.id.textViewIP);
     }
 
 
     public void onClickLogin(View view) {
-        email=etEmail.getText().toString();
-        String password = etPassword.getText().toString();
+        String email = etEmail.getText().toString().trim().toLowerCase();
+        String password = etPassword.getText().toString().trim();
+        String ip = textViewIP.getText().toString().trim();
+
         if(!isEmailValid(email)) {
             etEmail.setError(getString(R.string.email_errado));
             return;

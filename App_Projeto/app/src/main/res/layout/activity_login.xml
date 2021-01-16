@@ -80,4 +80,14 @@
         tools:layout_editor_absoluteX="129dp"
         tools:layout_editor_absoluteY="635dp" />
 
+    <TextView
+        android:id="@+id/textViewIP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView8"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="192dp"
+        android:layout_marginBottom="-47dp"
+        android:text="TextView" />
+
 </RelativeLayout>
