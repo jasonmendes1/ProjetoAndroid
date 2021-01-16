@@ -1,6 +1,5 @@
 package pt.ipleiria.estg.dei.app_projeto.vistas;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,8 +31,6 @@ public class PerfilFragment extends Fragment {
     private String urlAPI, ipURL;
     private int ID_User;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
@@ -52,7 +49,7 @@ public class PerfilFragment extends Fragment {
         urlAPI = "http://" + ipURL + "/ProjetoWeb/api/web/v1/cliente";
 
         ID_User = Singleton.getInstance(getContext()).getIdUser();
-        System.out.println("--> url ClienteAPI: "+ urlAPI + "/" + ID_User);
+        System.out.println("--> url ClienteAPI: " + urlAPI + "/" + ID_User);
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, urlAPI + "/" + ID_User, null,
                 new Response.Listener<JSONArray>() {
@@ -90,9 +87,6 @@ public class PerfilFragment extends Fragment {
             }
         });
         mQueue.add(request);
-
-        public void onClickEditarPerfil(View view) {
-        Intent intent = new Intent(this, EditarPerfilFragment.class);
-        startActivity(intent);
+        return rootView;
     }
 }

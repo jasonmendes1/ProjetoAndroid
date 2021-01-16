@@ -40,7 +40,7 @@ public class Singleton extends Application {
     public List<PlanosNutricao> planosnutricaoAPI;
 
     private LoginListener loginListener;
-    private int IDUser = 4;
+    private int User_id = 4;
     // Resto dos Listeners
 
     private static final String ALGORITHM = "AES";
@@ -175,10 +175,10 @@ public class Singleton extends Application {
     }
 
     public int getIdUser(){
-        return IDUser;
+        return User_id;
     }
 
     public void setIdUser(int idUser){
-        this.IDUser = IDUser;
+        this.User_id = User_id;
     }
 }
