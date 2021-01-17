@@ -17,13 +17,15 @@ import org.json.JSONObject;
 import pt.ipleiria.estg.dei.app_projeto.MenuMainActivity;
 import pt.ipleiria.estg.dei.app_projeto.R;
 import pt.ipleiria.estg.dei.app_projeto.listeners.LoginListener;
+import pt.ipleiria.estg.dei.app_projeto.listeners.UserListener;
 import pt.ipleiria.estg.dei.app_projeto.models.SharedPreferencesConfig;
 import pt.ipleiria.estg.dei.app_projeto.models.Singleton;
+import pt.ipleiria.estg.dei.app_projeto.models.User;
 import pt.ipleiria.estg.dei.app_projeto.utils.UserJSONParser;
 
 import static android.provider.ContactsContract.Intents.Insert.EMAIL;
 
-public class LoginActivity extends AppCompatActivity implements LoginListener {
+public class LoginActivity extends AppCompatActivity implements UserListener {
     public static final String USERNAME = "USERNAME";
     private EditText etusername, etPassword;
     private String email;

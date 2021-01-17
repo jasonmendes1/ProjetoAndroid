@@ -25,6 +25,8 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 import pt.ipleiria.estg.dei.app_projeto.listeners.LoginListener;
+import pt.ipleiria.estg.dei.app_projeto.listeners.PlanosNutricaoListener;
+import pt.ipleiria.estg.dei.app_projeto.listeners.PlanosTreinoListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.UserListener;
 import pt.ipleiria.estg.dei.app_projeto.utils.PlanosTreinoJSONParser;
 import pt.ipleiria.estg.dei.app_projeto.utils.UserJSONParser;
@@ -50,6 +52,8 @@ public class Singleton extends Application {
     private LoginListener loginListener;
     private int User_id = 4;
     private UserListener userListener;
+    private PlanosTreinoListener planosTreinoListener;
+    private PlanosNutricaoListener planosNutricaoListener;
 
     // Resto dos Listeners
 
