@@ -52,19 +52,19 @@ public class Singleton extends Application {
     private PlanosTreinoListener planosTreinoListener;
     private PlanosNutricaoListener planosNutricaoListener;
 
-    // Resto dos Listeners
 
     private static final String ALGORITHM = "AES";
     private static final byte[] SALT = "tHeApAcHe6410111".getBytes();
 
     private static RequestQueue volleyQueue = null;
+
     private String tokenAPI = "";
     //private String urlAPI = "http://" + SharedPreferencesConfig.read(SharedPreferencesConfig.IP, null) + "/projetoWeb/api/web/v1";
-    private String CURRENT_IP;
+    private String CURRENT_IP = "192.168.1.7";
     private String ipURL;
 
-    private String UrlAPIusersLogin = "http://localhost/ProjetoWeb/api/web/v1/userregisterandlogin/loginuser";
-    private String mUrlGetStuffFromUser;
+    private String UrlAPIusersLogin = "http://192.168.1.7/ProjetoWeb/api/web/v1/userregisterandlogin/loginuser";
+    private String mUrlGetStuffFromUser = "http://192.168.1.7/ProjetoWeb/api/web/v1/userregisterandlogin/loginuser";
 
     private FitnessLeagueBDHelper fitnessLeagueBDHelper = null;
 
@@ -186,7 +186,7 @@ public class Singleton extends Application {
 
     public void verificaLoginAPI_POST(final String username, final String password, final Context context, final boolean isConnected) {
         if (!isConnected) {
-            Toast.makeText(context, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Sem internet", Toast.LENGTH_SHORT).show();
         } else {
             StringRequest request = new StringRequest(Request.Method.POST, UrlAPIusersLogin, new Response.Listener<String>() {
                 @Override
@@ -197,7 +197,7 @@ public class Singleton extends Application {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, "Error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }) {
                 @Override
@@ -214,7 +214,7 @@ public class Singleton extends Application {
 
     public void getClienteFromLogin(final Context context, final boolean isConnected){
         if(!isConnected){
-            Toast.makeText(context, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Sem internet", Toast.LENGTH_SHORT).show();
         }
         else{
             StringRequest request = new StringRequest(Request.Method.GET, mUrlGetStuffFromUser+SharedPreferencesConfig.read(SharedPreferencesConfig.ID_USER, 0)+"/cliente?access-token="+SharedPreferencesConfig.read(SharedPreferencesConfig.AUTH_KEY, null), new Response.Listener<String>() {

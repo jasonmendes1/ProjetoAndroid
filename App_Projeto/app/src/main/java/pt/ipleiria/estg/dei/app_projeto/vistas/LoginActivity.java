@@ -26,7 +26,7 @@ import pt.ipleiria.estg.dei.app_projeto.utils.UserJSONParser;
 
 public class LoginActivity extends AppCompatActivity implements UserListener {
     public static final String USERNAME = "USERNAME";
-    private EditText etusername, etPassword;
+    private EditText etusername, etpassword;
     private String email;
     private String textIP;
     private TextView textViewIP;
@@ -37,45 +37,39 @@ public class LoginActivity extends AppCompatActivity implements UserListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        setTitle("Login");
-
         etusername = findViewById(R.id.editTextUsername);
-        etPassword = findViewById(R.id.editTextPassword);
-        textViewIP = findViewById(R.id.textViewIP);
-    }
+        etpassword = findViewById(R.id.editTextPassword);
+        SharedPreferencesConfig.init(getApplicationContext());
 
-
-    public void onCreate(View view) {
-        String ip = textViewIP.getText().toString().trim();
 
         Integer UserIdSaved = SharedPreferencesConfig.read(SharedPreferencesConfig.ID_USER, 0);
         String UserUsernameSaved = SharedPreferencesConfig.read(SharedPreferencesConfig.USERNAME_USER, null);
         String UserAuthkeySaved = SharedPreferencesConfig.read(SharedPreferencesConfig.AUTH_KEY, null);
 
-        if (UserIdSaved != 0 && UserUsernameSaved != null && UserAuthkeySaved != null) {
+        if(UserIdSaved != 0 && UserUsernameSaved != null && UserAuthkeySaved != null){
             Intent main = new Intent(this, MenuMainActivity.class);
             main.putExtra("IDUSER", UserIdSaved);
             main.putExtra("USERNAME", UserUsernameSaved);
             main.putExtra("AUTH_KEY", UserAuthkeySaved);
-            System.out.println("->>>>>>>>>>>>>>>>>>> Tinha lá dados guardados:" + UserIdSaved + " | " + UserUsernameSaved + " | " + UserAuthkeySaved);
+            System.out.println("->>>>>>>>>>>>>>>>>>> Tinha lá dados guardados:"+ UserIdSaved + " | "+UserUsernameSaved + " | "+UserAuthkeySaved);
             startActivity(main);
             finish();
         }
+
     }
 
         public void onClickLogin(View view){
             String username = etusername.getText().toString();
-            String password = etusername.getText().toString();
+            String password = etpassword.getText().toString();
 
 
             Singleton.getInstance(getApplicationContext()).verificaLoginAPI_POST(username, password, getApplicationContext(), UserJSONParser.isConnectionInternet(getApplicationContext()));
-
     }
 
     @Override
     public void onRefreshListaUser(User user) {
         if(user == null){
-            etusername.setError("Username or Password is wrong");
+            etusername.setError("Dados de login inválidos! Tente novamente.");
         }
         else{
             SharedPreferencesConfig.write(SharedPreferencesConfig.ID_USER, user.getId());//save int in shared preference.
@@ -100,6 +94,7 @@ public class LoginActivity extends AppCompatActivity implements UserListener {
             SharedPreferencesConfig.write(SharedPreferencesConfig.PESO_CLIENTE, cliente.getPeso());//save string in shared preference.
             SharedPreferencesConfig.write(SharedPreferencesConfig.MASSA_MUSCULAR_CLIENTE, cliente.getMassa_muscular());//save string in shared preference.
             SharedPreferencesConfig.write(SharedPreferencesConfig.MASSA_GORDA_CLIENTE, cliente.getMassa_gorda());//save string in shared preference.
+
             Intent main = new Intent(this, MenuMainActivity.class);
             main.putExtra("IDUSER", SharedPreferencesConfig.read(SharedPreferencesConfig.ID_USER, 0));
             main.putExtra("USERNAME", SharedPreferencesConfig.read(SharedPreferencesConfig.USERNAME_USER, null));
@@ -171,7 +166,10 @@ public class LoginActivity extends AppCompatActivity implements UserListener {
         return dialog;
     }
 
-
+    public void onClickAqui(View view) {
+        Intent intent = new Intent(this, LoginErroActivity.class);
+        startActivity(intent);
+    }
 
 
 
@@ -191,12 +189,6 @@ public class LoginActivity extends AppCompatActivity implements UserListener {
             System.out.println("--> encryptado: " + pw_encriptada);
             Singleton.getInstance(getApplicationContext()).verificaLoginAPI_POST(email, pw_encriptada);
         }
-    }
-
-    public void onClickAqui(View view) {
-        Intent intent = new Intent(this, LoginErroActivity.class);
-        intent.putExtra(EMAIL, email);
-        startActivity(intent);
     }
 
     @Override

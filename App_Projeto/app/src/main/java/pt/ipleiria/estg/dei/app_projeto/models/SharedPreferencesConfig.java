@@ -8,8 +8,6 @@ import pt.ipleiria.estg.dei.app_projeto.MainActivity;
 public class SharedPreferencesConfig
 {
     private static SharedPreferences mSharedPref;
-    public static final String IP = "IP";
-    public static final String ENTRAR = "IP";
     public static final String USERNAME_USER = "USERNAME_USER";
     public static final String ID_USER = "ID_USER";
     public static final String AUTH_KEY = "AUTH_KEY";
