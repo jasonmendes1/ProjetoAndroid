@@ -9,11 +9,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
 
 import java.security.Key;
 import java.util.ArrayList;
@@ -29,7 +26,6 @@ import pt.ipleiria.estg.dei.app_projeto.listeners.PlanosNutricaoListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.PlanosTreinoListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.UserListener;
 import pt.ipleiria.estg.dei.app_projeto.utils.ClienteJSONParser;
-import pt.ipleiria.estg.dei.app_projeto.utils.PlanosTreinoJSONParser;
 import pt.ipleiria.estg.dei.app_projeto.utils.UserJSONParser;
 
 
@@ -63,7 +59,8 @@ public class Singleton extends Application {
 
     private static RequestQueue volleyQueue = null;
     private String tokenAPI = "";
-    private String urlAPI = "http://" + SharedPreferencesConfig.read(SharedPreferencesConfig.IP, null) + "/projetoWeb/api/web/v1";
+    //private String urlAPI = "http://" + SharedPreferencesConfig.read(SharedPreferencesConfig.IP, null) + "/projetoWeb/api/web/v1";
+    private String CURRENT_IP;
     private String ipURL;
 
     private String UrlAPIusersLogin = "http://localhost/ProjetoWeb/api/web/v1/userregisterandlogin/loginuser";
@@ -98,14 +95,14 @@ public class Singleton extends Application {
         fitnessLeagueBDHelper = new FitnessLeagueBDHelper(context);
     }
 
-    public void setIp(String ip) {
-        SharedPreferencesConfig.write(SharedPreferencesConfig.IP, ip);
-        urlAPI = "http://" + SharedPreferencesConfig.read(SharedPreferencesConfig.IP, null) + "/projetoWeb/api/web/v1";
+    public void setIP(String ip) {
+        CURRENT_IP = ip;
+        SharedPreferencesConfig.write(SharedPreferencesConfig.SETTINGS_IP, CURRENT_IP);//save boolean in shared preference.
+        mUrlGetStuffFromUser = "http://" + CURRENT_IP + ":80/ProjetoWeb/api/web/v1/user";
     }
 
-    public String getIp() {
-        ipURL = SharedPreferencesConfig.read(SharedPreferencesConfig.IP, null);
-        return ipURL;
+    public String getIPInput() {
+        return CURRENT_IP;
     }
 
     public ArrayList<Cargo> getCargos() {
@@ -269,7 +266,7 @@ public class Singleton extends Application {
             }
         }
 
-    */
+
     public void planostreinoAPI(final Context context, final boolean isConnected) {
         if (!isConnected) {
 
@@ -292,4 +289,6 @@ public class Singleton extends Application {
             volleyQueue.add(request);
         }
     }
+
+     */
 }

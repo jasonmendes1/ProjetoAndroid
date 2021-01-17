@@ -47,7 +47,7 @@ public class EditarPerfilFragment extends Fragment {
         etDataNasc2 = rootView.findViewById(R.id.editTextDataNasc);
 
 
-        ipURL = Singleton.getInstance(getContext()).getIp();
+        ipURL = Singleton.getInstance(getContext()).getIPInput();
         urlAPI = "http://" + ipURL + "/ProjetoWeb/api/web/v1/cliente";
 
         User_id = Singleton.getInstance(getContext()).getIdUser();

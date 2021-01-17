@@ -4,9 +4,13 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,15 +23,6 @@ import pt.ipleiria.estg.dei.app_projeto.models.Singleton;
 import pt.ipleiria.estg.dei.app_projeto.models.User;
 import pt.ipleiria.estg.dei.app_projeto.utils.ClienteJSONParser;
 import pt.ipleiria.estg.dei.app_projeto.utils.UserJSONParser;
-
-import pt.ipleiria.estg.dei.app_projeto.listeners.LoginListener;
-import pt.ipleiria.estg.dei.app_projeto.listeners.UserListener;
-import pt.ipleiria.estg.dei.app_projeto.models.SharedPreferencesConfig;
-import pt.ipleiria.estg.dei.app_projeto.models.Singleton;
-import pt.ipleiria.estg.dei.app_projeto.models.User;
-import pt.ipleiria.estg.dei.app_projeto.utils.UserJSONParser;
-
-import static android.provider.ContactsContract.Intents.Insert.EMAIL;
 
 public class LoginActivity extends AppCompatActivity implements UserListener {
     public static final String USERNAME = "USERNAME";
@@ -123,6 +118,57 @@ public class LoginActivity extends AppCompatActivity implements UserListener {
     protected void onResume() {
         Singleton.getInstance(getApplicationContext()).setUserListener(this);
         super.onResume();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_three_dots_login, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+
+        if(id == R.id.action_settings){
+            createDialog();
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public Dialog createDialog() {
+
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.ip_picker_dialog);
+        TextView titulo = dialog.findViewById(R.id.ip_picker_dialog_title);
+        titulo.setText("IP ADDRESS");
+        dialog.setTitle("IP ADDRESS");
+        final EditText textIP = dialog.findViewById(R.id.ipDialog);
+        textIP.setText(SharedPreferencesConfig.read(SharedPreferencesConfig.SETTINGS_IP, null));
+        Button dialogButtonSave = (Button) dialog.findViewById(R.id.buttonSave);
+        Button dialogButtonCancel = (Button) dialog.findViewById(R.id.buttonCancel);
+
+        dialogButtonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Singleton.getInstance(getApplicationContext()).setIP(textIP.getText().toString());
+                Toast.makeText(getApplicationContext(), Singleton.getInstance(getApplicationContext()).getIPInput(), Toast.LENGTH_SHORT).show();
+                textIP.setText(Singleton.getInstance(getApplicationContext()).getIPInput());
+                dialog.dismiss();
+            }
+        });
+
+        dialogButtonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+
+        dialog.show();
+        return dialog;
     }
 
 
