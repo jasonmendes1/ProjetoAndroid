@@ -15,7 +15,6 @@ public class ClienteJSONParser {
         Cliente auxCliente = null;
         try {
             JSONObject cliente = new JSONObject(response);
-            //int id, String username, String authKey, String email,int profile_ID, int saldo, String nome, int nif, String profileimage
             int cliente_ID = cliente.getInt("IDCliente");
             String cliente_primeiroNome = cliente.getString("primeiroNome");
             String cliente_apelido = cliente.getString("apelido");
@@ -38,17 +37,6 @@ public class ClienteJSONParser {
         return auxCliente;
     }
 
-    public static String parserJsonSaldo(String response, Context context){
-        String auxSaldo = null;
-        try{
-            JSONObject profile = new JSONObject(response);
-            String profile_saldo = profile.getString("saldo");
-            auxSaldo = profile_saldo;
-        }catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return auxSaldo;
-    }
 
     public static boolean isConnectionInternet(Context context){
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
