@@ -9,8 +9,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
 
 import java.security.Key;
 import java.util.ArrayList;
@@ -26,6 +29,7 @@ import pt.ipleiria.estg.dei.app_projeto.listeners.PlanosNutricaoListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.PlanosTreinoListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.UserListener;
 import pt.ipleiria.estg.dei.app_projeto.utils.ClienteJSONParser;
+import pt.ipleiria.estg.dei.app_projeto.utils.PlanosTreinoJSONParser;
 import pt.ipleiria.estg.dei.app_projeto.utils.UserJSONParser;
 
 
@@ -246,7 +250,7 @@ public class Singleton extends Application {
     public void adicionarPlanosTreinoBD(ArrayList<PlanosTreino> planostreinos) {
         fitnessLeagueBDHelper.removeAllPlanosTreinoBD();
         for (PlanosTreino planosTreino : planostreinos) {
-            fitnessLeagueBDHelper.adicionarPlanoTreino(planosTreino);
+            fitnessLeagueBDHelper.adicionarPlanoTreinoBD(planosTreino);
         }
     }
 
@@ -267,12 +271,12 @@ public class Singleton extends Application {
             }
         }
 
-
-    public void planostreinoAPI(final Context context, final boolean isConnected) {
+    */
+    public void getAllPlanosTreinoFromClientAPI(final Context context, final boolean isConnected) {
         if (!isConnected) {
 
         } else {
-            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, urlAPI, null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, mUrlGetStuffFromUser+SharedPreferencesConfig.read(SharedPreferencesConfig.ID_USER, 0)+"/cliente?access-token="+SharedPreferencesConfig.read(SharedPreferencesConfig.AUTH_KEY, null), null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     planosTreinos = PlanosTreinoJSONParser.parserJsonPlanosTreino(response, context);
@@ -290,6 +294,4 @@ public class Singleton extends Application {
             volleyQueue.add(request);
         }
     }
-
-     */
 }

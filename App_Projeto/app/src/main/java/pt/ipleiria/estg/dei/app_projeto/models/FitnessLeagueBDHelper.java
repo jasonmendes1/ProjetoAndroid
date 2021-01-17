@@ -108,11 +108,13 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
 
     }
 
+
+    /*Planos De Treino*/
     public boolean removeAllPlanosTreinoBD(){
         return database.delete(TABLE_PLANOTREINO,null,null) > 0;
     }
 
-    public PlanosTreino adicionarPlanoTreino(PlanosTreino planosTreino){
+    public PlanosTreino adicionarPlanoTreinoBD(PlanosTreino planosTreino){
         ContentValues values = new ContentValues();
         values.put(IDPLANOTREINO, planosTreino.getIDPlanoTreino());
         values.put(IDPT, planosTreino.getIDPT());
@@ -127,7 +129,7 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public ArrayList<PlanosTreino> getAllPlanosTreino(){
+    public ArrayList<PlanosTreino> getAllPlanosTreinoBD(){
         ArrayList<PlanosTreino> planosTreinos = new ArrayList<PlanosTreino>();
         Cursor cursor = this.database.query(TABLE_PLANOTREINO, new String[]{IDPLANOTREINO,IDPT,DIATREINO,SEMANAPT},null,null,null,null,null);
         if(cursor.moveToFirst()){
@@ -139,6 +141,10 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
         }
         return planosTreinos;
     }
+
+    /*Planos De Treino*/
+
+    /*Planos De Nutrição*/
 
     public boolean removeAllPlanosNutricaoBD(){
         return database.delete(TABLE_PLANONUTRICAO,null,null) > 0;
@@ -176,5 +182,7 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
         }
         return planosNutricaos;
     }
+
+    /*Planos De Nutrição*/
 
 }
