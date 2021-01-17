@@ -14,8 +14,17 @@ public class SharedPreferencesConfig
     public static final String ID_USER = "ID_USER";
     public static final String AUTH_KEY = "AUTH_KEY";
     public static final String SETTINGS_IP = "SETTINGS_IP";
-    public static final String NOME_CLIENTE = "NOME_PROFILE";
-    public static final String NIF_CLIENTE = "NIF_PROFILE";
+    public static final String NOME_CLIENTE = "NOME_CLIENTE";
+    public static final String APELIDO_CLIENTE = "APELIDO_CLIENTE";
+    public static final String DTA_NASCIMENTO_CLIENTE = "DTA_NASCIMENTO_CLIENTE";
+    public static final String SEXO_CLIENTE = "SEXO_CLIENTE";
+    public static final String AVATAR_CLIENTE = "AVATAR_CLIENTE";
+    public static final String NUM_TELE_CLIENTE = "NUM_TELE_CLIENTE";
+    public static final String NIF_CLIENTE = "NIF_CLIENTE";
+    public static final String ALTURA_CLIENTE = "ALTURA_CLIENTE";
+    public static final String PESO_CLIENTE = "PESO_CLIENTE";
+    public static final String MASSA_MUSCULAR_CLIENTE = "MASSA_MUSCULAR_CLIENTE";
+    public static final String MASSA_GORDA_CLIENTE = "MASSA_GORDA_CLIENTE";
 
     private SharedPreferencesConfig()
     {

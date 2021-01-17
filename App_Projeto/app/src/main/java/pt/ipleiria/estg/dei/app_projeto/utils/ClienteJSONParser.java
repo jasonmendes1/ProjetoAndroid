@@ -1,0 +1,59 @@
+package pt.ipleiria.estg.dei.app_projeto.utils;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import pt.ipleiria.estg.dei.app_projeto.models.Cliente;
+
+public class ClienteJSONParser {
+
+    public static Cliente parserJsonCliente(String response, Context context){
+        Cliente auxCliente = null;
+        try {
+            JSONObject cliente = new JSONObject(response);
+            //int id, String username, String authKey, String email,int profile_ID, int saldo, String nome, int nif, String profileimage
+            int cliente_ID = cliente.getInt("IDCliente");
+            String cliente_primeiroNome = cliente.getString("primeiroNome");
+            String cliente_apelido = cliente.getString("apelido");
+            int cliente_dta_nascimento = cliente.getInt("cliente_dta_nascimento");
+            String cliente_sexo = cliente.getString("sexo");
+            String cliente_avatar = cliente.getString("avatar");
+            int cliente_num_tele = cliente.getInt("num_tele");
+            int cliente_nif = cliente.getInt("nif");
+            int cliente_altura = cliente.getInt("altura");
+            int cliente_peso = cliente.getInt("peso");
+            int cliente_massa_muscular = cliente.getInt("massa_muscular");
+            int cliente_massa_gorda = cliente.getInt("massa_gorda");
+
+
+            auxCliente = new Cliente(cliente_ID, cliente_primeiroNome, cliente_apelido, cliente_dta_nascimento, cliente_sexo, cliente_avatar, cliente_num_tele, cliente_nif, cliente_altura, cliente_peso, cliente_massa_muscular, cliente_massa_gorda);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return auxCliente;
+    }
+
+    public static String parserJsonSaldo(String response, Context context){
+        String auxSaldo = null;
+        try{
+            JSONObject profile = new JSONObject(response);
+            String profile_saldo = profile.getString("saldo");
+            auxSaldo = profile_saldo;
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return auxSaldo;
+    }
+
+    public static boolean isConnectionInternet(Context context){
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+
+        return networkInfo != null && networkInfo.isConnected();
+    }
+}

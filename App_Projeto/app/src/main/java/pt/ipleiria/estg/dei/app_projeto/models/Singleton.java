@@ -26,6 +26,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import pt.ipleiria.estg.dei.app_projeto.listeners.LoginListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.UserListener;
+import pt.ipleiria.estg.dei.app_projeto.utils.ClienteJSONParser;
 import pt.ipleiria.estg.dei.app_projeto.utils.PlanosTreinoJSONParser;
 import pt.ipleiria.estg.dei.app_projeto.utils.UserJSONParser;
 
@@ -62,6 +63,7 @@ public class Singleton extends Application {
     private String ipURL;
 
     private String UrlAPIusersLogin = "http://localhost/ProjetoWeb/api/web/v1/userregisterandlogin/loginuser";
+    private String mUrlGetStuffFromUser;
 
     private FitnessLeagueBDHelper fitnessLeagueBDHelper = null;
 
@@ -152,6 +154,10 @@ public class Singleton extends Application {
         return null;
     }
 
+    public void setUserListener(UserListener userListener) {
+        this.userListener = userListener;
+    }
+
     public String getEncrypted(String plainText) {
         if (plainText == null) {
             return null;
@@ -203,6 +209,29 @@ public class Singleton extends Application {
             volleyQueue.add(request);
         }
     }
+
+    public void getClienteFromLogin(final Context context, final boolean isConnected){
+        if(!isConnected){
+            Toast.makeText(context, "No Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            StringRequest request = new StringRequest(Request.Method.GET, mUrlGetStuffFromUser+SharedPreferencesConfig.read(SharedPreferencesConfig.ID_USER, 0)+"/cliente?access-token="+SharedPreferencesConfig.read(SharedPreferencesConfig.AUTH_KEY, null), new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Cliente cliente = ClienteJSONParser.parserJsonCliente(response, context);
+                    userListener.onRefreshListaCliente(cliente);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, "Error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+            );
+            volleyQueue.add(request);
+        }
+    }
+
 
     public int getIdUser() {
         return User_id;

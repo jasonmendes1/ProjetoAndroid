@@ -8,7 +8,7 @@ import pt.ipleiria.estg.dei.app_projeto.models.User;
 
 public interface UserListener {
     void onRefreshListaUser(User user);
-    void onRefrshListaCliente(Cliente cliente);
+    void onRefreshListaCliente(Cliente cliente);
 
     Dialog onCreateDialog(Bundle savedInstanceState);
 }
