@@ -99,6 +99,7 @@ public class Singleton extends Application {
         CURRENT_IP = ip;
         SharedPreferencesConfig.write(SharedPreferencesConfig.SETTINGS_IP, CURRENT_IP);//save boolean in shared preference.
         mUrlGetStuffFromUser = "http://" + CURRENT_IP + ":80/ProjetoWeb/api/web/v1/user";
+
     }
 
     public String getIPInput() {
