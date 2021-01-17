@@ -26,7 +26,7 @@
         android:password="true" />
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/editTextUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/editTextPassword"
@@ -34,7 +34,7 @@
         android:layout_marginBottom="19dp"
         android:layout_toEndOf="@+id/space1"
         android:ems="10"
-        android:hint="@string/introduza_o_email"
+        android:hint="Introduza o Username"
         android:inputType="textPersonName" />
 
     <TextView

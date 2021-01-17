@@ -1,4 +1,4 @@
-package utils;
+package pt.ipleiria.estg.dei.app_projeto.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -23,8 +23,8 @@ public class PlanosTreinoJSONParser {
                 int id = planostreino.getInt("IDPlanoTreino");
                 String semana = planostreino.getString("semana");
                 Date dia = (Date) planostreino.get("dia_treino");
-                PlanosTreino auxplanotreino = new PlanosTreino(id,dia,semana);
-                listaPlanosTreino.add(auxplanotreino);
+                //PlanosTreino auxplanotreino = new PlanosTreino(id,dia,semana);
+                //listaPlanosTreino.add(auxplanotreino);
             }
         } catch (JSONException e) {
             e.printStackTrace();

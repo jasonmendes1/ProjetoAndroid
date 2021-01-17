@@ -10,6 +10,12 @@ public class SharedPreferencesConfig
     private static SharedPreferences mSharedPref;
     public static final String IP = "IP";
     public static final String ENTRAR = "IP";
+    public static final String USERNAME_USER = "USERNAME_USER";
+    public static final String ID_USER = "ID_USER";
+    public static final String AUTH_KEY = "AUTH_KEY";
+    public static final String SETTINGS_IP = "SETTINGS_IP";
+    public static final String NOME_CLIENTE = "NOME_PROFILE";
+    public static final String NIF_CLIENTE = "NIF_PROFILE";
 
     private SharedPreferencesConfig()
     {

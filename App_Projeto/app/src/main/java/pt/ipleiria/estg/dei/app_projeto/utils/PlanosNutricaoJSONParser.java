@@ -1,4 +1,4 @@
-package utils;
+package pt.ipleiria.estg.dei.app_projeto.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

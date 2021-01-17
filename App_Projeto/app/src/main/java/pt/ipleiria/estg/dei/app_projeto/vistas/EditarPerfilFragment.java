@@ -42,7 +42,7 @@ public class EditarPerfilFragment extends Fragment {
 
         etNome = rootView.findViewById(R.id.editTextNome);
         etSexo2 = rootView.findViewById(R.id.editTextSexo);
-        etEmail2 = rootView.findViewById(R.id.editTextEmail);
+        etEmail2 = rootView.findViewById(R.id.editTextUsername);
         etTelefone2 = rootView.findViewById(R.id.editTextTelefone);
         etDataNasc2 = rootView.findViewById(R.id.editTextDataNasc);
 

@@ -19,12 +19,13 @@ import pt.ipleiria.estg.dei.app_projeto.R;
 import pt.ipleiria.estg.dei.app_projeto.listeners.LoginListener;
 import pt.ipleiria.estg.dei.app_projeto.models.SharedPreferencesConfig;
 import pt.ipleiria.estg.dei.app_projeto.models.Singleton;
+import pt.ipleiria.estg.dei.app_projeto.utils.UserJSONParser;
 
 import static android.provider.ContactsContract.Intents.Insert.EMAIL;
 
 public class LoginActivity extends AppCompatActivity implements LoginListener {
-    public static final String EMAIl = "EMAIL";
-    private EditText etEmail, etPassword;
+    public static final String USERNAME = "USERNAME";
+    private EditText etusername, etPassword;
     private String email;
     private String textIP;
     private TextView textViewIP;
@@ -37,19 +38,47 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         setContentView(R.layout.activity_login);
         setTitle("Login");
 
-        etEmail = findViewById(R.id.editTextEmail);
+        etusername = findViewById(R.id.editTextUsername);
         etPassword = findViewById(R.id.editTextPassword);
         textViewIP = findViewById(R.id.textViewIP);
     }
 
 
-    public void onClickLogin(View view) {
-        String email = etEmail.getText().toString().trim().toLowerCase();
-        String password = etPassword.getText().toString().trim();
+    public void onCreate(View view) {
         String ip = textViewIP.getText().toString().trim();
 
+        Integer UserIdSaved = SharedPreferencesConfig.read(SharedPreferencesConfig.ID_USER, 0);
+        String UserUsernameSaved = SharedPreferencesConfig.read(SharedPreferencesConfig.USERNAME_USER, null);
+        String UserAuthkeySaved = SharedPreferencesConfig.read(SharedPreferencesConfig.AUTH_KEY, null);
 
-        if(textViewIP.getText() == ""){
+        if (UserIdSaved != 0 && UserUsernameSaved != null && UserAuthkeySaved != null) {
+            Intent main = new Intent(this, MenuMainActivity.class);
+            main.putExtra("IDUSER", UserIdSaved);
+            main.putExtra("USERNAME", UserUsernameSaved);
+            main.putExtra("AUTH_KEY", UserAuthkeySaved);
+            System.out.println("->>>>>>>>>>>>>>>>>>> Tinha lá dados guardados:" + UserIdSaved + " | " + UserUsernameSaved + " | " + UserAuthkeySaved);
+            startActivity(main);
+            finish();
+        }
+    }
+
+        public void onClickLogin(View view){
+            String username = etusername.getText().toString();
+            String password = etusername.getText().toString();
+
+
+            Singleton.getInstance(getApplicationContext()).verificaLoginAPI_POST(username, password, getApplicationContext(), UserJSONParser.isConnectionInternet(getApplicationContext()));
+
+        }
+
+
+
+
+
+
+
+
+       /* if(textViewIP.getText() == ""){
             Toast.makeText(this, "Adiciona / Altera o IP!", Toast.LENGTH_SHORT).show();
         }else {
             Singleton.getInstance(getApplicationContext()).setIp(ip);
@@ -93,9 +122,10 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         Toast.makeText(this, "Logged In!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, MenuMainActivity.class);
         intent.putExtra(MenuMainActivity.CHAVE_USERNAME, username);
-        intent.putExtra(MenuMainActivity.CHAVE_EMAIL, email);
         intent.putExtra(MenuMainActivity.CHAVE_ID, iduser+"");
         startActivity(intent);
         finish();
     }
+
+        */
 }
