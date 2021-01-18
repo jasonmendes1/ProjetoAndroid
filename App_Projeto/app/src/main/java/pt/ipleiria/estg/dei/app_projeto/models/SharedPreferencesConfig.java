@@ -24,6 +24,8 @@ public class SharedPreferencesConfig
     public static final String MASSA_MUSCULAR_CLIENTE = "MASSA_MUSCULAR_CLIENTE";
     public static final String MASSA_GORDA_CLIENTE = "MASSA_GORDA_CLIENTE";
 
+    public static final String IP = "IP";
+
     private SharedPreferencesConfig()
     {
 

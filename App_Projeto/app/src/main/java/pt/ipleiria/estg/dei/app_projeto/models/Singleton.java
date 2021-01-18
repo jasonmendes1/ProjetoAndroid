@@ -17,9 +17,7 @@ import org.json.JSONArray;
 
 import java.security.Key;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -30,7 +28,6 @@ import pt.ipleiria.estg.dei.app_projeto.listeners.PlanosTreinoListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.UserListener;
 import pt.ipleiria.estg.dei.app_projeto.utils.ClienteJSONParser;
 import pt.ipleiria.estg.dei.app_projeto.utils.PlanosTreinoJSONParser;
-import pt.ipleiria.estg.dei.app_projeto.utils.UserJSONParser;
 
 
 public class Singleton extends Application {
@@ -63,12 +60,11 @@ public class Singleton extends Application {
     private static RequestQueue volleyQueue = null;
 
     private String tokenAPI = "";
-    //private String urlAPI = "http://" + SharedPreferencesConfig.read(SharedPreferencesConfig.IP, null) + "/projetoWeb/api/web/v1";
+    private String urlAPI = "http://" + SharedPreferencesConfig.read(SharedPreferencesConfig.IP, "192.168.1.7") + "/ProjetoWeb/api/web/v1";
     private String CURRENT_IP = "192.168.1.7";
     private String ipURL;
-
-    private String UrlAPIusersLogin = "http://192.168.1.7/ProjetoWeb/api/web/v1/userregisterandlogin/loginuser";
-    private String mUrlGetStuffFromUser = "http://192.168.1.7/ProjetoWeb/api/web/v1/userregisterandlogin/loginuser";
+    private String UrlAPIusersLogin = "http://192.168.1.7/ProjetoWeb/api/web/v1/userregisterandlogin/loginuser/";
+    private String mUrlGetStuffFromUser = "http://" + CURRENT_IP + ":80/ProjetoWeb/api/web/v1/user/";
 
     private FitnessLeagueBDHelper fitnessLeagueBDHelper = null;
 
@@ -102,7 +98,7 @@ public class Singleton extends Application {
     public void setIP(String ip) {
         CURRENT_IP = ip;
         SharedPreferencesConfig.write(SharedPreferencesConfig.SETTINGS_IP, CURRENT_IP);//save boolean in shared preference.
-        mUrlGetStuffFromUser = "http://" + CURRENT_IP + ":80/ProjetoWeb/api/web/v1/user";
+        mUrlGetStuffFromUser = "http://" + CURRENT_IP + ":80/ProjetoWeb/api/web/v1";
 
     }
 
@@ -188,6 +184,25 @@ public class Singleton extends Application {
         this.loginListener = loginListener;
     }
 
+    public void verificaLoginAPI_POST(final String username, final String password){
+        System.out.println("--> url:" + urlAPI + "/user/verificaLogin?username="+ username +"&password_hash="+ password);
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.POST, urlAPI + "/userregisterandlogin/verificaLogin?username="+ username +"&password_hash="+ password, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                if(loginListener!=null){
+                    loginListener.onRefreshLogin(response);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("--> Erro: " + error.getMessage());
+            }
+        });
+        volleyQueue.add(req);
+    }
+
+/*
     public void verificaLoginAPI_POST(final String username, final String password, final Context context, final boolean isConnected) {
         if (!isConnected) {
             Toast.makeText(context, "Sem internet", Toast.LENGTH_SHORT).show();
@@ -216,13 +231,14 @@ public class Singleton extends Application {
         }
     }
 
+ */
+
     public void getClienteFromLogin(final Context context, final boolean isConnected){
         if(!isConnected){
             Toast.makeText(context, "Sem internet", Toast.LENGTH_SHORT).show();
         }
         else{
-            StringRequest request = new StringRequest(Request.Method.GET, mUrlGetStuffFromUser+SharedPreferencesConfig.read(SharedPreferencesConfig.ID_USER, 0)+"/cliente?access-token="+SharedPreferencesConfig.read(SharedPreferencesConfig.AUTH_KEY, null), new Response.Listener<String>() {
-                @Override
+            StringRequest request = new StringRequest(Request.Method.GET, mUrlGetStuffFromUser+SharedPreferencesConfig.read(SharedPreferencesConfig.ID_USER, 0)+"/cliente?access-token="+SharedPreferencesConfig.read(SharedPreferencesConfig.AUTH_KEY, null), new Response.Listener<String>() {                @Override
                 public void onResponse(String response) {
                     Cliente cliente = ClienteJSONParser.parserJsonCliente(response, context);
                     userListener.onRefreshListaCliente(cliente);
@@ -237,6 +253,8 @@ public class Singleton extends Application {
             volleyQueue.add(request);
         }
     }
+
+
 
 
     public int getIdUser() {
