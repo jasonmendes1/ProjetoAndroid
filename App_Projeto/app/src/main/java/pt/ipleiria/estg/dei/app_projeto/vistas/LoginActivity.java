@@ -136,9 +136,6 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         finish();
     }
 
-
-
-
     public void onClickAqui(View view) {
         Intent intent = new Intent(this, LoginErroActivity.class);
         startActivity(intent);

@@ -46,7 +46,7 @@ public class PerfilFragment extends Fragment {
         tvDataExpirar = rootView.findViewById(R.id.textViewDataExpirar);
 
         ipURL = Singleton.getInstance(getContext()).getIPInput();
-        urlAPI = "http://" + ipURL + "/ProjetoWeb/api/web/v1/cliente";
+        urlAPI = "http://" + ipURL + "/ProjetoWeb/api/web/v1/user/cliente";
 
         ID_User = Singleton.getInstance(getContext()).getIdUser();
         System.out.println("--> url ClienteAPI: " + urlAPI + "/" + ID_User);
@@ -88,5 +88,7 @@ public class PerfilFragment extends Fragment {
         });
         mQueue.add(request);
         return rootView;
+
     }
+
 }

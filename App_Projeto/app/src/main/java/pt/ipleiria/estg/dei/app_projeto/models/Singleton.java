@@ -48,7 +48,7 @@ public class Singleton extends Application {
     public List<PlanosNutricao> planosnutricaoAPI;
 
     private LoginListener loginListener;
-    private int User_id = 4;
+    private int User_id = 10;
     private UserListener userListener;
     private PlanosTreinoListener planosTreinoListener;
     private PlanosNutricaoListener planosNutricaoListener;

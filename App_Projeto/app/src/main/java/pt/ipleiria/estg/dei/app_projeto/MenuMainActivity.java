@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -84,12 +83,13 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
 
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
         Fragment fragment = null;
 
         switch (menuItem.getItemId()) {
             case R.id.nav_profile:
                 System.out.println("-->PERFIL");
+                fragment = new PerfilFragment();
                 setTitle(menuItem.getTitle());
                 break;
             case R.id.nav_planos_treino:
