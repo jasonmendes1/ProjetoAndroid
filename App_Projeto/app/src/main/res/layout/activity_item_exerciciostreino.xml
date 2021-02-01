@@ -39,7 +39,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvNome"
+                android:id="@+id/tvDiaTreino"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -61,7 +61,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvRepeticoes"
+                android:id="@+id/tvPT"
                 android:layout_width="match_parent"
                 android:layout_height="21dp"
                 android:layout_weight="1" />
@@ -82,7 +82,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvTempo"
+                android:id="@+id/tvSemana"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />

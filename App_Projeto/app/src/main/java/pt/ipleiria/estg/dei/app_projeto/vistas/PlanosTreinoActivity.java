@@ -13,6 +13,6 @@ public class PlanosTreinoActivity extends AppCompatActivity /*implements PlanosT
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_planos_treino);
+        setContentView(R.layout.activity_item_exerciciostreino);
     }
 }

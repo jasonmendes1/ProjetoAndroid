@@ -49,7 +49,7 @@ public class ListaPlanosTreinoAdapter extends BaseAdapter {
             layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null)
-            convertView = layoutInflater.inflate(R.layout.activity_planos_treino, null);
+            convertView = layoutInflater.inflate(R.layout.activity_item_exerciciostreino, null);
 
         ListaPlanosTreinoAdapter.ViewHolderGrelha viewHolderGrelha = (ListaPlanosTreinoAdapter.ViewHolderGrelha) convertView.getTag();
         if (viewHolderGrelha == null) {
