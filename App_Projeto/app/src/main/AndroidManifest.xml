@@ -17,7 +17,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".vistas.PlanosTreinoSegunda"></activity>
-        <activity android:name=".vistas.PlanosTreinoActivity" />
         <activity
             android:name=".MenuMainActivity"
             android:launchMode="singleTop"

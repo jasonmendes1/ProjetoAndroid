@@ -48,9 +48,10 @@ public class PerfilFragment extends Fragment {
         tvNif2 = rootView.findViewById(R.id.textViewNif2);
         tvDataInicio = rootView.findViewById(R.id.textViewDataInicio);
         tvDataExpirar = rootView.findViewById(R.id.textViewDataExpirar);
+        tvEmail2 = rootView.findViewById(R.id.textViewEmail2);
 
         ipURL = Singleton.getInstance(getContext()).getIPInput();
-        urlAPI = "http://" + ipURL + "/ProjetoWeb/api/web/v1/user/cliente";
+        urlAPI = "http://" + ipURL + "/ProjetoWeb/api/web/v1/cliente/get";
 
         ID_User = Singleton.getInstance(getContext()).getIdUser();
         System.out.println("--> url ClienteAPI: " + urlAPI + "/" + ID_User);
@@ -62,23 +63,28 @@ public class PerfilFragment extends Fragment {
                         System.out.println("-->RESPOSTA ");
                         try {
                             JSONObject cliente = response.getJSONObject(0);
-                            String ClienteNome = cliente.getString("ClienteNome");
-                            String ClienteSexo = cliente.getString("ClienteSexo");
-                            int ClienteDataNasc = cliente.getInt("ClienteDataNasc");
-                            int ClienteTelefone = cliente.getInt("ClienteTelefone");
-                            int ClienteNif = cliente.getInt("ClienteNif");
-                            String SubscricaoDataInicio = cliente.getString("SubscricaoDataInicio");
-                            String SubscricaoDataExpirar = cliente.getString("SubscricaoDataExpirar");
+                            System.out.println("--> cliente: " + cliente.toString());
 
-                            tvNome.setText(ClienteNome);
+
+                            String ClientePrimeiroNome = cliente.getString("ClientePrimeiroNome");
+                            String ClienteSexo = cliente.getString("ClienteSexo");
+                            String ClienteDataNasc = cliente.getString("ClienteDataNasc");
+                            int ClienteNumTele = cliente.getInt("ClienteNumTele");
+                            int ClienteNIF = cliente.getInt("ClienteNIF");
+                            String DataSubscricao = cliente.getString("DataSubscricao");
+                            String DataExpirar = cliente.getString("DataExpirar");
+                            String UserEmail = cliente.getString("UserEmail");
+
+
+
+                            tvNome.setText(ClientePrimeiroNome);
                             tvSexo2.setText(ClienteSexo);
                             tvDataNasc2.setText(ClienteDataNasc);
-                            tvTelefone2.setText(ClienteTelefone);
-                            tvNif2.setText(ClienteNif);
-                            tvDataInicio.setText(SubscricaoDataInicio);
-                            tvDataExpirar.setText(SubscricaoDataExpirar);
-
-                            System.out.println("--> tvNome: " + tvNome.getText());
+                            tvTelefone2.setText(String.valueOf(ClienteNumTele));
+                            tvNif2.setText(String.valueOf(ClienteNIF));
+                            tvDataInicio.setText("Início: " + DataSubscricao);
+                            tvDataExpirar.setText("Expira: " + DataExpirar);
+                            tvEmail2.setText(UserEmail);
 
                         } catch (JSONException e) {
                             e.printStackTrace();

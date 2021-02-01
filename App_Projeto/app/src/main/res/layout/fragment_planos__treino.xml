@@ -6,15 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".vistas.PlanosTreinoFragment">
 
-    <ListView
-        android:id="@+id/lvPlanosTreino"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="491dp"
+        android:layout_height="527dp"
         android:layout_alignBottom="@+id/textView15"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="-497dp"
-        android:clickable="true" />
+        android:layout_marginBottom="-525dp">
+
+        <ListView
+            android:id="@+id/lvPlanosTreino"
+            android:layout_width="match_parent"
+            android:layout_height="491dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="-497dp"
+            android:clickable="true" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ImageView
         android:id="@+id/imageView5"
