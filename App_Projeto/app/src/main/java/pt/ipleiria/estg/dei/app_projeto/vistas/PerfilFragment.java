@@ -31,6 +31,10 @@ public class PerfilFragment extends Fragment {
     private String urlAPI, ipURL;
     private int ID_User;
 
+    public PerfilFragment(){
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
@@ -90,5 +94,11 @@ public class PerfilFragment extends Fragment {
         return rootView;
 
     }
+    /*
+    public void onClickEditarPerfil(View view) {
+        Intent intent = new Intent(this, EditarPerfilFragment.class);
+        startActivity(intent);
+    }
+    */
 
 }

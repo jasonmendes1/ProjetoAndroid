@@ -22,6 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import pt.ipleiria.estg.dei.app_projeto.vistas.LoginActivity;
 import pt.ipleiria.estg.dei.app_projeto.vistas.PerfilFragment;
+import pt.ipleiria.estg.dei.app_projeto.vistas.PlanosTreinoFragment;
 
 public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -94,6 +95,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 break;
             case R.id.nav_planos_treino:
                 System.out.println("-->PLANOS-TREINO");
+                fragment = new PlanosTreinoFragment();
                 setTitle(menuItem.getTitle());
                 break;
             case R.id.nav_planos_nutricao:

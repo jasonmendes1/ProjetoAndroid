@@ -14,7 +14,7 @@
             android:textSize="20sp"/>
         <item
             android:id="@+id/nav_planos_treino"
-            android:title="@string/minhas_bandas"
+            android:title="@string/planos_de_treino"
             android:icon="@drawable/ic_menu_perfil"
             android:fontFamily="@font/bold"
             android:textColor="@color/gray"

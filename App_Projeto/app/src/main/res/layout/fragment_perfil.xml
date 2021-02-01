@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/ivBannnerPerfil"
         android:layout_width="match_parent"
-        android:layout_height="277dp"
+        android:layout_height="206dp"
         android:background="@color/gray" />
 
     <ImageView
@@ -52,63 +52,27 @@
         android:textSize="17sp" />
 
     <TextView
+        android:id="@+id/textViewEmail2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivBannnerPerfil"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="270dp"
+        android:layout_marginBottom="-126dp"
+        android:fontFamily="@font/semibold"
+        android:text="@string/blank"
+        android:textSize="17sp" />
+
+    <TextView
         android:id="@+id/textViewDataNasc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textViewEmail"
         android:layout_marginEnd="6dp"
-        android:layout_marginBottom="-42dp"
+        android:layout_marginBottom="-41dp"
         android:layout_toStartOf="@+id/textViewDataNasc2"
         android:fontFamily="@font/bold"
         android:text="Data de Nascimento:"
-        android:textSize="17sp" />
-
-    <TextView
-        android:id="@+id/textViewTelefone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textViewEmail"
-        android:layout_marginEnd="98dp"
-        android:layout_marginBottom="-82dp"
-        android:layout_toStartOf="@+id/textViewDataNasc2"
-        android:fontFamily="@font/bold"
-        android:text="Telefone:"
-        android:textSize="17sp" />
-
-    <TextView
-        android:id="@+id/textViewNIF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textViewEmail"
-        android:layout_marginEnd="-3dp"
-        android:layout_marginBottom="-127dp"
-        android:layout_toStartOf="@+id/textViewDataNasc2"
-        android:fontFamily="@font/bold"
-        android:text="Nif:"
-        android:textSize="17sp" />
-
-    <TextView
-        android:id="@+id/textViewNif2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textViewEmail2"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="145dp"
-        android:layout_marginBottom="-127dp"
-        android:fontFamily="@font/semibold"
-        android:text="@string/blank"
-        android:textSize="17sp" />
-
-    <TextView
-        android:id="@+id/textViewTelefone2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textViewEmail2"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="251dp"
-        android:layout_marginBottom="-82dp"
-        android:fontFamily="@font/semibold"
-        android:text="@string/blank"
         android:textSize="17sp" />
 
     <TextView
@@ -117,8 +81,32 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textViewEmail2"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="158dp"
+        android:layout_marginEnd="157dp"
         android:layout_marginBottom="-41dp"
+        android:fontFamily="@font/semibold"
+        android:text="@string/blank"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/textViewTelefone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textViewEmail"
+        android:layout_marginEnd="97dp"
+        android:layout_marginBottom="-75dp"
+        android:layout_toStartOf="@+id/textViewDataNasc2"
+        android:fontFamily="@font/bold"
+        android:text="Telefone:"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/textViewTelefone2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textViewEmail2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="252dp"
+        android:layout_marginBottom="-75dp"
         android:fontFamily="@font/semibold"
         android:text="@string/blank"
         android:textSize="17sp" />
@@ -128,23 +116,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/ivBannnerPerfil"
-        android:layout_marginEnd="6dp"
-        android:layout_marginBottom="-149dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="-127dp"
         android:layout_toStartOf="@+id/textViewEmail2"
         android:fontFamily="@font/bold"
         android:text="Email:"
-        android:textSize="17sp" />
-
-    <TextView
-        android:id="@+id/textViewEmail2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ivBannnerPerfil"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="271dp"
-        android:layout_marginBottom="-148dp"
-        android:fontFamily="@font/semibold"
-        android:text="@string/blank"
         android:textSize="17sp" />
 
     <TextView
@@ -166,8 +142,8 @@
         android:layout_height="130dp"
         android:layout_alignBottom="@+id/textViewDataExpirar"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="246dp"
-        android:layout_marginBottom="-22dp"
+        android:layout_marginEnd="244dp"
+        android:layout_marginBottom="-20dp"
         android:src="@drawable/bordas_subscricao" />
 
     <TextView
@@ -176,8 +152,44 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textViewSubscricao"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="320dp"
+        android:layout_marginEnd="318dp"
         android:layout_marginBottom="-33dp"
+        android:fontFamily="@font/semibold"
+        android:text="@string/blank"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/textViewDataExpirar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textViewDataInicio"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="317dp"
+        android:layout_marginBottom="-38dp"
+        android:fontFamily="@font/semibold"
+        android:text="@string/blank"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/textViewNIF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textViewEmail"
+        android:layout_marginEnd="-5dp"
+        android:layout_marginBottom="-108dp"
+        android:layout_toStartOf="@+id/textViewDataNasc2"
+        android:fontFamily="@font/bold"
+        android:text="Nif:"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/textViewNif2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textViewEmail2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="143dp"
+        android:layout_marginBottom="-108dp"
         android:fontFamily="@font/semibold"
         android:text="@string/blank"
         android:textSize="17sp" />
@@ -188,33 +200,11 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textViewDataNasc"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="284dp"
-        android:layout_marginBottom="-97dp"
+        android:layout_marginEnd="282dp"
+        android:layout_marginBottom="-77dp"
         android:fontFamily="@font/bold"
         android:text="Subscrição:"
         android:textSize="17sp" />
-
-    <TextView
-        android:id="@+id/textViewDataExpirar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textViewDataInicio"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="319dp"
-        android:layout_marginBottom="-38dp"
-        android:fontFamily="@font/semibold"
-        android:text="@string/blank"
-        android:textSize="17sp" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="161dp"
-        android:layout_height="60dp"
-        android:layout_alignBottom="@+id/imageView2"
-        android:layout_marginEnd="26dp"
-        android:layout_marginBottom="-63dp"
-        android:layout_toStartOf="@+id/button2"
-        android:text="Button1" />
 
     <Button
         android:id="@+id/button2"
@@ -222,8 +212,8 @@
         android:layout_height="59dp"
         android:layout_alignBottom="@+id/imageView2"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="37dp"
-        android:layout_marginBottom="-62dp"
+        android:layout_marginEnd="137dp"
+        android:layout_marginBottom="-70dp"
         android:text="Button2" />
 
 </RelativeLayout>

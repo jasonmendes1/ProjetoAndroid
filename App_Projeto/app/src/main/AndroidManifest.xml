@@ -18,7 +18,6 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".vistas.PlanosTreinoSegunda"></activity>
         <activity android:name=".vistas.PlanosTreinoActivity" />
-        <activity android:name=".vistas.CalcularIMC" />
         <activity
             android:name=".MenuMainActivity"
             android:launchMode="singleTop"
@@ -30,6 +29,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".vistas.LoginErroActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".vistas.CalcularIMC"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
