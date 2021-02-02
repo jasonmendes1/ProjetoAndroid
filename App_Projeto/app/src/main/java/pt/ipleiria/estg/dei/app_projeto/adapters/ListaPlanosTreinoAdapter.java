@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -49,26 +48,39 @@ public class ListaPlanosTreinoAdapter extends BaseAdapter {
             layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null)
-            convertView = layoutInflater.inflate(R.layout.activity_item_exerciciostreino, null);
+            convertView = layoutInflater.inflate(R.layout.activity_item_planostreino, null);
 
-        ListaPlanosTreinoAdapter.ViewHolderGrelha viewHolderGrelha = (ListaPlanosTreinoAdapter.ViewHolderGrelha) convertView.getTag();
-        if (viewHolderGrelha == null) {
-            viewHolderGrelha = new ViewHolderGrelha(convertView);
-            convertView.setTag(viewHolderGrelha);
+        ViewHolderLista viewHolder = (ViewHolderLista)convertView.getTag();
+        if(viewHolder == null){
+            viewHolder = new ViewHolderLista(convertView);
+            convertView.setTag(viewHolder);
         }
-        viewHolderGrelha.update(position, planosTreinos);
+
+        viewHolder.update(planosTreinos.get(position));
         return convertView;
     }
 
-    public class ViewHolderGrelha {
-        private ImageView image;
-        private TextView DiaSemanaTreino;
-        public ViewHolderGrelha(View view) {
-            DiaSemanaTreino = view.findViewById(R.id.title);
+    public void refresh(ArrayList<PlanosTreino> planosTreinos) {
+        this.planosTreinos = planosTreinos;
+        notifyDataSetChanged();
+    }
+
+
+
+    private class ViewHolderLista{
+        private TextView diatreino;
+        private TextView pt;
+        private TextView semana;
+        public ViewHolderLista(View convertView){
+            diatreino = convertView.findViewById(R.id.tvDiaTreino);
+            pt = convertView.findViewById(R.id.tvPT);
+            semana = convertView.findViewById(R.id.tvSemana);
         }
-        public void update(int position, ArrayList<PlanosTreino> planosTreinos){
-            PlanosTreino planosTreino = planosTreinos.get(position);
-            DiaSemanaTreino.setText(planosTreino.getDia_treino());
+
+        public void update(PlanosTreino planosTreino){
+            diatreino.setText(planosTreino.getDia_treino());
+            pt.setText(planosTreino.getid_PT());
+            semana.setText(planosTreino.getSemana());
         }
     }
 }

@@ -64,7 +64,7 @@ public class Singleton extends Application {
     private String CURRENT_IP = "192.168.1.7";
     private String ipURL;
     private String UrlAPIusersLogin = "http://192.168.1.7/ProjetoWeb/api/web/v1/userregisterandlogin/loginuser/";
-    private String mUrlGetStuffFromUser = "http://" + CURRENT_IP + ":80/ProjetoWeb/api/web/v1/user/";
+    private String mUrlGetStuffFromUser = "http://" + CURRENT_IP + ":80/ProjetoWeb/api/web/v1/";
 
     private FitnessLeagueBDHelper fitnessLeagueBDHelper = null;
 
@@ -184,12 +184,12 @@ public class Singleton extends Application {
         this.loginListener = loginListener;
     }
 
-    public void verificaLoginAPI_POST(final String username, final String password){
-        System.out.println("--> url:" + urlAPI + "/user/verificaLogin?username="+ username +"&password_hash="+ password);
-        JsonArrayRequest req = new JsonArrayRequest(Request.Method.POST, urlAPI + "/userregisterandlogin/verificaLogin?username="+ username +"&password_hash="+ password, null, new Response.Listener<JSONArray>() {
+    public void verificaLoginAPI_POST(final String username, final String password) {
+        System.out.println("--> url:" + urlAPI + "/user/verificaLogin?username=" + username + "&password_hash=" + password);
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.POST, urlAPI + "/userregisterandlogin/verificaLogin?username=" + username + "&password_hash=" + password, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                if(loginListener!=null){
+                if (loginListener != null) {
                     loginListener.onRefreshLogin(response);
                 }
             }
@@ -233,12 +233,12 @@ public class Singleton extends Application {
 
  */
 
-    public void getClienteFromLogin(final Context context, final boolean isConnected){
-        if(!isConnected){
+    public void getClienteFromLogin(final Context context, final boolean isConnected) {
+        if (!isConnected) {
             Toast.makeText(context, "Sem internet", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            StringRequest request = new StringRequest(Request.Method.GET, mUrlGetStuffFromUser+SharedPreferencesConfig.read(SharedPreferencesConfig.ID_USER, 0)+"/cliente?access-token="+SharedPreferencesConfig.read(SharedPreferencesConfig.AUTH_KEY, null), new Response.Listener<String>() {                @Override
+        } else {
+            StringRequest request = new StringRequest(Request.Method.GET, mUrlGetStuffFromUser + SharedPreferencesConfig.read(SharedPreferencesConfig.ID_USER, 0) + "/cliente?access-token=" + SharedPreferencesConfig.read(SharedPreferencesConfig.AUTH_KEY, null), new Response.Listener<String>() {
+                @Override
                 public void onResponse(String response) {
                     Cliente cliente = ClienteJSONParser.parserJsonCliente(response, context);
                     userListener.onRefreshListaCliente(cliente);
@@ -253,8 +253,6 @@ public class Singleton extends Application {
             volleyQueue.add(request);
         }
     }
-
-
 
 
     public int getIdUser() {
@@ -291,25 +289,24 @@ public class Singleton extends Application {
 
     */
     public void getAllPlanosTreinoFromClientAPI(final Context context, final boolean isConnected) {
-        if (!isConnected) {
+        Toast.makeText(context, "isConnected", Toast.LENGTH_SHORT).show();
+        System.out.println("--> API URL FEED: " + mUrlGetStuffFromUser + "/planotreino/getplanotreino/1");
 
-        } else {
-            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, mUrlGetStuffFromUser+SharedPreferencesConfig.read(SharedPreferencesConfig.ID_USER, 0)+"/cliente?access-token="+SharedPreferencesConfig.read(SharedPreferencesConfig.AUTH_KEY, null), null, new Response.Listener<JSONArray>() {
-                @Override
-                public void onResponse(JSONArray response) {
-                    planosTreinos = PlanosTreinoJSONParser.parserJsonPlanosTreino(response, context);
-                    adicionarPlanosTreinoBD(planosTreinos);
-
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, "Error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlGetStuffFromUser + "/planotreino/getplanotreino/1", null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                planosTreinos = PlanosTreinoJSONParser.parserJsonPlanosTreino(response, context);
+                System.out.println("--> RESPOSTA GET PLANOS API: " + planosTreinos);
+                if (planosTreinoListener != null) {
+                    planosTreinoListener.onRefreshPlanosTreino(planosTreinos);
                 }
             }
-            );
-            volleyQueue.add(request);
-        }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("--> ERRO GET PLANOS API: " + error.getMessage());
+            }
+        });
+        volleyQueue.add(req);
     }
 }

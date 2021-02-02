@@ -117,7 +117,7 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
     public PlanosTreino adicionarPlanoTreinoBD(PlanosTreino planosTreino){
         ContentValues values = new ContentValues();
         values.put(IDPLANOTREINO, planosTreino.getIDPlanoTreino());
-        values.put(IDPT, planosTreino.getIDPT());
+        values.put(IDPT, planosTreino.getid_PT());
         values.put(DIATREINO, planosTreino.getDia_treino());
         values.put(SEMANAPT, planosTreino.getSemana());
 
@@ -134,7 +134,7 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
         Cursor cursor = this.database.query(TABLE_PLANOTREINO, new String[]{IDPLANOTREINO,IDPT,DIATREINO,SEMANAPT},null,null,null,null,null);
         if(cursor.moveToFirst()){
             do{
-                PlanosTreino auxplanotreino = new PlanosTreino(cursor.getInt(0),cursor.getInt(0),cursor.getInt(0),cursor.getString(0));
+                PlanosTreino auxplanotreino = new PlanosTreino(cursor.getInt(0),cursor.getInt(0),cursor.getString(0),cursor.getString(0));
                 auxplanotreino.setIDPlanoTreino(cursor.getInt(0));
                 planosTreinos.add(auxplanotreino);
             }while(cursor.moveToNext());

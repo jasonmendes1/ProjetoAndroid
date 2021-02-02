@@ -12,18 +12,21 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import java.util.ArrayList;
+
 import pt.ipleiria.estg.dei.app_projeto.R;
+import pt.ipleiria.estg.dei.app_projeto.adapters.ListaPlanosTreinoAdapter;
+import pt.ipleiria.estg.dei.app_projeto.listeners.PlanosTreinoListener;
 import pt.ipleiria.estg.dei.app_projeto.models.PlanosTreino;
 import pt.ipleiria.estg.dei.app_projeto.models.Singleton;
 import pt.ipleiria.estg.dei.app_projeto.utils.PlanosTreinoJSONParser;
 
-public class PlanosTreinoFragment extends Fragment /*implements PlanosTreinoListener*/ {
+public class PlanosTreinoFragment extends Fragment implements PlanosTreinoListener {
 
     private ListView lvPlanosTreino;
     private SwipeRefreshLayout swipeRefreshLayout;
     private boolean isHistorico = false;
-
-
+    private ListaPlanosTreinoAdapter listaPlanosTreinoAdapter;
 
 
     public PlanosTreinoFragment() {
@@ -69,11 +72,20 @@ public class PlanosTreinoFragment extends Fragment /*implements PlanosTreinoList
         Singleton.getInstance(getContext()).getAllPlanosTreinoFromClientAPI(getContext(), PlanosTreinoJSONParser.isConnectionInternet(getContext()));
         return view;
     }
-/*
+
     @Override
-    public void onRefreshPlanosNutricao(ArrayList<PlanosTreino> PlanosTreino){
-        ListaPlanosTreinoAdapter listaPlanosTreinoAdapter = new ListaPlanosTreinoAdapter(getContext(), PlanosTreino);
-        lvPlanosTreino.setAdapter(listaPlanosTreinoAdapter);
+    public void onRefreshPlanosTreino(ArrayList<PlanosTreino> planosTreinos) {
+        System.out.println("--> onRefreshPlanosTreino" + planosTreinos);
+        if (!planosTreinos.isEmpty()) {
+            listaPlanosTreinoAdapter = new ListaPlanosTreinoAdapter(getContext(), planosTreinos);
+            lvPlanosTreino.setAdapter(listaPlanosTreinoAdapter);
+            listaPlanosTreinoAdapter.refresh(planosTreinos);
+        }
     }
-*/
+
+    @Override
+    public void onUpdatePlanoTreino(PlanosTreino planosTreino, int operacao) {
+
+    }
+
 }
