@@ -22,6 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import pt.ipleiria.estg.dei.app_projeto.vistas.LoginActivity;
 import pt.ipleiria.estg.dei.app_projeto.vistas.PerfilFragment;
+import pt.ipleiria.estg.dei.app_projeto.vistas.PlanosNutricaoFragment;
 import pt.ipleiria.estg.dei.app_projeto.vistas.PlanosTreinoFragment;
 
 public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -100,6 +101,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 break;
             case R.id.nav_planos_nutricao:
                 System.out.println("-->PLANOS-NUTRICAO");
+                fragment = new PlanosNutricaoFragment();
                 setTitle(menuItem.getTitle());
                 break;
             case R.id.nav_horarios:

@@ -27,6 +27,7 @@ import pt.ipleiria.estg.dei.app_projeto.listeners.PlanosNutricaoListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.PlanosTreinoListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.UserListener;
 import pt.ipleiria.estg.dei.app_projeto.utils.ClienteJSONParser;
+import pt.ipleiria.estg.dei.app_projeto.utils.PlanosNutricaoJSONParser;
 import pt.ipleiria.estg.dei.app_projeto.utils.PlanosTreinoJSONParser;
 
 
@@ -299,6 +300,28 @@ public class Singleton extends Application {
                 System.out.println("--> RESPOSTA GET PLANOS API: " + planosTreinos);
                 if (planosTreinoListener != null) {
                     planosTreinoListener.onRefreshPlanosTreino(planosTreinos);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("--> ERRO GET PLANOS API: " + error.getMessage());
+            }
+        });
+        volleyQueue.add(req);
+    }
+
+    public void getAllPlanosNutricaoFromClientAPI(final Context context, final boolean isConnected) {
+        Toast.makeText(context, "isConnected", Toast.LENGTH_SHORT).show();
+        System.out.println("--> API URL FEED: " + mUrlGetStuffFromUser + "/planonutricao/getplanonutricao/1");
+
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlGetStuffFromUser + "/planonutricao/getplanonutricao/1", null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                planosNutricaos = PlanosNutricaoJSONParser.parserJsonPlanosNutricao(response, context);
+                System.out.println("--> RESPOSTA GET PLANOS API: " + planosNutricaos);
+                if (planosNutricaoListener != null) {
+                    planosNutricaoListener.onRefreshPlanosNutricao(planosNutricaos);
                 }
             }
         }, new Response.ErrorListener() {
