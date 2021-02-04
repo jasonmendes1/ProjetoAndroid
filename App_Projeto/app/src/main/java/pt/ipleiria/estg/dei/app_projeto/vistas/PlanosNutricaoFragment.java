@@ -68,13 +68,14 @@ public class PlanosNutricaoFragment extends Fragment implements PlanosNutricaoLi
             }
         });
 
+        Singleton.getInstance(getContext()).setPlanosNutricaoListener(this);
         Singleton.getInstance(getContext()).getAllPlanosNutricaoFromClientAPI(getContext(), PlanosNutricaoJSONParser.isConnectionInternet(getContext()));
         return view;
     }
 
     @Override
     public void onRefreshPlanosNutricao(ArrayList<PlanosNutricao> planosNutricaos) {
-        System.out.println("--> onRefreshPlanosTreino" + planosNutricaos);
+        System.out.println("--> onRefreshPlanosNutricao" + planosNutricaos.toString());
         if (!planosNutricaos.isEmpty()) {
             listaPlanosNutricaoAdapter = new ListaPlanosNutricaoAdapter(getContext(), planosNutricaos);
             lvPlanosNutricao.setAdapter(listaPlanosNutricaoAdapter);

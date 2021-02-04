@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
 
+import pt.ipleiria.estg.dei.app_projeto.vistas.InfoGymActivity;
 import pt.ipleiria.estg.dei.app_projeto.vistas.LoginActivity;
 import pt.ipleiria.estg.dei.app_projeto.vistas.PerfilFragment;
 import pt.ipleiria.estg.dei.app_projeto.vistas.PlanosNutricaoFragment;
@@ -35,6 +36,8 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     public static final String CHAVE_USERNAME = "USERNAME";
     public static final String CHAVE_ID = "-1";
     public static final String CHAVE_EMAIL = "EMAIL";
+    public static final String TOKEN = "TOKEN";
+
     private String username = "";
 
     private SharedPreferences sharedPreferences;
@@ -111,6 +114,8 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             case R.id.nav_info_gym:
                 System.out.println("-->INFO-GYM");
                 setTitle(menuItem.getTitle());
+                Intent intentinfo = new Intent(this, InfoGymActivity.class);
+                startActivity(intentinfo);
                 break;
             case R.id.nav_logout:
                 sharedPreferences = getSharedPreferences(MenuMainActivity.SECCAO_INFO_USER, Context.MODE_PRIVATE);

@@ -1,13 +1,15 @@
 package pt.ipleiria.estg.dei.app_projeto.models;
 
 public class Exercicio {
-    private int IDExer, repeticoes, tempo, series, repouso, tempo_total, num_maquina;
+    private int IDExer, repeticoes, tempo, serie, repouso, tempo_total, num_maquina;
     private String nome;
 
-    public Exercicio(int IDExer, String nome, int series, int repouso, int tempo_total, int num_maquina){
+    public Exercicio(int IDExer, String nome, int repeticoes, int tempo, int serie, int repouso, int tempo_total, int num_maquina){
         this.IDExer = IDExer;
         this.nome = nome;
-        this.series = series;
+        this.repeticoes = repeticoes;
+        this.tempo = tempo;
+        this.serie = serie;
         this.repouso = repouso;
         this.tempo_total = tempo_total;
         this.num_maquina = num_maquina;
@@ -37,12 +39,12 @@ public class Exercicio {
         this.tempo = tempo;
     }
 
-    public int getSeries() {
-        return series;
+    public int getSerie() {
+        return serie;
     }
 
-    public void setSeries(int series) {
-        this.series = series;
+    public void setSerie(int serie) {
+        this.serie = serie;
     }
 
     public int getRepouso() {

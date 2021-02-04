@@ -29,6 +29,7 @@ public class ClienteJSONParser {
             int cliente_massa_gorda = cliente.getInt("massa_gorda");
 
 
+
             auxCliente = new Cliente(cliente_ID, cliente_primeiroNome, cliente_apelido, cliente_dta_nascimento, cliente_sexo, cliente_avatar, cliente_num_tele, cliente_nif, cliente_altura, cliente_peso, cliente_massa_muscular, cliente_massa_gorda);
 
         } catch (JSONException e) {
@@ -43,5 +44,17 @@ public class ClienteJSONParser {
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
 
         return networkInfo != null && networkInfo.isConnected();
+    }
+
+    public static String parserJsonAvatarCliente(String response){
+        String avatar = null;
+        try {
+            JSONObject login = new JSONObject(response);
+            if (login.getBoolean("success"))
+                avatar = login.getString("avatar");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return avatar;
     }
 }

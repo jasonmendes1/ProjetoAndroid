@@ -33,7 +33,7 @@ public class PlanosTreinoJSONParser {
             e.printStackTrace();
             Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        System.out.println("--> PARSER LISTA TEMP: "+ tempListaPlanosTreino);
+        System.out.println("--> PARSER LISTA TEMP: "+ tempListaPlanosTreino.toString());
         return tempListaPlanosTreino;
     }
 

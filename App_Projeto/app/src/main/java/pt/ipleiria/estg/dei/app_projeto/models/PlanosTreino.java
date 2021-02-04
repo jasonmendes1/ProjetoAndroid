@@ -12,6 +12,16 @@ public class PlanosTreino {
         this.semana = semana;
     }
 
+    @Override
+    public String toString() {
+        return "PlanosTreino{" +
+                "IDPlanoTreino=" + IDPlanoTreino +
+                ", id_PT=" + id_PT +
+                ", dia_treino='" + dia_treino + '\'' +
+                ", semana='" + semana + '\'' +
+                '}';
+    }
+
     public int getid_PT() {
         return id_PT;
     }

@@ -24,7 +24,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="85dp"
         android:layout_marginBottom="-72dp"
-        android:onClick="onClickEditarPerfil"
+        android:clickable="true"
         android:src="@drawable/avatar_example" />
 
     <TextView
@@ -50,6 +50,21 @@
         android:fontFamily="@font/semibold"
         android:text="@string/blank"
         android:textSize="17sp" />
+
+    <Button
+        android:id="@+id/buttonUpload"
+        android:layout_width="46dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/ivAvatar"
+        android:layout_alignBottom="@+id/textViewNome"
+        android:layout_gravity="center"
+        android:layout_marginEnd="-51dp"
+        android:layout_marginBottom="-184dp"
+        android:background="@drawable/rounded_button"
+        android:clickable="false"
+        android:drawableLeft="@drawable/ic_action_upload"
+        android:padding="10dp"
+        android:text="" />
 
     <TextView
         android:id="@+id/textViewDataNasc"
@@ -207,13 +222,13 @@
         android:textSize="17sp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnCalcularIMC"
         android:layout_width="161dp"
         android:layout_height="59dp"
-        android:layout_alignBottom="@+id/imageView2"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="133dp"
-        android:layout_marginBottom="-82dp"
-        android:text="Button2" />
+        android:layout_alignEnd="@+id/textViewDataInicio"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-192dp"
+        android:layout_marginBottom="135dp"
+        android:text="CalcularIMC" />
 
 </RelativeLayout>

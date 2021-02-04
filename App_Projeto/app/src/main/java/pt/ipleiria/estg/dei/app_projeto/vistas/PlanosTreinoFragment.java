@@ -27,6 +27,12 @@ public class PlanosTreinoFragment extends Fragment implements PlanosTreinoListen
     private SwipeRefreshLayout swipeRefreshLayout;
     private boolean isHistorico = false;
     private ListaPlanosTreinoAdapter listaPlanosTreinoAdapter;
+    public static final String IDPlanoTreino = "IDPlanoTreino";
+    private int ID_User;
+
+    public static final int RESULT_CODE_VER = 10;
+
+
 
 
     public PlanosTreinoFragment() {
@@ -47,11 +53,10 @@ public class PlanosTreinoFragment extends Fragment implements PlanosTreinoListen
         lvPlanosTreino.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PlanosTreino planostreino = (PlanosTreino) parent.getItemAtPosition(position);
-
-                Intent intent = new Intent(getContext(), PlanosTreino.class);
-                intent.putExtra("DETALHES",planostreino.getIDPlanoTreino());
-                startActivity(intent);
+                PlanosTreino temp = (PlanosTreino)  parent.getItemAtPosition(position);
+                Intent intent = new Intent(getContext(), ExerciciosTreinoActivity.class);
+                intent.putExtra(ExerciciosTreinoActivity.ID_PLANOTREINO, temp.getIDPlanoTreino());
+                startActivityForResult(intent, RESULT_CODE_VER);
             }
         });
 
@@ -69,13 +74,15 @@ public class PlanosTreinoFragment extends Fragment implements PlanosTreinoListen
             }
         });
 
+        Singleton.getInstance(getContext()).setPlanosTreinoListener(this);
         Singleton.getInstance(getContext()).getAllPlanosTreinoFromClientAPI(getContext(), PlanosTreinoJSONParser.isConnectionInternet(getContext()));
+
         return view;
     }
 
     @Override
     public void onRefreshPlanosTreino(ArrayList<PlanosTreino> planosTreinos) {
-        System.out.println("--> onRefreshPlanosTreino" + planosTreinos);
+        System.out.println("--> onRefreshPlanosTreino" + planosTreinos.toString());
         if (!planosTreinos.isEmpty()) {
             listaPlanosTreinoAdapter = new ListaPlanosTreinoAdapter(getContext(), planosTreinos);
             lvPlanosTreino.setAdapter(listaPlanosTreinoAdapter);

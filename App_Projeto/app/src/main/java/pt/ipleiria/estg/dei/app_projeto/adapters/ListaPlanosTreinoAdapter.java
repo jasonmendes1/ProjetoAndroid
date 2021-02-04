@@ -79,7 +79,7 @@ public class ListaPlanosTreinoAdapter extends BaseAdapter {
 
         public void update(PlanosTreino planosTreino){
             diatreino.setText(planosTreino.getDia_treino());
-            pt.setText(planosTreino.getid_PT());
+            pt.setText(planosTreino.getid_PT()+"");
             semana.setText(planosTreino.getSemana());
         }
     }

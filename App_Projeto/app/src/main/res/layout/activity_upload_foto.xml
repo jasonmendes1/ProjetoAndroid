@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".vistas.UploadFotoActivity">
+
+    <ImageView
+        android:id="@+id/ivAvatar2"
+        android:layout_width="225dp"
+        android:layout_height="150dp"
+        android:layout_alignBottom="@+id/ivBannnerPerfil"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="86dp"
+        android:clickable="true"
+        android:src="@drawable/avatar_example"
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="56dp" />
+
+    <Button
+        android:id="@+id/buttonUpload2"
+        android:layout_width="46dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/ivAvatar2"
+        android:layout_alignBottom="@+id/ivAvatar2"
+        android:layout_gravity="center"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/rounded_button"
+        android:clickable="false"
+        android:drawableLeft="@drawable/ic_action_upload"
+        android:padding="10dp"
+        android:text=""
+        tools:layout_editor_absoluteX="233dp"
+        tools:layout_editor_absoluteY="158dp" />
+</RelativeLayout>

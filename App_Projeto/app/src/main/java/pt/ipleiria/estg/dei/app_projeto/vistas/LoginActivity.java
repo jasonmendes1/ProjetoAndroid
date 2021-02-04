@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         textIP = IPinput.getText().toString();
-                        textViewIP.setText(textIP);
+                        textViewIP.setText(/*textIP*/"192.168.1.7");
                     }})
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override

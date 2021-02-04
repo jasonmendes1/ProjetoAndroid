@@ -17,16 +17,20 @@ import org.json.JSONArray;
 
 import java.security.Key;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+import pt.ipleiria.estg.dei.app_projeto.listeners.ExerciciosListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.LoginListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.PlanosNutricaoListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.PlanosTreinoListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.UserListener;
 import pt.ipleiria.estg.dei.app_projeto.utils.ClienteJSONParser;
+import pt.ipleiria.estg.dei.app_projeto.utils.ExerciciosJSONParser;
 import pt.ipleiria.estg.dei.app_projeto.utils.PlanosNutricaoJSONParser;
 import pt.ipleiria.estg.dei.app_projeto.utils.PlanosTreinoJSONParser;
 
@@ -53,6 +57,7 @@ public class Singleton extends Application {
     private UserListener userListener;
     private PlanosTreinoListener planosTreinoListener;
     private PlanosNutricaoListener planosNutricaoListener;
+    private ExerciciosListener exerciciosListener;
 
 
     private static final String ALGORITHM = "AES";
@@ -157,9 +162,32 @@ public class Singleton extends Application {
         return null;
     }
 
+    public Exercicio getExercicio(int id) {
+        for (Exercicio e : exercicios)
+            if (e.getIDExer() == id)
+                return e;
+        return null;
+    }
+
+
     public void setUserListener(UserListener userListener) {
         this.userListener = userListener;
     }
+
+    public void setPlanosTreinoListener(PlanosTreinoListener planosTreinoListener) {
+        this.planosTreinoListener = planosTreinoListener;
+    }
+
+    public void setPlanosNutricaoListener(PlanosNutricaoListener planosNutricaoListener) {
+        this.planosNutricaoListener = planosNutricaoListener;
+    }
+
+    public void setExerciciosListener(ExerciciosListener exerciciosListener) {
+        this.exerciciosListener = exerciciosListener;
+    }
+
+
+
 
     public String getEncrypted(String plainText) {
         if (plainText == null) {
@@ -291,9 +319,9 @@ public class Singleton extends Application {
     */
     public void getAllPlanosTreinoFromClientAPI(final Context context, final boolean isConnected) {
         Toast.makeText(context, "isConnected", Toast.LENGTH_SHORT).show();
-        System.out.println("--> API URL FEED: " + mUrlGetStuffFromUser + "/planotreino/getplanotreino/1");
+        System.out.println("--> API URL FEED: " + mUrlGetStuffFromUser + "/planotreino/getexercicios/" + getIdUser());
 
-        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlGetStuffFromUser + "/planotreino/getplanotreino/1", null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlGetStuffFromUser + "/planotreino/getexercicios/" + getIdUser(), null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 planosTreinos = PlanosTreinoJSONParser.parserJsonPlanosTreino(response, context);
@@ -311,11 +339,33 @@ public class Singleton extends Application {
         volleyQueue.add(req);
     }
 
+    public void getAllExerciciosFromClientAPI(final Context context, final boolean isConnected) {
+        Toast.makeText(context, "isConnected", Toast.LENGTH_SHORT).show();
+        System.out.println("--> API URL FEED: " + mUrlGetStuffFromUser + "/exercicio");
+
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlGetStuffFromUser + "/exercicio", null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                exercicios = ExerciciosJSONParser.parserJsonExercicio(response, context);
+                System.out.println("--> RESPOSTA GET EXERCICIOS API: " + exercicios);
+                if (exerciciosListener != null) {
+                    exerciciosListener.onRefreshExericios(exercicios);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("--> ERRO GET PLANOS API: " + error.getMessage());
+            }
+        });
+        volleyQueue.add(req);
+    }
+
     public void getAllPlanosNutricaoFromClientAPI(final Context context, final boolean isConnected) {
         Toast.makeText(context, "isConnected", Toast.LENGTH_SHORT).show();
-        System.out.println("--> API URL FEED: " + mUrlGetStuffFromUser + "/planonutricao/getplanonutricao/1");
+        System.out.println("--> API URL FEED: " + mUrlGetStuffFromUser + "/planonutricao/getementas" + getIdUser());
 
-        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlGetStuffFromUser + "/planonutricao/getplanonutricao/1", null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlGetStuffFromUser + "/planonutricao/getementas/" + getIdUser(), null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 planosNutricaos = PlanosNutricaoJSONParser.parserJsonPlanosNutricao(response, context);
@@ -332,4 +382,55 @@ public class Singleton extends Application {
         });
         volleyQueue.add(req);
     }
+
+    public void adicionarImagemApi(final String image, final Cliente cliente, final Context context){
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlGetStuffFromUser + "/cliente" + getIdUser() + "/upload", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                String capa = ClienteJSONParser.parserJsonAvatarCliente(response);
+
+                if (userListener != null)
+                    userListener.onRefreshListaCliente(cliente);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("image", image);
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+/*
+    public void adicionarImagemApi(final String image, final Cliente user, final Context context){
+        StringRequest request = new StringRequest(Request.Method.GET, mUrlGetStuffFromUser + SharedPreferencesConfig.read(SharedPreferencesConfig.ID_USER, 0) + "/cliente?access-token=" + SharedPreferencesConfig.read(SharedPreferencesConfig.AUTH_KEY, null), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                String avatar = ClienteJSONParser.parserJsonAvatarCliente(response);
+
+                if (userListener != null)
+                    userListener.onRefreshListaCliente(userListener);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("image", image);
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+    */
 }

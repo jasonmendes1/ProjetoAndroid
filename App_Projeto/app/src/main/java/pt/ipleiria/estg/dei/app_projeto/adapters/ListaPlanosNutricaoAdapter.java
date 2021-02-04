@@ -76,7 +76,7 @@ public class ListaPlanosNutricaoAdapter extends BaseAdapter {
         private TextView sabado;
         private TextView semana;
         public ViewHolderLista(View convertView){
-            segunda = convertView.findViewById(R.id.tvSemana);
+            segunda = convertView.findViewById(R.id.tvSegunda);
             terca = convertView.findViewById(R.id.tvTerca);
             quarta = convertView.findViewById(R.id.tvQuarta);
             quinta = convertView.findViewById(R.id.tvQuinta);
@@ -86,12 +86,12 @@ public class ListaPlanosNutricaoAdapter extends BaseAdapter {
         }
 
         public void update(PlanosNutricao planosNutricao){
-            segunda.setText(planosNutricao.getSegunda());
-            terca.setText(planosNutricao.getTerca());
-            quarta.setText(planosNutricao.getQuarta());
-            quinta.setText(planosNutricao.getQuinta());
-            sexta.setText(planosNutricao.getSexta());
-            sabado.setText(planosNutricao.getSabado());
+            segunda.setText(planosNutricao.getSegunda()+"");
+            terca.setText(planosNutricao.getTerca()+"");
+            quarta.setText(planosNutricao.getQuarta()+"");
+            quinta.setText(planosNutricao.getQuinta()+"");
+            sexta.setText(planosNutricao.getSexta()+"");
+            sabado.setText(planosNutricao.getSabado()+"");
             semana.setText(planosNutricao.getSemana());
         }
     }

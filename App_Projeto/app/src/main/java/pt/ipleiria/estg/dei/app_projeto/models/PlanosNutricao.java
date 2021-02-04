@@ -15,6 +15,20 @@ public class PlanosNutricao {
         this.semana = semana;
     }
 
+    @Override
+    public String toString() {
+        return "PlanosNutricao{" +
+                "IDPlanoNutricao=" + IDPlanoNutricao +
+                ", segunda=" + segunda +
+                ", terca=" + terca +
+                ", quarta=" + quarta +
+                ", quinta=" + quinta +
+                ", sexta=" + sexta +
+                ", sabado=" + sabado +
+                ", semana='" + semana + '\'' +
+                '}';
+    }
+
     public int getIDPlanoNutricao() {
         return IDPlanoNutricao;
     }
