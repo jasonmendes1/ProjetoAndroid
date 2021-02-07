@@ -14,7 +14,7 @@
         android:layout_width="62dp"
         android:layout_height="61dp"
         android:paddingTop="8dp"
-        app:srcCompat="@drawable/ic_menu_perfil"
+        app:srcCompat="@drawable/avatar_example"
         tools:ignore="VectorDrawableCompat" />
 
     <TextView
@@ -24,7 +24,7 @@
         android:fontFamily="@font/bold"
         android:gravity="start"
         android:text="Username"
-        android:textColor="@color/white"
+        android:textColor="@color/gray"
         android:textSize="14sp" />
 
     <TextView
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/bold"
         android:text="Email"
-        android:textColor="@color/white"
+        android:textColor="@color/gray"
         android:textSize="12sp" />
 </LinearLayout>
 
