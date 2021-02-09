@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
@@ -29,6 +30,7 @@ public class PlanosTreinoFragment extends Fragment implements PlanosTreinoListen
     private ListaPlanosTreinoAdapter listaPlanosTreinoAdapter;
     public static final String IDPlanoTreino = "IDPlanoTreino";
     private int ID_User;
+    private Button btnPDF;
 
     public static final int RESULT_CODE_VER = 10;
 
@@ -44,6 +46,8 @@ public class PlanosTreinoFragment extends Fragment implements PlanosTreinoListen
         setHasOptionsMenu(true);
 
         final View view = inflater.inflate(R.layout.fragment_planos__treino, container, false);
+
+        btnPDF = view.findViewById(R.id.buttonPDF);
 
 
         lvPlanosTreino = view.findViewById(R.id.lvPlanosTreino);
@@ -74,6 +78,14 @@ public class PlanosTreinoFragment extends Fragment implements PlanosTreinoListen
             }
         });
 
+/*        btnPDF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), UploadFotoActivity.class);
+                startActivity(intent);
+            }
+        });
+*/
         Singleton.getInstance(getContext()).setPlanosTreinoListener(this);
         Singleton.getInstance(getContext()).getAllPlanosTreinoFromClientAPI(getContext(), PlanosTreinoJSONParser.isConnectionInternet(getContext()));
 

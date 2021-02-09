@@ -25,6 +25,11 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
     private static final String CLIENTE_AVATAR = "avatar";
     private static final String CLIENTE_TELEMOVEL = "num_tele";
     private static final String CLIENTE_NIF = "nif";
+    private static final String CLIENTE_ALTURA = "altura";
+    private static final String CLIENTE_PESO = "peso";
+    private static final String CLIENTE_MASSAMUSCULAR = "massa_muscular";
+    private static final String CLIENTE_MASSAGORDA = "massa_gorda";
+
 
     private static final String FUNCIONARIO_ID = "IDFuncionario";
     private static final String FUNCIONARIO_PRIMEIRONOME = "primeiroNome";
@@ -68,7 +73,11 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
                 CLIENTE_SEXO + " TEXT NOT NULL, " +
                 CLIENTE_AVATAR + " TEXT NOT NULL, " +
                 CLIENTE_TELEMOVEL + " TEXT NOT NULL, " +
-                CLIENTE_NIF + " TEXT NOT NULL);";
+                CLIENTE_NIF + " INTEGER NOT NULL, " +
+                CLIENTE_ALTURA + " INTEGER NOT NULL, " +
+                CLIENTE_PESO + " INTEGER NOT NULL, " +
+                CLIENTE_MASSAMUSCULAR + " INTEGER NOT NULL, " +
+                CLIENTE_MASSAGORDA + " INTEGER NOT NULL);";
         db.execSQL(TBL_CREATE_CLIENTE);
 
         String TBL_CREATE_FUNCIONARIO = "CREATE TABLE " + TABLE_FUNCIONARIO + "(" +
@@ -129,6 +138,24 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
         return null;
     }
 
+    public ArrayList<Cliente> getAllClientesDB() {
+        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+        Cursor cursor = this.database.query(TABLE_CLIENTE, new String[]{CLIENTE_ID, CLIENTE_PRIMEIRONOME, CLIENTE_APELIDO, CLIENTE_DATANASCIMENTO, CLIENTE_SEXO, CLIENTE_AVATAR, CLIENTE_DATANASCIMENTO, CLIENTE_SEXO, CLIENTE_AVATAR, CLIENTE_TELEMOVEL, CLIENTE_NIF, CLIENTE_ALTURA, CLIENTE_PESO, CLIENTE_MASSAMUSCULAR, CLIENTE_MASSAGORDA},
+                null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Cliente auxCliente = new Cliente(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
+                        cursor.getInt(3), cursor.getString(4), cursor.getString(5),
+                        cursor.getInt(6), cursor.getInt(7), cursor.getInt(8), cursor.getInt(9),
+                        cursor.getInt(10),cursor.getInt(11));
+
+                clientes.add(auxCliente);
+            } while (cursor.moveToNext());
+        }
+        return clientes;
+    }
+
     public ArrayList<PlanosTreino> getAllPlanosTreinoBD(){
         ArrayList<PlanosTreino> planosTreinos = new ArrayList<PlanosTreino>();
         Cursor cursor = this.database.query(TABLE_PLANOTREINO, new String[]{IDPLANOTREINO,IDPT,DIATREINO,SEMANAPT},null,null,null,null,null);
@@ -181,6 +208,36 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
             }while (cursor.moveToNext());
         }
         return planosNutricaos;
+    }
+
+    public void adicionarClienteDB(Cliente cliente) {
+        ContentValues values = new ContentValues();
+        values.put(CLIENTE_PRIMEIRONOME, cliente.getPrimeiroNome());
+        values.put(CLIENTE_APELIDO, cliente.getApelido());
+        values.put(CLIENTE_TELEMOVEL, cliente.getNum_tele());
+        values.put(CLIENTE_NIF, cliente.getNif());
+        values.put(CLIENTE_SEXO, cliente.getSexo());
+        values.put(CLIENTE_ALTURA, cliente.getAltura());
+        values.put(CLIENTE_PESO, cliente.getPeso());
+        values.put(CLIENTE_MASSAMUSCULAR, cliente.getMassa_muscular());
+        values.put(CLIENTE_MASSAGORDA, cliente.getMassa_gorda());
+
+        this.database.insert(TABLE_CLIENTE, null, values);
+    }
+
+    public boolean editarClienteDB(Cliente cliente) {
+        ContentValues values = new ContentValues();
+        values.put(CLIENTE_PRIMEIRONOME, cliente.getPrimeiroNome());
+        values.put(CLIENTE_APELIDO, cliente.getApelido());
+        values.put(CLIENTE_TELEMOVEL, cliente.getNum_tele());
+        values.put(CLIENTE_NIF, cliente.getNif());
+        values.put(CLIENTE_SEXO, cliente.getSexo());
+        values.put(CLIENTE_ALTURA, cliente.getAltura());
+        values.put(CLIENTE_PESO, cliente.getPeso());
+        values.put(CLIENTE_MASSAMUSCULAR, cliente.getMassa_muscular());
+        values.put(CLIENTE_MASSAGORDA, cliente.getMassa_gorda());
+
+        return this.database.update(TABLE_CLIENTE, values, "id=?", new String[]{cliente.getIDCliente() + ""}) > 0;
     }
 
     /*Planos De Nutrição*/

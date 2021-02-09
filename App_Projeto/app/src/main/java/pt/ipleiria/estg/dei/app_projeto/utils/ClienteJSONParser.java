@@ -46,6 +46,19 @@ public class ClienteJSONParser {
         return networkInfo != null && networkInfo.isConnected();
     }
 
+    public static String parserJsonLogin(String response) {
+        String token = null;
+        try {
+            JSONObject login = new JSONObject(response);
+            if (login.getBoolean("success"))
+                token = login.getString("token");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return token;
+    }
+
+
     public static String parserJsonAvatarCliente(String response){
         String avatar = null;
         try {
@@ -57,4 +70,5 @@ public class ClienteJSONParser {
         }
         return avatar;
     }
+
 }

@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="274dp"
         android:layout_alignBottom="@+id/textView5"
-        android:layout_marginBottom="-153dp"
+        android:layout_marginBottom="-142dp"
         android:src="@drawable/linhahorizontal" />
 
     <ImageView
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="274dp"
         android:layout_alignBottom="@+id/textView5"
-        android:layout_marginBottom="-361dp"
+        android:layout_marginBottom="-349dp"
         android:src="@drawable/linhahorizontal" />
 
     <TextView
@@ -59,10 +59,10 @@
         android:id="@+id/textViewDataNascimento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageViewLinha"
+        android:layout_alignBottom="@+id/textViewNomePerfil"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="221dp"
-        android:layout_marginBottom="54dp"
+        android:layout_marginBottom="-40dp"
         android:fontFamily="@font/bold"
         android:text="Data de Nascimento:"
         android:textSize="17sp" />
@@ -71,10 +71,10 @@
         android:id="@+id/textViewTelefone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageViewLinha"
+        android:layout_alignBottom="@+id/textViewDataNascimento"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="222dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="-47dp"
         android:fontFamily="@font/bold"
         android:text="Telefone:"
         android:textSize="17sp" />
@@ -95,10 +95,10 @@
         android:id="@+id/textViewNIF2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageViewLinha"
+        android:layout_alignBottom="@+id/textViewNIF"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="217dp"
-        android:layout_marginBottom="-68dp"
+        android:layout_marginBottom="-29dp"
         android:fontFamily="@font/bold"
         android:text="Sexo:"
         android:textSize="17sp" />
@@ -107,10 +107,10 @@
         android:id="@+id/textViewAltura"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageViewLinha"
+        android:layout_alignBottom="@+id/textViewNIF2"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="215dp"
-        android:layout_marginBottom="-100dp"
+        android:layout_marginEnd="216dp"
+        android:layout_marginBottom="-37dp"
         android:fontFamily="@font/bold"
         android:text="Altura:"
         android:textSize="17sp" />
@@ -119,10 +119,10 @@
         android:id="@+id/textViewPeso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageViewLinha"
+        android:layout_alignBottom="@+id/textViewAltura"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="215dp"
-        android:layout_marginBottom="-143dp"
+        android:layout_marginBottom="-41dp"
         android:fontFamily="@font/bold"
         android:text="Peso:"
         android:textSize="17sp" />
@@ -131,10 +131,10 @@
         android:id="@+id/textViewMassaMuscular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageViewLinha"
+        android:layout_alignBottom="@+id/textViewPeso"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="217dp"
-        android:layout_marginBottom="-184dp"
+        android:layout_marginBottom="-41dp"
         android:fontFamily="@font/bold"
         android:text="M. Muscular"
         android:textSize="17sp" />
@@ -143,10 +143,10 @@
         android:id="@+id/textViewMassaGorda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageViewLinha"
+        android:layout_alignBottom="@+id/textViewMassaMuscular"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="218dp"
-        android:layout_marginBottom="-223dp"
+        android:layout_marginBottom="-41dp"
         android:fontFamily="@font/bold"
         android:text="M. Gorda"
         android:textSize="17sp" />
@@ -160,20 +160,18 @@
         android:layout_marginEnd="-125dp"
         android:layout_marginBottom="-42dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="2000/01/01" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editTextTelefone"
         android:layout_width="112dp"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/textViewDataNascimento"
-        android:layout_alignBottom="@+id/editTextNome"
+        android:layout_alignBottom="@+id/editTextDataNasc"
         android:layout_marginEnd="-126dp"
-        android:layout_marginBottom="-88dp"
+        android:layout_marginBottom="-46dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="912345678" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editTextNIF"
@@ -182,10 +180,9 @@
         android:layout_alignEnd="@+id/textViewDataNascimento"
         android:layout_alignBottom="@+id/editTextNome"
         android:layout_marginEnd="-126dp"
-        android:layout_marginBottom="-132dp"
+        android:layout_marginBottom="-127dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="123456789" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editTextSexo"
@@ -194,10 +191,9 @@
         android:layout_alignEnd="@+id/textViewDataNascimento"
         android:layout_alignBottom="@+id/editTextNome"
         android:layout_marginEnd="-126dp"
-        android:layout_marginBottom="-164dp"
+        android:layout_marginBottom="-155dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="123456789" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etAltura"
@@ -208,8 +204,7 @@
         android:layout_marginEnd="-92dp"
         android:layout_marginBottom="-196dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="185cm" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etPeso"
@@ -220,8 +215,7 @@
         android:layout_marginEnd="-91dp"
         android:layout_marginBottom="-239dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="85kg" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etMassaMuscular"
@@ -232,8 +226,7 @@
         android:layout_marginEnd="-92dp"
         android:layout_marginBottom="-276dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="24%" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etMassaGorda"
@@ -244,41 +237,40 @@
         android:layout_marginEnd="-91dp"
         android:layout_marginBottom="-316dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="24%" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editTextNome"
-        android:layout_width="56dp"
+        android:layout_width="95dp"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/textViewNomePerfil"
         android:layout_alignBottom="@+id/textViewNomePerfil"
-        android:layout_marginEnd="-66dp"
-        android:layout_marginBottom="-9dp"
+        android:layout_marginEnd="-105dp"
+        android:layout_marginBottom="-8dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Jason" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editTextApelido"
-        android:layout_width="70dp"
+        android:layout_width="108dp"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/textViewNomePerfil"
         android:layout_alignBottom="@+id/textViewNomePerfil"
-        android:layout_marginEnd="-132dp"
-        android:layout_marginBottom="-9dp"
+        android:layout_marginEnd="-213dp"
+        android:layout_marginBottom="-8dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Mendes" />
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/buttonEditar"
-        android:layout_width="141dp"
-        android:layout_height="66dp"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textViewMassaGorda"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="140dp"
-        android:layout_marginBottom="-84dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="8dp"
+        android:layout_toEndOf="@+id/etMassaGorda"
         android:text="Editar" />
 
 </RelativeLayout>

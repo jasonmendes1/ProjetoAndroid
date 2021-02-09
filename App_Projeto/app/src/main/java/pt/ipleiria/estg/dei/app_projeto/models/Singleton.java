@@ -76,6 +76,9 @@ public class Singleton extends Application {
 
 
     private static Singleton INSTANCE = null;
+    private static final int ADICIONAR_BD = 1;
+    private static final int EDITAR_BD = 2;
+
 
     public static synchronized Singleton getInstance(Context context) {
         if (INSTANCE == null) {
@@ -118,6 +121,15 @@ public class Singleton extends Application {
 
     public ArrayList<Cliente> getClientes() {
         return clientes;
+    }
+/*
+    public ArrayList<Cliente> getClientesBD() {
+        clientes = fitnessLeagueBDHelper.getAllClientesDB();
+        return clientes;
+    }
+*/
+    public ArrayList<Subscricao> getSubscricao() {
+        return subscricaos;
     }
 
     public ArrayList<Desconto> getDescontos() {
@@ -213,21 +225,30 @@ public class Singleton extends Application {
         this.loginListener = loginListener;
     }
 
-    public void verificaLoginAPI_POST(final String username, final String password) {
+    public void verificaLoginAPI_POST(final String username, final String password, final Context context) {
         System.out.println("--> url:" + urlAPI + "/user/verificaLogin?username=" + username + "&password_hash=" + password);
         JsonArrayRequest req = new JsonArrayRequest(Request.Method.POST, urlAPI + "/userregisterandlogin/verificaLogin?username=" + username + "&password_hash=" + password, null, new Response.Listener<JSONArray>() {
+        //StringRequest req = new StringRequest(Request.Method.POST, urlAPI + "/userregisterandlogin/verificaLogin?username=" + username + "&password_hash=" + password, new Response.Listener<String>() {
             @Override
             public void onResponse(JSONArray response) {
-                if (loginListener != null) {
+                //String token = ClienteJSONParser.parserJsonLogin(response);
+                if (loginListener != null)
                     loginListener.onRefreshLogin(response);
-                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("--> Erro: " + error.getMessage());
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", username);
+                params.put("password", password);
+                return params;
+            }
+        };
         volleyQueue.add(req);
     }
 
@@ -292,19 +313,18 @@ public class Singleton extends Application {
         this.User_id = User_id;
     }
 
-    public void adicionarPlanosTreinoBD(ArrayList<PlanosTreino> planostreinos) {
-        fitnessLeagueBDHelper.removeAllPlanosTreinoBD();
-        for (PlanosTreino planosTreino : planostreinos) {
-            fitnessLeagueBDHelper.adicionarPlanoTreinoBD(planosTreino);
-        }
+    public void adicionarClientesBD(Cliente cliente) {
+        Cliente clienteAux = getCliente(cliente.getIDCliente());
+        if (clienteAux != null)
+            fitnessLeagueBDHelper.adicionarClienteDB(clienteAux);
     }
 
-    public void adicionarPlanosNutricaoBD(ArrayList<PlanosNutricao> planosnutri) {
-        fitnessLeagueBDHelper.removeAllPlanosNutricaoBD();
-        for (PlanosNutricao planosNutricao : planosnutri) {
-            fitnessLeagueBDHelper.adicionarPlanoNutricao(planosNutricao);
-        }
+    public void editarClientesBD(Cliente cliente) {
+        Cliente clienteAux = getCliente(cliente.getIDCliente());
+        if (clienteAux != null)
+            fitnessLeagueBDHelper.editarClienteDB(clienteAux);
     }
+
 
     /*
         public void getAllExerFromPlanosTreino(final Context context, boolean isConnected, ArrayList<PlanosTreino> planosTreinos){
@@ -406,6 +426,91 @@ public class Singleton extends Application {
             }
         };
         volleyQueue.add(req);
+    }
+
+    public void editarClienteAPI(final Cliente cliente, final Context context) {
+        System.out.println("--> API URL FEED: " + mUrlGetStuffFromUser + "/cliente" + getIdUser());
+
+        StringRequest req = new StringRequest(Request.Method.PUT, mUrlGetStuffFromUser + "/cliente/" + getIdUser(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Cliente c = ClienteJSONParser.parserJsonCliente(response, context);
+                onUpdateListaClientesBD(c, EDITAR_BD);
+
+                if (userListener != null)
+                    userListener.onRefreshListaCliente(cliente);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("ClientePrimeiroNome", cliente.getPrimeiroNome());
+                params.put("ClienteApelido", cliente.getApelido());
+                params.put("ClienteDataNasc", cliente.getDta_nascimento() + "");
+                params.put("ClienteNumTele", cliente.getNum_tele() + "");
+                params.put("ClienteNIF", cliente.getNif() + "");
+                params.put("ClienteSexo", cliente.getSexo());
+                params.put("ClienteAltura", cliente.getAltura() + "");
+                params.put("ClientePeso", cliente.getNif() + "");
+                params.put("ClienteMassaMuscular", cliente.getMassa_muscular() + "");
+                params.put("ClienteMassaGorda", cliente.getMassa_gorda() + "");
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+
+    public void adicionarClienteAPI(final Cliente cliente, final Context context) {
+        System.out.println("--> API URL Cliente " + mUrlGetStuffFromUser + "/cliente/" + getIdUser());
+
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlGetStuffFromUser + "/cliente/" + getIdUser(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Cliente c = ClienteJSONParser.parserJsonCliente(response, context);
+                onUpdateListaClientesBD(c, ADICIONAR_BD);
+
+                if (userListener != null)
+                    userListener.onRefreshListaCliente(cliente);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("ClientePrimeiroNome", cliente.getPrimeiroNome());
+                params.put("ClienteApelido", cliente.getApelido());
+                params.put("ClienteDataNasc", cliente.getDta_nascimento() + "");
+                params.put("ClienteNumTele", cliente.getNum_tele() + "");
+                params.put("ClienteNIF", cliente.getNif() + "");
+                params.put("ClienteSexo", cliente.getSexo());
+                params.put("ClienteAltura", cliente.getAltura() + "");
+                params.put("ClientePeso", cliente.getNif() + "");
+                params.put("ClienteMassaMuscular", cliente.getMassa_muscular() + "");
+                params.put("ClienteMassaGorda", cliente.getMassa_gorda() + "");
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+
+    private void onUpdateListaClientesBD(Cliente cliente, int operacao) {
+        switch (operacao) {
+            case ADICIONAR_BD:
+                adicionarClientesBD(cliente);
+                break;
+            case EDITAR_BD:
+                editarClientesBD(cliente);
+                break;
+        }
     }
 /*
     public void adicionarImagemApi(final String image, final Cliente user, final Context context){

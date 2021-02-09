@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.app_projeto.vistas;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -52,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
             main.putExtra("IDUSER", UserIdSaved);
             main.putExtra("USERNAME", UserUsernameSaved);
             main.putExtra("AUTH_KEY", UserAuthkeySaved);
-            System.out.println("->>>>>>>>>>>>>>>>>>> Tinha lá dados guardados:"+ UserIdSaved + " | "+UserUsernameSaved + " | "+UserAuthkeySaved);
+            System.out.println("-->>>>>>>>>>>>>>>>>>> Tinha lá dados guardados:"+ UserIdSaved + " | "+UserUsernameSaved + " | "+UserAuthkeySaved);
             startActivity(main);
             finish();
         }
@@ -73,7 +74,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
                 Singleton.getInstance(getApplicationContext()).setLoginListener(this);
                 String pw_encryptada = Singleton.getInstance(getApplicationContext()).getEncrypted(password);
                 System.out.println("--> encryptado: " + pw_encryptada);
-                Singleton.getInstance(getApplicationContext()).verificaLoginAPI_POST(username,pw_encryptada);
+                Singleton.getInstance(getApplicationContext()).verificaLoginAPI_POST(username, pw_encryptada, getApplicationContext());
 
                 // Singleton.getInstance(getApplicationContext()).verificaLoginAPI_POST(username, password, getApplicationContext(), UserJSONParser.isConnectionInternet(getApplicationContext()));
             }
@@ -139,6 +140,29 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     public void onClickAqui(View view) {
         Intent intent = new Intent(this, LoginErroActivity.class);
         startActivity(intent);
+    }
+
+
+
+    @Override
+    public void onValidateLogin(String token, String username) {
+        if (token != null) {
+            SharedPreferences sharedPrefUser = getSharedPreferences(MenuMainActivity.USER, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPrefUser.edit();
+            editor.putString(MenuMainActivity.CHAVE_USERNAME, email);
+            editor.putString(MenuMainActivity.TOKEN, token);
+            editor.apply();
+
+            Intent intent = new Intent(getApplicationContext(), MenuMainActivity.class);
+            startActivity(intent);
+            finish();
+        } else
+            Toast.makeText(this, "Login inválido", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 
     /*

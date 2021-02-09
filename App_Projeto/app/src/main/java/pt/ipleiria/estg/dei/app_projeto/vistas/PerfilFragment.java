@@ -156,6 +156,33 @@ public class PerfilFragment extends Fragment {
 
     }
 /*
+    private void carregarCliente() {
+
+        ArrayList<Cliente> clientes = Singleton.getInstance(getContext()).getClientes();
+        ArrayList<Subscricao> subscricaos = Singleton.getInstance(getContext()).getSubscricaos();
+
+        if (clientes.size() > 0) {
+            Cliente c = clientes.get(0);
+            // Subscricao s = subscricaos.get(0);
+
+            tvNome.setText(c.getPrimeiroNome());
+            tvSexo2.setText(c.getSexo());
+            tvDataNasc2.setText(c.getDta_nascimento());
+            tvTelefone2.setText(String.valueOf(c.getNum_tele()));
+            tvNif2.setText(String.valueOf(c.getNif()));
+            //tvDataInicio.setText("Início: " + s.getData_subscricao());
+            //tvDataExpirar.setText("Expira: " + s.getData_expirar());
+            // tvEmail2.setText(UserEmail);
+            Glide.with(getContext())
+                    .load(c.getAvatar())
+                    .placeholder(R.drawable.avatar_example)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(ivAvatar);
+        }
+    }
+
+ */
+/*
     private void dialogUpload() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Selecione uma opção para carregar imagem:");

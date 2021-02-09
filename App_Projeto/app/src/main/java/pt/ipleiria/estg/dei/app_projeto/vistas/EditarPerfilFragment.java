@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.app_projeto.vistas;
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,24 +8,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import pt.ipleiria.estg.dei.app_projeto.R;
+import pt.ipleiria.estg.dei.app_projeto.listeners.UserListener;
+import pt.ipleiria.estg.dei.app_projeto.models.Cliente;
 import pt.ipleiria.estg.dei.app_projeto.models.Singleton;
+import pt.ipleiria.estg.dei.app_projeto.utils.ClienteJSONParser;
 
-public class EditarPerfilFragment extends Fragment {
+public class EditarPerfilFragment extends Fragment implements UserListener {
 
     private EditText etNome, etApelido, etSexo2, etEmail2, etTelefone2, etDataNasc2, etNif2, etAltura, etPeso, etMassaMuscular, etMassaGorda;
     private SharedPreferences sharedPreferences;
@@ -32,13 +32,26 @@ public class EditarPerfilFragment extends Fragment {
     private String urlAPI, ipURL;
     private Button buttonEditar;
     private int ID_User;
+    public static final String ID = "ID";
+    private Cliente cliente;
+    private String token;
+    private ImageView ivAvatar;
+    private static final String DEFAULT_IMAGE = "https://cdn4.iconfinder.com/data/icons/famous-character-vol-2-flat/48/Avatar_Famous_Characters-04-512.png";
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        final View rootView = inflater.inflate(R.layout.fragment_perfil, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_editar_perfil, container, false);
 
         mQueue = Volley.newRequestQueue(getContext());
+
+        final int id = getActivity().getIntent().getIntExtra(ID, -1);
+        cliente = Singleton.getInstance(getActivity().getApplicationContext()).getCliente(id);
+
+        //SharedPreferences sharedPrefUser = getActivity().getSharedPreferences(MenuMainActivity.USER, Context.MODE_PRIVATE);
+        //token = sharedPrefUser.getString(MenuMainActivity.TOKEN, "TOKEN");
 
         etNome = rootView.findViewById(R.id.editTextNome);
         etApelido = rootView.findViewById(R.id.editTextApelido);
@@ -50,116 +63,213 @@ public class EditarPerfilFragment extends Fragment {
         etPeso = rootView.findViewById(R.id.etPeso);
         etMassaMuscular = rootView.findViewById(R.id.etMassaMuscular);
         etMassaGorda = rootView.findViewById(R.id.etMassaGorda);
+        ivAvatar = rootView.findViewById(R.id.ivAvatar);
 
-
-
-
+        Singleton.getInstance(getContext()).setUserListener(this);
 
 
         ipURL = Singleton.getInstance(getContext()).getIPInput();
         urlAPI = "http://" + ipURL + "/ProjetoWeb/api/web/v1/cliente/get";
-
         ID_User = Singleton.getInstance(getContext()).getIdUser();
         System.out.println("--> url ClienteEDITARAPI: " + urlAPI + "/" + ID_User);
-
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, urlAPI + "/" + ID_User, null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        System.out.println("-->RESPOSTAEDITARPERFIL ");
-                        try {
-                            JSONObject cliente = response.getJSONObject(0);
-                            String ClienteNome = cliente.getString("ClientePrimeiroNome");
-                            String ClienteApelido = cliente.getString("ClienteApelido");
-                            String ClienteDataNasc = cliente.getString("ClienteDataNasc");
-                            int ClienteNumTele = cliente.getInt("ClienteNumTele");
-                            int ClienteNIF = cliente.getInt("ClienteNIF");
-                            String ClienteSexo = cliente.getString("ClienteSexo");
-                            int ClienteAltura = cliente.getInt("ClienteAltura");
-                            int ClientePeso = cliente.getInt("ClientePeso");
-                            int ClienteMassaMuscular = cliente.getInt("ClienteMassaMuscular");
-                            int ClienteMassaGorda = cliente.getInt("ClienteMassaGorda");
-
-                            etNome.setText(ClienteNome);
-                            System.out.println("--> tvNome: " + etNome.getText());
-
-                            etApelido.setText(ClienteApelido);
-                            System.out.println("--> tvNome: " + etApelido.getText());
-
-                            etDataNasc2.setText(ClienteDataNasc);
-                            System.out.println("--> tvNome: " + etDataNasc2.getText());
-
-                            etTelefone2.setText(String.valueOf(ClienteNumTele));
-                            System.out.println("--> tvNome: " + etTelefone2.getText());
-
-                            etNif2.setText(String.valueOf(ClienteNIF));
-                            System.out.println("--> tvNome: " + etNif2.getText());
-
-                            etSexo2.setText(ClienteSexo);
-                            System.out.println("--> tvNome: " + etSexo2.getText());
-
-
-                            etAltura.setText(String.valueOf(ClienteAltura));
-                            System.out.println("--> tvNome: " + etAltura.getText());
-
-                            etPeso.setText(String.valueOf(ClientePeso));
-                            System.out.println("--> tvNome: " + etPeso.getText());
-
-                            etMassaMuscular.setText(String.valueOf(ClienteMassaMuscular));
-                            System.out.println("--> tvNome: " + etMassaMuscular.getText());
-
-                            etMassaGorda.setText(String.valueOf(ClienteMassaGorda));
-                            System.out.println("--> tvNome: " + etMassaGorda.getText());
-
-
-                            System.out.println("--> tvNome: " + etNome.getText());
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-        mQueue.add(request);
 
         buttonEditar = rootView.findViewById(R.id.buttonEditar);
         buttonEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                etNome.clearFocus();
-                etApelido.clearFocus();
-                etDataNasc2.clearFocus();
-                etTelefone2.clearFocus();
-                etNif2.clearFocus();
-                etSexo2.clearFocus();
-                etAltura.clearFocus();
-                etPeso.clearFocus();
-                etMassaMuscular.clearFocus();
-                etMassaGorda.clearFocus();
+                if (ClienteJSONParser.isConnectionInternet(getActivity().getApplicationContext())) {
+                    if (cliente != null)
+                        if (validarCliente() == true) {
+                            cliente.setPrimeiroNome(etNome.getText().toString());
+                            cliente.setApelido(etApelido.getText().toString());
+                            cliente.setDta_nascimento(Integer.parseInt(etDataNasc2.getText().toString()));
+                            cliente.setNum_tele(Integer.parseInt(etTelefone2.getText().toString()));
+                            cliente.setNif(Integer.parseInt(etNif2.getText().toString()));
+                            cliente.setSexo(etSexo2.getText().toString());
+                            cliente.setAltura(Integer.parseInt(etAltura.getText().toString()));
+                            cliente.setPeso(Integer.parseInt(etPeso.getText().toString()));
+                            cliente.setMassa_muscular(Integer.parseInt(etMassaMuscular.getText().toString()));
+                            cliente.setMassa_gorda(Integer.parseInt(etMassaGorda.getText().toString()));
 
-                JsonArrayRequest request = new JsonArrayRequest(Request.Method.POST, urlAPI + "/edit?IdUser=" + ID_User
-                        + "&ClientePrimeiroNome=" +  etNome.getText().toString() + "&ClienteApelido=" + etApelido.getText().toString() + "&ClienteDataNasc=" + etDataNasc2.getText().toString()
-                        + "&ClienteSexo=" + etSexo2.getText().toString() + "&ClienteNumTele" + etTelefone2.getText().toString() + "&ClienteNIF" + etNif2.getText().toString()
-                        + "&ClienteAltura" + etAltura.getText().toString() + "&ClientePeso" + etPeso.getText().toString() + "&ClienteMassaMuscular" + etMassaMuscular.getText().toString()
-                        + "&ClienteMassaGorda" + etMassaGorda.getText().toString(), null,
-                        new Response.Listener<JSONArray>() {
-                            @Override
-                            public void onResponse(JSONArray response) {
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        System.out.println("--> Error: " + error.getMessage());
-                    }
-                });
-                mQueue.add(request);
+                            Singleton.getInstance(getActivity().getApplicationContext()).editarClienteAPI(cliente, getActivity().getApplicationContext());
+                        } else return;
+
+                    else if (validarCliente() == true) {
+                        cliente = new Cliente(0,
+                                etNome.getText().toString(),
+                                etApelido.getText().toString(),
+                                Integer.parseInt(etDataNasc2.getText().toString()),
+                                etSexo2.getText().toString(),
+                                DEFAULT_IMAGE,
+                                Integer.parseInt(etTelefone2.getText().toString()),
+                                Integer.parseInt(etNif2.getText().toString()),
+                                Integer.parseInt(etAltura.getText().toString()),
+                                Integer.parseInt(etPeso.getText().toString()),
+                                Integer.parseInt(etMassaMuscular.getText().toString()),
+                                Integer.parseInt(etMassaGorda.getText().toString()));
+
+                        Singleton.getInstance(getActivity().getApplicationContext()).adicionarClienteAPI(cliente, getActivity().getApplicationContext());
+                    } else return;
+                    /*setResult(RESULT_OK);
+                    finish();*/
+                } else
+                    Toast.makeText(getActivity(), "Não há Internet", Toast.LENGTH_SHORT).show();
             }
         });
+
+        if (cliente != null)
+            carregarCliente();
         return rootView;
+    }
+
+    private boolean validarCliente() {
+        String ClientePrimeiroNome = etNome.getText().toString();
+        String ClienteApelido = etApelido.getText().toString();
+        String ClienteDataNasc = etDataNasc2.getText().toString();
+        String ClienteNumTele = etTelefone2.getText().toString();
+        String ClienteNIF = etNif2.getText().toString();
+        String ClienteSexo = etSexo2.getText().toString();
+        String ClienteAltura = etAltura.getText().toString();
+        String ClientePeso = etPeso.getText().toString();
+        String ClienteMassaMuscular = etMassaMuscular.getText().toString();
+        String ClienteMassaGorda = etMassaGorda.getText().toString();
+
+        if (ClientePrimeiroNome.length() < 3) {
+            etNome.setError("Nome Inválido");
+            return false;
+        }
+
+        if (ClienteApelido.length() < 3) {
+            etApelido.setError("Apelido Inválido");
+            return false;
+        }
+
+        if (ClienteDataNasc.length() < 3) {
+            etDataNasc2.setError("Data Inválida");
+            return false;
+        }
+
+        if (ClienteNumTele.length() < 9) {
+            etTelefone2.setError("Telefone Inválido");
+            return false;
+        }
+
+        if (ClienteNIF.length() < 9) {
+            etNif2.setError("NIF Inválido");
+            return false;
+        }
+
+        if (ClienteSexo.length() > 3) {
+            etSexo2.setError("Sexo Inválido");
+            return false;
+        }
+
+        if (ClienteAltura.length() > 3) {
+            etAltura.setError("Altura Inválido");
+            return false;
+        }
+
+        if (ClientePeso.length() > 3) {
+            etPeso.setError("Peso Inválido");
+            return false;
+        }
+
+        if (ClienteMassaMuscular.length() > 3) {
+            etMassaMuscular.setError("Massa Muscular Inválido");
+            return false;
+        }
+
+        if (ClienteMassaGorda.length() > 3) {
+            etMassaGorda.setError("Massa Gorda Inválido");
+            return false;
+        }
+
+        //ctrl + alt + t
+        try {
+            Integer.parseInt(ClienteDataNasc);
+        } catch (NumberFormatException e) {
+            //e.printStackTrace();
+            etDataNasc2.setError("Data Inválido");
+            return false;
+        }
+
+        try {
+            Integer.parseInt(ClienteNumTele);
+        } catch (NumberFormatException e) {
+            //e.printStackTrace();
+            etTelefone2.setError("Telefone Inválido");
+            return false;
+        }
+
+        try {
+            Integer.parseInt(ClienteNIF);
+        } catch (NumberFormatException e) {
+            //e.printStackTrace();
+            etNif2.setError("NIF Inválido");
+            return false;
+        }
+
+        try {
+            Integer.parseInt(ClienteAltura);
+        } catch (NumberFormatException e) {
+            //e.printStackTrace();
+            etAltura.setError("Altura Inválida");
+            return false;
+        }
+
+        try {
+            Integer.parseInt(ClientePeso);
+        } catch (NumberFormatException e) {
+            //e.printStackTrace();
+            etPeso.setError("Peso Inválido");
+            return false;
+        }
+
+        try {
+            Integer.parseInt(ClienteMassaMuscular);
+        } catch (NumberFormatException e) {
+            //e.printStackTrace();
+            etMassaMuscular.setError("Massa Muscular Inválida");
+            return false;
+        }
+
+        try {
+            Integer.parseInt(ClienteMassaGorda);
+        } catch (NumberFormatException e) {
+            //e.printStackTrace();
+            etMassaGorda.setError("Massa Gorda Inválida");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void carregarCliente() {
+        etNome.setText(cliente.getPrimeiroNome());
+        etApelido.setText(cliente.getApelido());
+        etDataNasc2.setText(cliente.getDta_nascimento() + "");
+        etSexo2.setText(cliente.getSexo());
+        etApelido.setText(cliente.getApelido());
+        Glide.with(this)
+                .load(cliente.getAvatar())
+                .placeholder(R.drawable.avatar_example)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(ivAvatar);
+        etTelefone2.setText(cliente.getNum_tele() + "");
+        etNif2.setText(cliente.getNif() + "");
+        etAltura.setText(cliente.getAltura() + "");
+        etPeso.setText(cliente.getPeso() + "");
+        etMassaMuscular.setText(cliente.getMassa_muscular() + "");
+        etMassaGorda.setText(cliente.getMassa_gorda() + "");
+    }
+
+    @Override
+    public void onRefreshListaCliente(Cliente cliente) {
+
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        return null;
     }
 }

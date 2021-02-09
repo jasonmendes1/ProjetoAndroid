@@ -32,6 +32,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     private DrawerLayout drawer;
     private FragmentManager fragmentManager;
 
+    public static final String USER = "USER_SHARED_PREF";
     public static final String SECCAO_INFO_USER = "SECCAO_INFO_USER";
     public static final String CHAVE_USERNAME = "USERNAME";
     public static final String CHAVE_ID = "-1";
