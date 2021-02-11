@@ -283,27 +283,6 @@ public class Singleton extends Application {
 
  */
 
-    public void getClienteFromLogin(final Context context, final boolean isConnected) {
-        if (!isConnected) {
-            Toast.makeText(context, "Sem internet", Toast.LENGTH_SHORT).show();
-        } else {
-            StringRequest request = new StringRequest(Request.Method.GET, mUrlGetStuffFromUser + SharedPreferencesConfig.read(SharedPreferencesConfig.ID_USER, 0) + "/cliente?access-token=" + SharedPreferencesConfig.read(SharedPreferencesConfig.AUTH_KEY, null), new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    Cliente cliente = ClienteJSONParser.parserJsonCliente(response, context);
-                    userListener.onRefreshListaCliente(cliente);
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, "Error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-            );
-            volleyQueue.add(request);
-        }
-    }
-
 
     public int getIdUser() {
         return User_id;
