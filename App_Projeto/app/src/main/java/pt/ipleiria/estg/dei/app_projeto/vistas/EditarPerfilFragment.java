@@ -93,25 +93,8 @@ public class EditarPerfilFragment extends Fragment implements UserListener {
 
                             Singleton.getInstance(getActivity().getApplicationContext()).editarClienteAPI(cliente, getActivity().getApplicationContext());
                         } else return;
-
-                    else if (validarCliente() == true) {
-                        cliente = new Cliente(0,
-                                etNome.getText().toString(),
-                                etApelido.getText().toString(),
-                                Integer.parseInt(etDataNasc2.getText().toString()),
-                                etSexo2.getText().toString(),
-                                DEFAULT_IMAGE,
-                                Integer.parseInt(etTelefone2.getText().toString()),
-                                Integer.parseInt(etNif2.getText().toString()),
-                                Integer.parseInt(etAltura.getText().toString()),
-                                Integer.parseInt(etPeso.getText().toString()),
-                                Integer.parseInt(etMassaMuscular.getText().toString()),
-                                Integer.parseInt(etMassaGorda.getText().toString()));
-
-                        Singleton.getInstance(getActivity().getApplicationContext()).adicionarClienteAPI(cliente, getActivity().getApplicationContext());
-                    } else return;
-                    /*setResult(RESULT_OK);
-                    finish();*/
+                    //setResult(RESULT_OK);
+                    //finish();
                 } else
                     Toast.makeText(getActivity(), "Não há Internet", Toast.LENGTH_SHORT).show();
             }

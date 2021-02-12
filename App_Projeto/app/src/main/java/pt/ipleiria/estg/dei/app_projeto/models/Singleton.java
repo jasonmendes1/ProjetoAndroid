@@ -408,13 +408,12 @@ public class Singleton extends Application {
     }
 
     public void editarClienteAPI(final Cliente cliente, final Context context) {
-        System.out.println("--> API URL FEED: " + mUrlGetStuffFromUser + "/cliente" + getIdUser());
-
-        StringRequest req = new StringRequest(Request.Method.PUT, mUrlGetStuffFromUser + "/cliente/" + getIdUser(), new Response.Listener<String>() {
+        StringRequest req = new StringRequest(Request.Method.PUT, mUrlGetStuffFromUser + "/cliente/get/" + getIdUser(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Cliente c = ClienteJSONParser.parserJsonCliente(response, context);
                 onUpdateListaClientesBD(c, EDITAR_BD);
+                System.out.println("--> RESPOSTA PUT EDITAR API: " + cliente);
 
                 if (userListener != null)
                     userListener.onRefreshListaCliente(cliente);
@@ -434,6 +433,7 @@ public class Singleton extends Application {
                 params.put("ClienteNumTele", cliente.getNum_tele() + "");
                 params.put("ClienteNIF", cliente.getNif() + "");
                 params.put("ClienteSexo", cliente.getSexo());
+                params.put("ClienteAvatar", cliente.getAvatar());
                 params.put("ClienteAltura", cliente.getAltura() + "");
                 params.put("ClientePeso", cliente.getNif() + "");
                 params.put("ClienteMassaMuscular", cliente.getMassa_muscular() + "");
@@ -445,9 +445,9 @@ public class Singleton extends Application {
     }
 
     public void adicionarClienteAPI(final Cliente cliente, final Context context) {
-        System.out.println("--> API URL Cliente " + mUrlGetStuffFromUser + "/cliente/" + getIdUser());
+        System.out.println("--> API URL Cliente " + mUrlGetStuffFromUser + "/cliente/get/" + getIdUser());
 
-        StringRequest req = new StringRequest(Request.Method.POST, mUrlGetStuffFromUser + "/cliente/" + getIdUser(), new Response.Listener<String>() {
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlGetStuffFromUser + "/cliente/get/" + getIdUser(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Cliente c = ClienteJSONParser.parserJsonCliente(response, context);
@@ -471,6 +471,7 @@ public class Singleton extends Application {
                 params.put("ClienteNumTele", cliente.getNum_tele() + "");
                 params.put("ClienteNIF", cliente.getNif() + "");
                 params.put("ClienteSexo", cliente.getSexo());
+                params.put("ClienteAvatar", cliente.getAvatar());
                 params.put("ClienteAltura", cliente.getAltura() + "");
                 params.put("ClientePeso", cliente.getNif() + "");
                 params.put("ClienteMassaMuscular", cliente.getMassa_muscular() + "");

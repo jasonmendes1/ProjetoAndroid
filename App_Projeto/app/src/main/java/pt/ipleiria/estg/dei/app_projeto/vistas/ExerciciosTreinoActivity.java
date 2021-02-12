@@ -34,18 +34,21 @@ public class ExerciciosTreinoActivity extends AppCompatActivity implements Exerc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_exerciciostreino);
+
         final int idplanotreino = getIntent().getIntExtra(ID_PLANOTREINO, -1);
+
+        mQueue = Volley.newRequestQueue(this);
+
         exercicio = Singleton.getInstance(getApplicationContext()).getExercicio(idplanotreino);
-
-        System.out.println("--> exercicio : " + exercicio);
-
 
         idPlanoTreino = getIntent().getIntExtra(ID_PLANOTREINO, 0);
         System.out.println("--> idPlanoTreino: " + idPlanoTreino);
         final String nomeExercicio = getIntent().getStringExtra(NOME_EXERCICIO);
         //fabProcura = findViewById(R.id.fabProcura);
 
-        mQueue = Volley.newRequestQueue(this);
+        System.out.println("--> exercicio : " + exercicio);
+
+
         tvNomeEx = findViewById(R.id.tvNomeEx);
         tvRepeticoesEx = findViewById(R.id.tvRepeticoesEx);
         tvTempoEx = findViewById(R.id.tvTempoEx);

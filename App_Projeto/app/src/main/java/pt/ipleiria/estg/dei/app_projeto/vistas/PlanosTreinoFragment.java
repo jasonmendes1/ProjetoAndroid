@@ -47,7 +47,7 @@ public class PlanosTreinoFragment extends Fragment implements PlanosTreinoListen
 
         final View view = inflater.inflate(R.layout.fragment_planos__treino, container, false);
 
-        btnPDF = view.findViewById(R.id.buttonPDF);
+        //btnPDF = view.findViewById(R.id.buttonPDF);
 
 
         lvPlanosTreino = view.findViewById(R.id.lvPlanosTreino);
