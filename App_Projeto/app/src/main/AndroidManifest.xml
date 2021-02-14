@@ -18,7 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".vistas.InfoGymActivity"></activity>
+        <activity android:name=".vistas.CalendarioData"></activity>
+        <activity android:name=".vistas.EmentaActivity" />
+        <activity android:name=".vistas.InfoGymActivity" />
         <activity
             android:name=".MenuMainActivity"
             android:launchMode="singleTop"
@@ -42,6 +44,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".vistas.UploadFotoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".vistas.CalendarioActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

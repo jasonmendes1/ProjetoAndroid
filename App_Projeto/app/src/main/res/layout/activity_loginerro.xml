@@ -11,7 +11,7 @@
         android:id="@+id/btnVoltar"
         android:layout_width="153dp"
         android:layout_height="43dp"
-        android:layout_alignStart="@+id/textView2"
+        android:layout_alignStart="@+id/textView2A"
         android:layout_alignBottom="@+id/textView4"
         android:layout_marginStart="80dp"
         android:layout_marginBottom="-77dp"
@@ -38,7 +38,7 @@
         app:srcCompat="@drawable/sinal_proibido" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView2A"
         android:layout_width="350dp"
         android:layout_height="204dp"
         android:layout_alignBottom="@+id/imageView"
@@ -56,8 +56,8 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignStart="@+id/textView2A"
+        android:layout_alignBottom="@+id/textView2A"
         android:layout_marginStart="0dp"
         android:layout_marginBottom="-43dp"
         android:text="@string/visitar_em"
@@ -69,7 +69,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView2"
+        android:layout_alignStart="@+id/textView2A"
         android:layout_alignBottom="@+id/textView3"
         android:layout_marginStart="-1dp"
         android:layout_marginBottom="-48dp"

@@ -2,10 +2,12 @@ package pt.ipleiria.estg.dei.app_projeto.models;
 
 public class Ementa {
     private int IDEmenta;
-    private String pequenoalmoco, almoco, lanche1, lanche2, jantar;
+    private String nomeementa, pequenoalmoco, almoco, lanche1, lanche2, jantar;
 
-    public Ementa (int IDEmenta, String pequenoalmoco, String almoco, String lanche1, String lanche2, String jantar){
+
+    public Ementa (int IDEmenta, String nomeEmenta, String pequenoalmoco, String almoco, String lanche1, String lanche2, String jantar){
         this.IDEmenta = IDEmenta;
+        this.nomeementa = nomeEmenta;
         this.pequenoalmoco = pequenoalmoco;
         this.almoco = almoco;
         this.lanche1 = lanche1;
@@ -19,6 +21,14 @@ public class Ementa {
 
     public void setIDEmenta(int IDEmenta) {
         this.IDEmenta = IDEmenta;
+    }
+
+    public String getNomeementa() {
+        return nomeementa;
+    }
+
+    public void setNomeementa(String nomeementa) {
+        this.nomeementa = nomeementa;
     }
 
     public String getPequenoalmoco() {

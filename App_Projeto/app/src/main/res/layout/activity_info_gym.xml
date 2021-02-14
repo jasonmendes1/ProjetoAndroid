@@ -23,22 +23,40 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="35dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="113dp"
         android:text="Jason Mendes - 2180601"
         android:textColor="#000000"
         android:textSize="30sp"
         tools:layout_editor_absoluteX="36dp"
         tools:layout_editor_absoluteY="659dp" />
 
-    <Button
-        android:id="@+id/buttonVoltar"
-        android:layout_width="127dp"
-        android:layout_height="60dp"
-        android:layout_alignBottom="@+id/textView10"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="253dp"
-        android:layout_marginBottom="-75dp"
-        android:onClick="onClickVoltar"
-        android:text="Voltar" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="70dp"
+        android:text="Tiago Antunes - 2180602"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="659dp" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="27dp"
+        android:text="Tiago Ramos - 2180689"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="659dp" />
+
 </RelativeLayout>

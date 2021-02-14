@@ -97,6 +97,8 @@ public class EditarPerfilFragment extends Fragment implements UserListener {
                     //finish();
                 } else
                     Toast.makeText(getActivity(), "Não há Internet", Toast.LENGTH_SHORT).show();
+                    System.out.println("--> NADA ");
+
             }
         });
 

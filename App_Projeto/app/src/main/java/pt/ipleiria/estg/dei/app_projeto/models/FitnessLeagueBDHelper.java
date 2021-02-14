@@ -16,6 +16,8 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
     private static final String TABLE_FUNCIONARIO = "funcionario";
     private static final String TABLE_PLANOTREINO = "planostreino";
     private static final String TABLE_PLANONUTRICAO = "planosnutricao";
+    private static final String TABLE_EXERCICIOS = "planosexercicios";
+
 
     private static final String CLIENTE_ID = "IDCliente";
     private static final String CLIENTE_PRIMEIRONOME = "primeiroNome";
@@ -53,6 +55,15 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
     private static final String SEXTA = "Sexta";
     private static final String SABADO = "Sabado";
     private static final String SEMANAPN = "Semana";
+
+    private static final String EXERCICIO_ID = "IDExer";
+    private static final String EXERCICIO_NOME = "nome";
+    private static final String EXERCICIO_REPETICOES = "repeticoes";
+    private static final String EXERCICIO_TEMPO = "tempo";
+    private static final String EXERCICIO_SERIE = "serie";
+    private static final String EXERCICIO_REPOUSO = "repouso";
+    private static final String EXERCICIO_TEMPOTOTAL = "tempo_total";
+    private static final String EXERCICIO_NUMMAQUINA = "num_maquina";
 
 
     private final SQLiteDatabase database;
@@ -108,6 +119,17 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
                 SEXTA + " INTEGER NOT NULL, " +
                 SABADO + " INTEGER NOT NULL, " +
                 SEMANAPN + " TEXT NOT NULL);";
+        db.execSQL(TBL_CREATE_PLANONUTRICAO);
+
+        String TBL_CREATE_EXERCICIOS = "CREATE TABLE " + TABLE_EXERCICIOS + "(" +
+                EXERCICIO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                EXERCICIO_NOME + " VARCHAR NOT NULL, " +
+                EXERCICIO_REPETICOES + " INTEGER NOT NULL, " +
+                EXERCICIO_TEMPO + " INTEGER NOT NULL, " +
+                EXERCICIO_SERIE + " INTEGER NOT NULL, " +
+                EXERCICIO_REPOUSO + " INTEGER NOT NULL, " +
+                EXERCICIO_TEMPOTOTAL + " INTEGER NOT NULL, " +
+                EXERCICIO_NUMMAQUINA + " INTEGER NOT NULL);";
         db.execSQL(TBL_CREATE_PLANONUTRICAO);
 
     }
@@ -210,6 +232,20 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
         return planosNutricaos;
     }
 
+    public ArrayList<Exercicio> getAllExercicios(){
+        ArrayList<Exercicio> exercicios = new ArrayList<Exercicio>();
+        Cursor cursor = this.database.query(TABLE_EXERCICIOS, new String[]{EXERCICIO_ID, EXERCICIO_NOME, EXERCICIO_REPETICOES,EXERCICIO_TEMPO,EXERCICIO_SERIE,EXERCICIO_REPOUSO,EXERCICIO_TEMPOTOTAL,EXERCICIO_NUMMAQUINA}, null, null, null,null, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                Exercicio auxexercicio = new Exercicio(cursor.getInt(0),cursor.getString(0),cursor.getInt(0),cursor.getInt(0),cursor.getInt(0),cursor.getInt(0),cursor.getInt(0),cursor.getInt(0));
+                auxexercicio.setIDExer(cursor.getInt(0));
+                exercicios.add(auxexercicio);
+            }while (cursor.moveToNext());
+        }
+        return exercicios;
+    }
+
     public void adicionarClienteDB(Cliente cliente) {
         ContentValues values = new ContentValues();
         values.put(CLIENTE_PRIMEIRONOME, cliente.getPrimeiroNome());
@@ -239,6 +275,8 @@ public class FitnessLeagueBDHelper extends SQLiteOpenHelper {
 
         return this.database.update(TABLE_CLIENTE, values, "id=?", new String[]{cliente.getIDCliente() + ""}) > 0;
     }
+
+
 
     /*Planos De Nutrição*/
 

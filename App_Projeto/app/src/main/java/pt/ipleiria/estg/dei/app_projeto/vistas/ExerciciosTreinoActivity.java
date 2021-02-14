@@ -35,19 +35,10 @@ public class ExerciciosTreinoActivity extends AppCompatActivity implements Exerc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_exerciciostreino);
 
-        final int idplanotreino = getIntent().getIntExtra(ID_PLANOTREINO, -1);
-
-        mQueue = Volley.newRequestQueue(this);
-
+        int idplanotreino = getIntent().getIntExtra(ID_PLANOTREINO, -1);
         exercicio = Singleton.getInstance(getApplicationContext()).getExercicio(idplanotreino);
 
-        idPlanoTreino = getIntent().getIntExtra(ID_PLANOTREINO, 0);
-        System.out.println("--> idPlanoTreino: " + idPlanoTreino);
-        final String nomeExercicio = getIntent().getStringExtra(NOME_EXERCICIO);
-        //fabProcura = findViewById(R.id.fabProcura);
-
-        System.out.println("--> exercicio : " + exercicio);
-
+        mQueue = Volley.newRequestQueue(this);
 
         tvNomeEx = findViewById(R.id.tvNomeEx);
         tvRepeticoesEx = findViewById(R.id.tvRepeticoesEx);
@@ -57,10 +48,23 @@ public class ExerciciosTreinoActivity extends AppCompatActivity implements Exerc
         tvTempoTotalEx = findViewById(R.id.tvTempoTotalEx);
         tvNrMaquinaEx = findViewById(R.id.tvNrMaquinaEx);
 
+        idPlanoTreino = getIntent().getIntExtra(ID_PLANOTREINO, 0);
+        System.out.println("--> idPlanoTreino: " + idPlanoTreino);
+        final String nomeExercicio = getIntent().getStringExtra(NOME_EXERCICIO);
+        //fabProcura = findViewById(R.id.fabProcura);
+
+        //System.out.println("--> exercicio : " + exercicio);
+
+
         Singleton.getInstance(getApplicationContext()).setExerciciosListener(this);
         Singleton.getInstance(getApplicationContext()).getAllExerciciosFromClientAPI(getApplicationContext(), ExerciciosJSONParser.isConnectionInternet(getApplicationContext()));
-        System.out.println("--> nome ex: " + exercicio);
-        carregardetalhesexercicios();
+
+        if (exercicio != null) {
+            setTitle(exercicio.getNome());
+            carregardetalhesexercicios();
+        }
+        else
+            System.out.println("--> NADA: ");
     }
 
     private void carregardetalhesexercicios(){
@@ -71,7 +75,6 @@ public class ExerciciosTreinoActivity extends AppCompatActivity implements Exerc
         tvTempoRepousoEx.setText(exercicio.getRepouso()+"");
         tvTempoTotalEx.setText(exercicio.getTempo_total()+"");
         tvNrMaquinaEx.setText(exercicio.getNum_maquina()+"");
-        System.out.println("--> Exercicio Nome" + tvNomeEx);
     }
 
     @Override

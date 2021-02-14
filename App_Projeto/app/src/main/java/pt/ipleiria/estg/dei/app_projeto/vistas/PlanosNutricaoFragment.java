@@ -28,6 +28,9 @@ public class PlanosNutricaoFragment extends Fragment implements PlanosNutricaoLi
     private boolean isHistorico = false;
     private ListaPlanosNutricaoAdapter listaPlanosNutricaoAdapter;
 
+    public static final int RESULT_CODE_VER = 10;
+
+
     public PlanosNutricaoFragment() {
         // Required empty public constructor
     }
@@ -46,11 +49,11 @@ public class PlanosNutricaoFragment extends Fragment implements PlanosNutricaoLi
         lvPlanosNutricao.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PlanosNutricao planosNutricao = (PlanosNutricao) parent.getItemAtPosition(position);
+                PlanosNutricao temp = (PlanosNutricao)  parent.getItemAtPosition(position);
 
-                Intent intent = new Intent(getContext(), PlanosNutricao.class);
-                intent.putExtra("DETALHES",planosNutricao.getIDPlanoNutricao());
-                startActivity(intent);
+                Intent intent = new Intent(getContext(), EmentaActivity.class);
+                intent.putExtra(EmentaActivity.ID_PLANONUTRICAO, temp.getIDPlanoNutricao());
+                startActivityForResult(intent, RESULT_CODE_VER);
             }
         });
 
