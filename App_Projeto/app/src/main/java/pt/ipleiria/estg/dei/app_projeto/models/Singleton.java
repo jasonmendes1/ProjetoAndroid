@@ -24,12 +24,14 @@ import java.util.Map;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+import pt.ipleiria.estg.dei.app_projeto.listeners.EmentaListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.ExerciciosListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.LoginListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.PlanosNutricaoListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.PlanosTreinoListener;
 import pt.ipleiria.estg.dei.app_projeto.listeners.UserListener;
 import pt.ipleiria.estg.dei.app_projeto.utils.ClienteJSONParser;
+import pt.ipleiria.estg.dei.app_projeto.utils.EmentaJSONParser;
 import pt.ipleiria.estg.dei.app_projeto.utils.ExerciciosJSONParser;
 import pt.ipleiria.estg.dei.app_projeto.utils.PlanosNutricaoJSONParser;
 import pt.ipleiria.estg.dei.app_projeto.utils.PlanosTreinoJSONParser;
@@ -58,6 +60,8 @@ public class Singleton extends Application {
     private PlanosTreinoListener planosTreinoListener;
     private PlanosNutricaoListener planosNutricaoListener;
     private ExerciciosListener exerciciosListener;
+    private EmentaListener ementaListener;
+
 
 
     private static final String ALGORITHM = "AES";
@@ -181,6 +185,18 @@ public class Singleton extends Application {
         return null;
     }
 
+    public Ementa getEmenta(int id) {
+        for (Ementa em : ementa)
+            if (em.getIDEmenta() == id)
+                return em;
+        return null;
+    }
+
+    public ArrayList<Exercicio> getExerciciosBD() {
+        exercicios = fitnessLeagueBDHelper.getAllExercicios();
+        return exercicios;
+    }
+
 
     public void setUserListener(UserListener userListener) {
         this.userListener = userListener;
@@ -196,6 +212,10 @@ public class Singleton extends Application {
 
     public void setExerciciosListener(ExerciciosListener exerciciosListener) {
         this.exerciciosListener = exerciciosListener;
+    }
+
+    public void setEmentaListener(EmentaListener ementaListener) {
+        this.ementaListener = ementaListener;
     }
 
 
@@ -340,7 +360,7 @@ public class Singleton extends Application {
 
     public void getAllExerciciosFromClientAPI(final Context context, final boolean isConnected) {
         Toast.makeText(context, "isConnected", Toast.LENGTH_SHORT).show();
-        System.out.println("--> API URL FEED: " + mUrlGetStuffFromUser + "/exercicio");
+        System.out.println("--> API URL EXERCICIO: " + mUrlGetStuffFromUser + "/exercicio");
 
         JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlGetStuffFromUser + "/exercicio", null, new Response.Listener<JSONArray>() {
             @Override
@@ -360,9 +380,31 @@ public class Singleton extends Application {
         volleyQueue.add(req);
     }
 
+    public void getAllEmentaFromClientAPI(final Context context, final boolean isConnected) {
+        Toast.makeText(context, "isConnected", Toast.LENGTH_SHORT).show();
+        System.out.println("--> API URL EMENTA: " + mUrlGetStuffFromUser + "/ementa");
+
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlGetStuffFromUser + "/ementa", null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                ementa = EmentaJSONParser.parserJsonEmenta(response, context);
+                System.out.println("--> RESPOSTA GET EMENTA API: " + ementa);
+                if (ementaListener != null) {
+                    ementaListener.onRefreshEmenta(ementa);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("--> ERRO GET PLANOS API: " + error.getMessage());
+            }
+        });
+        volleyQueue.add(req);
+    }
+
     public void getAllPlanosNutricaoFromClientAPI(final Context context, final boolean isConnected) {
         Toast.makeText(context, "isConnected", Toast.LENGTH_SHORT).show();
-        System.out.println("--> API URL FEED: " + mUrlGetStuffFromUser + "/planonutricao/getementas" + getIdUser());
+        System.out.println("--> API URL PLANOS NUTRICAO: " + mUrlGetStuffFromUser + "/planonutricao/getementas/" + getIdUser());
 
         JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlGetStuffFromUser + "/planonutricao/getementas/" + getIdUser(), null, new Response.Listener<JSONArray>() {
             @Override

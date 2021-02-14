@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
 
+import pt.ipleiria.estg.dei.app_projeto.vistas.CalendarioActivity;
 import pt.ipleiria.estg.dei.app_projeto.vistas.InfoGymActivity;
 import pt.ipleiria.estg.dei.app_projeto.vistas.LoginActivity;
 import pt.ipleiria.estg.dei.app_projeto.vistas.PerfilFragment;
@@ -111,6 +112,8 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
             case R.id.nav_horarios:
                 System.out.println("-->HORARIOS");
                 setTitle(menuItem.getTitle());
+                Intent intentCalendario = new Intent(this, CalendarioActivity.class);
+                startActivity(intentCalendario);
                 break;
             case R.id.nav_info_gym:
                 System.out.println("-->INFO-GYM");

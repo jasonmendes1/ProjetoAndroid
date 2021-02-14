@@ -73,8 +73,8 @@ public class ListaPlanosTreinoAdapter extends BaseAdapter {
         private TextView semana;
         public ViewHolderLista(View convertView){
             diatreino = convertView.findViewById(R.id.tvDiaTreino);
-            pt = convertView.findViewById(R.id.tvPT);
-            semana = convertView.findViewById(R.id.tvSemana);
+            pt = convertView.findViewById(R.id.tv2Almoco);
+            semana = convertView.findViewById(R.id.tv2Lanche1);
         }
 
         public void update(PlanosTreino planosTreino){

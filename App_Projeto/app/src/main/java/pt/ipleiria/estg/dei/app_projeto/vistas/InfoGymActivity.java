@@ -24,7 +24,7 @@ public class InfoGymActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info_gym);
         setTitle("Info Gym");
 
-        buttonVoltar = findViewById(R.id.buttonVoltar);
+        //buttonVoltar = findViewById(R.id.buttonVoltar);
 
         SharedPreferences sharedPrefUser = getApplication().getSharedPreferences(MenuMainActivity.USER, Context.MODE_PRIVATE);
         token = sharedPrefUser.getString(MenuMainActivity.TOKEN, null);
