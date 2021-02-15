@@ -17,8 +17,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -69,13 +67,15 @@ public class UploadFotoActivity extends AppCompatActivity {
         ID_User = Singleton.getInstance(getApplicationContext()).getIdUser();
         System.out.println("--> url ClienteAPI: " + urlAPI + "/" + ID_User);
 
-        Button btnUpload = findViewById(R.id.buttonUpload);
-        btnUpload.setOnClickListener(new View.OnClickListener() {
+       /*Button btnUpload = findViewById(R.id.buttonUpload);
+       btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialogUpload();
             }
         });
+
+        */
     }
 
 

@@ -51,21 +51,6 @@
         android:text="@string/blank"
         android:textSize="17sp" />
 
-    <Button
-        android:id="@+id/buttonUpload"
-        android:layout_width="46dp"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/ivAvatar"
-        android:layout_alignBottom="@+id/textViewNome"
-        android:layout_gravity="center"
-        android:layout_marginEnd="-51dp"
-        android:layout_marginBottom="-184dp"
-        android:background="@drawable/rounded_button"
-        android:clickable="false"
-        android:drawableLeft="@drawable/ic_action_upload"
-        android:padding="10dp"
-        android:text="" />
-
     <TextView
         android:id="@+id/textViewDataNasc"
         android:layout_width="wrap_content"
