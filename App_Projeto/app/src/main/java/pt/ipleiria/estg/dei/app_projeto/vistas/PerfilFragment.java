@@ -69,7 +69,7 @@ public class PerfilFragment extends Fragment {
         tvEmail2 = rootView.findViewById(R.id.textViewEmail2);
         ivAvatar = rootView.findViewById(R.id.ivAvatar);
         btnCalcularIMC = rootView.findViewById(R.id.btnCalcularIMC);
-        btnUpload = rootView.findViewById(R.id.buttonUpload);
+        //btnUpload = rootView.findViewById(R.id.buttonUpload);
 
 
         ivAvatar.setOnClickListener(new View.OnClickListener() {
@@ -89,14 +89,14 @@ public class PerfilFragment extends Fragment {
             }
         });
 
-        btnUpload.setOnClickListener(new View.OnClickListener() {
+/*        btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), UploadFotoActivity.class);
                 startActivity(intent);
             }
         });
-
+*/
         Singleton.getInstance(getContext().getApplicationContext()).getAllClientesAPI(getContext());
 
         ipURL = Singleton.getInstance(getContext()).getIPInput();
