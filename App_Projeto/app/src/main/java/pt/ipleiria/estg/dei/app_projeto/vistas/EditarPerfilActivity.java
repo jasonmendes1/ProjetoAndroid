@@ -3,18 +3,15 @@ package pt.ipleiria.estg.dei.app_projeto.vistas;
 import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
@@ -26,7 +23,7 @@ import pt.ipleiria.estg.dei.app_projeto.models.Cliente;
 import pt.ipleiria.estg.dei.app_projeto.models.Singleton;
 import pt.ipleiria.estg.dei.app_projeto.utils.ClienteJSONParser;
 
-public class EditarPerfilFragment extends Fragment implements UserListener {
+public class EditarPerfilActivity extends AppCompatActivity implements UserListener {
 
     private EditText etNome, etApelido, etSexo2, etEmail2, etTelefone2, etDataNasc2, etNif2, etAltura, etPeso, etMassaMuscular, etMassaGorda;
     private SharedPreferences sharedPreferences;
@@ -40,72 +37,58 @@ public class EditarPerfilFragment extends Fragment implements UserListener {
     private ImageView ivAvatar;
     private static final String DEFAULT_IMAGE = "https://cdn4.iconfinder.com/data/icons/famous-character-vol-2-flat/48/Avatar_Famous_Characters-04-512.png";
 
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-        final View rootView = inflater.inflate(R.layout.fragment_editar_perfil, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_editar_perfil);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mQueue = Volley.newRequestQueue(getContext());
+        //Singleton.getInstance(getApplicationContext()).getAllClientesAPI(this);
 
-        final int id = getActivity().getIntent().getIntExtra(ID, -1);
-        cliente = Singleton.getInstance(getActivity().getApplicationContext()).getCliente(id);
-
-        //SharedPreferences sharedPrefUser = getActivity().getSharedPreferences(MenuMainActivity.USER, Context.MODE_PRIVATE);
-        //token = sharedPrefUser.getString(MenuMainActivity.TOKEN, "TOKEN");
-
-        etNome = rootView.findViewById(R.id.editTextNome);
-        etApelido = rootView.findViewById(R.id.editTextApelido);
-        etDataNasc2 = rootView.findViewById(R.id.editTextDataNasc);
-        etTelefone2 = rootView.findViewById(R.id.editTextTelefone);
-        etNif2 = rootView.findViewById(R.id.editTextNIF);
-        etSexo2 = rootView.findViewById(R.id.editTextSexo);
-        etAltura = rootView.findViewById(R.id.etAltura);
-        etPeso = rootView.findViewById(R.id.etPeso);
-        etMassaMuscular = rootView.findViewById(R.id.etMassaMuscular);
-        etMassaGorda = rootView.findViewById(R.id.etMassaGorda);
-        ivAvatar = rootView.findViewById(R.id.ivAvatar);
-
-        Singleton.getInstance(getContext()).setUserListener(this);
+        final int id = getIntent().getIntExtra(ID, -1);
+        cliente = Singleton.getInstance(getApplicationContext()).getCliente(id);
+        System.out.println("--> ID CLIENTE " + id);
+        System.out.println("--> ID CLIENTE " + cliente);
 
 
-        ipURL = Singleton.getInstance(getContext()).getIPInput();
+        etNome = findViewById(R.id.editTextNome);
+        etApelido = findViewById(R.id.editTextApelido);
+        etDataNasc2 = findViewById(R.id.editTextDataNasc);
+        etTelefone2 = findViewById(R.id.editTextTelefone);
+        etNif2 = findViewById(R.id.editTextNIF);
+        etSexo2 = findViewById(R.id.editTextSexo);
+        etAltura = findViewById(R.id.etAltura);
+        etPeso = findViewById(R.id.etPeso);
+        etMassaMuscular = findViewById(R.id.etMassaMuscular);
+        etMassaGorda = findViewById(R.id.etMassaGorda);
+        ivAvatar = findViewById(R.id.ivAvatar);
+
+
+        ipURL = Singleton.getInstance(getApplicationContext()).getIPInput();
         urlAPI = "http://" + ipURL + "/ProjetoWeb/api/web/v1/cliente/get";
-        ID_User = Singleton.getInstance(getContext()).getIdUser();
+        ID_User = Singleton.getInstance(getApplicationContext()).getIdUser();
         System.out.println("--> url ClienteEDITARAPI: " + urlAPI + "/" + ID_User);
 
-        buttonEditar = rootView.findViewById(R.id.buttonEditar);
+        buttonEditar = findViewById(R.id.buttonEditar);
         buttonEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ClienteJSONParser.isConnectionInternet(getActivity().getApplicationContext())) {
-                    if (cliente != null)
-                        if (validarCliente() == true) {
-                            cliente.setPrimeiroNome(etNome.getText().toString());
-                            cliente.setApelido(etApelido.getText().toString());
-                            cliente.setDta_nascimento(Integer.parseInt(etDataNasc2.getText().toString()));
-                            cliente.setNum_tele(Integer.parseInt(etTelefone2.getText().toString()));
-                            cliente.setNif(Integer.parseInt(etNif2.getText().toString()));
-                            cliente.setSexo(etSexo2.getText().toString());
-                            cliente.setAltura(Integer.parseInt(etAltura.getText().toString()));
-                            cliente.setPeso(Integer.parseInt(etPeso.getText().toString()));
-                            cliente.setMassa_muscular(Integer.parseInt(etMassaMuscular.getText().toString()));
-                            cliente.setMassa_gorda(Integer.parseInt(etMassaGorda.getText().toString()));
-
-                           // Singleton.getInstance(getActivity().getApplicationContext()).editarClienteAPI(cliente, getActivity().getApplicationContext());
-                        } else return;
-                    //setResult(RESULT_OK);
-                    //finish();
+                if (ClienteJSONParser.isConnectionInternet(getApplicationContext())) {
+                    // singleton
+                    Singleton.getInstance(getApplicationContext()).editarClienteAPI(etNome.getText().toString(), etApelido.getText().toString(),
+                            Integer.parseInt(etDataNasc2.getText().toString()), Integer.parseInt(etTelefone2.getText().toString()), Integer.parseInt(etNif2.getText().toString()),
+                            etSexo2.getText().toString(), Integer.parseInt(etAltura.getText().toString()),Integer.parseInt(etPeso.getText().toString()),
+                            Integer.parseInt(etMassaMuscular.getText().toString()), Integer.parseInt(etMassaGorda.getText().toString()), getApplicationContext());
                 } else
-                    Toast.makeText(getActivity(), "Não há Internet", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditarPerfilActivity.this, "Não há Internet", Toast.LENGTH_SHORT).show();
                     System.out.println("--> NADA ");
+
             }
         });
-
         if (cliente != null)
             carregarCliente();
-        return rootView;
+        Singleton.getInstance(getApplicationContext()).setUserListener(this);
+
     }
 
     private boolean validarCliente() {

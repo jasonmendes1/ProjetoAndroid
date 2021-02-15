@@ -78,6 +78,7 @@ public class Singleton extends Application {
 
     private FitnessLeagueBDHelper fitnessLeagueBDHelper = null;
 
+    private Cliente cliente;
 
     private static Singleton INSTANCE = null;
     private static final int ADICIONAR_BD = 1;
@@ -170,11 +171,9 @@ public class Singleton extends Application {
 
 
     public Cliente getCliente(int id) {
-        for (Cliente c : clientes) {
-            if (c.getIDCliente() == id) {
+        for (Cliente c : clientes)
+            if (c.getIDCliente() == id)
                 return c;
-            }
-        }
         return null;
     }
 
@@ -190,6 +189,10 @@ public class Singleton extends Application {
             if (em.getIDEmenta() == id)
                 return em;
         return null;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public ArrayList<Exercicio> getExerciciosBD() {
@@ -336,6 +339,28 @@ public class Singleton extends Application {
         }
 
     */
+    public void getAllClientesAPI(final Context context) {
+        Toast.makeText(context, "isConnected", Toast.LENGTH_SHORT).show();
+        System.out.println("--> API URL FEED: " + mUrlGetStuffFromUser + "/cliente");
+
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlGetStuffFromUser + "/cliente", null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                clientes = ClienteJSONParser.parserJsonClientes(response);
+                System.out.println("--> RESPOSTA GET CLIENTES API: " + clientes);
+                if (userListener != null) {
+                    userListener.onRefreshListaCliente(clientes);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("--> ERRO GET PLANOS API: " + error.getMessage());
+            }
+        });
+        volleyQueue.add(req);
+    }
+
     public void getAllPlanosTreinoFromClientAPI(final Context context, final boolean isConnected) {
         Toast.makeText(context, "isConnected", Toast.LENGTH_SHORT).show();
         System.out.println("--> API URL FEED: " + mUrlGetStuffFromUser + "/planotreino/getexercicios/" + getIdUser());
@@ -431,7 +456,7 @@ public class Singleton extends Application {
                 String capa = ClienteJSONParser.parserJsonAvatarCliente(response);
 
                 if (userListener != null)
-                    userListener.onRefreshListaCliente(cliente);
+                    userListener.onRefreshEditar();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -448,7 +473,7 @@ public class Singleton extends Application {
         };
         volleyQueue.add(req);
     }
-
+/*
     public void editarClienteAPI(final Cliente cliente, final Context context) {
         StringRequest req = new StringRequest(Request.Method.PUT, mUrlGetStuffFromUser + "/cliente/get/" + getIdUser(), new Response.Listener<String>() {
             @Override
@@ -458,7 +483,52 @@ public class Singleton extends Application {
                 System.out.println("--> RESPOSTA PUT EDITAR API: " + cliente);
 
                 if (userListener != null)
-                    userListener.onRefreshListaCliente(cliente);
+                    userListener.onRefreshEditar();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("ClientePrimeiroNome", cliente.getPrimeiroNome());
+                params.put("ClienteApelido", cliente.getApelido());
+                params.put("ClienteDataNasc", cliente.getDta_nascimento() + "");
+                params.put("ClienteNumTele", cliente.getNum_tele() + "");
+                params.put("ClienteNIF", cliente.getNif() + "");
+                params.put("ClienteSexo", cliente.getSexo());
+                params.put("ClienteAvatar", cliente.getAvatar());
+                params.put("ClienteAltura", cliente.getAltura() + "");
+                params.put("ClientePeso", cliente.getNif() + "");
+                params.put("ClienteMassaMuscular", cliente.getMassa_muscular() + "");
+                params.put("ClienteMassaGorda", cliente.getMassa_gorda() + "");
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+ */
+
+    public void editarClienteAPI(final String ClientePrimeiroNome, final String ClienteApelido, final Integer ClienteDataNasc, final Integer ClienteNumTele, final Integer ClienteNIF, final String ClienteSexo, final Integer ClienteAltura, final Integer ClientePeso, final Integer ClienteMassaMuscular, final Integer ClienteMassaGorda, final Context context) {
+        StringRequest req = new StringRequest(Request.Method.PUT, mUrlGetStuffFromUser + "/cliente/get/" + getIdUser(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                cliente.setPrimeiroNome(ClientePrimeiroNome);
+                cliente.setApelido(ClienteApelido);
+                cliente.setDta_nascimento(ClienteDataNasc);
+                cliente.setNum_tele(ClienteNumTele);
+                cliente.setNif(ClienteNIF);
+                cliente.setSexo(ClienteSexo);
+                cliente.setAltura(ClienteAltura);
+                cliente.setPeso(ClientePeso);
+                cliente.setMassa_muscular(ClienteMassaMuscular);
+                cliente.setMassa_gorda(ClienteMassaGorda);
+
+                if (userListener != null)
+                    userListener.onRefreshEditar();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -486,6 +556,7 @@ public class Singleton extends Application {
         volleyQueue.add(req);
     }
 
+
     public void adicionarClienteAPI(final Cliente cliente, final Context context) {
         System.out.println("--> API URL Cliente " + mUrlGetStuffFromUser + "/cliente/get/" + getIdUser());
 
@@ -496,7 +567,7 @@ public class Singleton extends Application {
                 onUpdateListaClientesBD(c, ADICIONAR_BD);
 
                 if (userListener != null)
-                    userListener.onRefreshListaCliente(cliente);
+                    userListener.onRefreshEditar();
             }
         }, new Response.ErrorListener() {
             @Override

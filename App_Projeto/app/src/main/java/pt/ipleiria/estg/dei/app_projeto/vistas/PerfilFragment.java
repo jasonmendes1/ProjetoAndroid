@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -39,6 +38,9 @@ public class PerfilFragment extends Fragment {
     private FragmentManager fragmentManager;
     private Button btnCalcularIMC, btnUpload;
     private String currentPhotoPath;
+
+    private static final int EDITAR = 2;
+
 
 
     public static final int CAMERA_REQUEST = 1;
@@ -73,12 +75,9 @@ public class PerfilFragment extends Fragment {
         ivAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new EditarPerfilFragment();
-                fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.contentFragment, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                Intent intent = new Intent(getContext(), EditarPerfilActivity.class);
+                intent.putExtra(EditarPerfilActivity.ID, (int) ID_User);
+                startActivityForResult(intent, EDITAR);
             }
         });
 
@@ -98,6 +97,7 @@ public class PerfilFragment extends Fragment {
             }
         });
 
+        Singleton.getInstance(getContext().getApplicationContext()).getAllClientesAPI(getContext());
 
         ipURL = Singleton.getInstance(getContext()).getIPInput();
         urlAPI = "http://" + ipURL + "/ProjetoWeb/api/web/v1/cliente/get";
@@ -152,6 +152,8 @@ public class PerfilFragment extends Fragment {
             }
         });
         mQueue.add(request);
+
+
         return rootView;
 
     }
