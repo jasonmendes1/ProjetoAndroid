@@ -73,22 +73,32 @@ public class EditarPerfilActivity extends AppCompatActivity implements UserListe
         buttonEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ClienteJSONParser.isConnectionInternet(getApplicationContext())) {
-                    // singleton
-                    Singleton.getInstance(getApplicationContext()).editarClienteAPI(etNome.getText().toString(), etApelido.getText().toString(),
-                            Integer.parseInt(etDataNasc2.getText().toString()), Integer.parseInt(etTelefone2.getText().toString()), Integer.parseInt(etNif2.getText().toString()),
-                            etSexo2.getText().toString(), Integer.parseInt(etAltura.getText().toString()),Integer.parseInt(etPeso.getText().toString()),
-                            Integer.parseInt(etMassaMuscular.getText().toString()), Integer.parseInt(etMassaGorda.getText().toString()), getApplicationContext());
-                } else
-                    Toast.makeText(EditarPerfilActivity.this, "Não há Internet", Toast.LENGTH_SHORT).show();
-                    System.out.println("--> NADA ");
+                if (ClienteJSONParser.isConnectionInternet(getApplication().getApplicationContext())) {
+                    if (cliente != null)
+                        if (validarCliente() == true) {
+                            cliente.setPrimeiroNome(etNome.getText().toString());
+                            cliente.setApelido(etApelido.getText().toString());
+                            cliente.setDta_nascimento(Integer.parseInt(etDataNasc2.getText().toString()));
+                            cliente.setNum_tele(Integer.parseInt(etTelefone2.getText().toString()));
+                            cliente.setNif(Integer.parseInt(etNif2.getText().toString()));
+                            cliente.setSexo(etSexo2.getText().toString());
+                            cliente.setAltura(Integer.parseInt(etAltura.getText().toString()));
+                            cliente.setPeso(Integer.parseInt(etPeso.getText().toString()));
+                            cliente.setMassa_muscular(Integer.parseInt(etMassaMuscular.getText().toString()));
+                            cliente.setMassa_gorda(Integer.parseInt(etMassaGorda.getText().toString()));
 
+                            // Singleton.getInstance(getActivity().getApplicationContext()).editarClienteAPI(cliente, getActivity().getApplicationContext());
+                        } else return;
+                    //setResult(RESULT_OK);
+                    //finish();
+                } else
+                    Toast.makeText(getApplicationContext(), "Não há Internet", Toast.LENGTH_SHORT).show();
+                System.out.println("--> NADA ");
             }
         });
+
         if (cliente != null)
             carregarCliente();
-        Singleton.getInstance(getApplicationContext()).setUserListener(this);
-
     }
 
     private boolean validarCliente() {
